@@ -1,0 +1,131 @@
+<aside class="panel controls">
+  <div class="section">
+    <h2>Evento</h2>
+    <label for="edition">Número da edição</label>
+    <input
+      id="edition"
+      type="number"
+      min="1"
+      [ngModel]="state.edition"
+      (ngModelChange)="patchState({ edition: +$event })"
+    />
+    <div class="hint">O título da roda será gerado como “29ª edição”, “30ª edição” etc.</div>
+  </div>
+
+  <div class="section">
+    <h2>Roda dos líderes</h2>
+    <label for="wheel-file">Imagem da roda</label>
+    <input
+      id="wheel-file"
+      type="file"
+      accept="image/png,image/jpeg,image/webp"
+      (change)="onWheelFile($event)"
+    />
+
+    <div class="library-actions">
+      <button class="library-button" type="button" (click)="wheelLibraryOpen = true">
+        📚 Abrir biblioteca
+      </button>
+      <button
+        *ngIf="state.wheel"
+        class="clear-button"
+        type="button"
+        (click)="clearWheel()"
+      >
+        Limpar
+      </button>
+    </div>
+
+    <div class="selected-file" *ngIf="state.wheelName">
+      <span>Selecionada</span>
+      <strong>{{ state.wheelName }}</strong>
+    </div>
+
+    <div class="range-row">
+      <label>
+        Zoom
+        <input
+          type="range"
+          min="90"
+          max="180"
+          [ngModel]="state.wheelZoom"
+          (ngModelChange)="patchState({ wheelZoom: +$event })"
+        />
+      </label>
+
+      <label>
+        Posição X
+        <input
+          type="range"
+          min="-100"
+          max="100"
+          [ngModel]="state.wheelX"
+          (ngModelChange)="patchState({ wheelX: +$event })"
+        />
+      </label>
+    </div>
+
+    <label>
+      Posição Y
+      <input
+        type="range"
+        min="-100"
+        max="100"
+        [ngModel]="state.wheelY"
+        (ngModelChange)="patchState({ wheelY: +$event })"
+      />
+    </label>
+  </div>
+
+  <div class="section">
+    <h2>Top 3</h2>
+    <app-rank-editor
+      *ngFor="let rank of state.top3; let index = index"
+      [rank]="rank"
+      [index]="index"
+      (rankChange)="updateRank(index, $event)"
+    />
+  </div>
+
+  <div class="section">
+    <div class="status" *ngIf="fontDetected === null">Verificando a fonte do modelo…</div>
+    <div class="status" *ngIf="fontDetected === true">
+      <strong>Fonte do PSD detectada:</strong> VAG Rounded BT.
+    </div>
+    <div class="status" *ngIf="fontDetected === false">
+      <strong>Atenção:</strong> VAG Rounded BT não foi detectada. A aplicação usará uma fonte arredondada de fallback; para ficar idêntico ao PSD, instale a VAG Rounded BT no computador.
+    </div>
+
+    <div class="hint" *ngIf="isValid; else invalidState">
+      Tudo preenchido. Os posts estão prontos para exportação.
+    </div>
+
+    <ng-template #invalidState>
+      <div class="hint">
+        Falta preencher: <span class="missing">{{ missingFields.join(', ') }}</span>.
+      </div>
+    </ng-template>
+
+    <div class="actions">
+      <button class="secondary" [disabled]="!isValid" (click)="downloadTop3.emit()">
+        Baixar colocação
+      </button>
+      <button class="secondary" [disabled]="!isValid" (click)="downloadWheel.emit()">
+        Baixar roda
+      </button>
+      <button class="full" [disabled]="!isValid" (click)="downloadBoth.emit()">
+        Baixar as 2 imagens
+      </button>
+    </div>
+
+    <div class="hint">Tudo é processado localmente no navegador. Nenhuma imagem é enviada para servidor.</div>
+  </div>
+</aside>
+
+<app-image-library
+  *ngIf="wheelLibraryOpen"
+  category="wheels"
+  title="Biblioteca de rodas"
+  (selected)="onWheelLibrarySelected($event)"
+  (closed)="wheelLibraryOpen = false"
+/>

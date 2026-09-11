@@ -1,0 +1,73 @@
+<div class="library-backdrop" (click)="onBackdrop($event)">
+  <section class="library-modal" role="dialog" aria-modal="true" [attr.aria-label]="title">
+    <header class="library-header">
+      <div>
+        <span class="eyebrow">Assets do projeto</span>
+        <h2>{{ title }}</h2>
+      </div>
+      <button class="close-button" type="button" aria-label="Fechar biblioteca" (click)="closed.emit()">
+        ×
+      </button>
+    </header>
+
+    <div class="filters">
+      <label class="search-field">
+        <span>Buscar</span>
+        <input
+          type="search"
+          placeholder="Nome da imagem..."
+          [(ngModel)]="search"
+          autofocus
+        />
+      </label>
+
+      <label>
+        <span>Coleção</span>
+        <select [(ngModel)]="collection">
+          <option value="all">Todas</option>
+          <option *ngFor="let item of collections" [value]="item">{{ item }}</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="summary" *ngIf="!loading">
+      {{ filteredImages.length }} de {{ images.length }} imagens
+    </div>
+
+    <div class="loading" *ngIf="loading">Carregando biblioteca…</div>
+
+    <div class="empty-state" *ngIf="!loading && images.length === 0">
+      <strong>Nenhuma imagem cadastrada ainda.</strong>
+      <span *ngIf="category === 'wheels'">
+        Coloque suas imagens em <code>src/assets/library/wheels/&lt;coleção&gt;/</code>.
+      </span>
+      <span *ngIf="category === 'backgrounds'">
+        Coloque suas imagens em <code>src/assets/library/backgrounds/&lt;coleção&gt;/</code>.
+      </span>
+      <span>Depois execute <code>npm run library:generate</code> ou reinicie <code>npm start</code>.</span>
+    </div>
+
+    <div class="empty-state" *ngIf="!loading && images.length > 0 && filteredImages.length === 0">
+      <strong>Nenhuma imagem encontrada.</strong>
+      <span>Tente alterar a busca ou o filtro de coleção.</span>
+    </div>
+
+    <div class="image-grid" *ngIf="!loading && filteredImages.length > 0">
+      <button
+        class="image-card"
+        type="button"
+        *ngFor="let image of filteredImages; trackBy: trackByPath"
+        (click)="choose(image)"
+        [title]="'Usar ' + image.name"
+      >
+        <div class="thumbnail">
+          <img [src]="image.path" [alt]="image.name" loading="lazy" />
+        </div>
+        <div class="image-info">
+          <strong>{{ image.name }}</strong>
+          <span>{{ image.collection }}</span>
+        </div>
+      </button>
+    </div>
+  </section>
+</div>

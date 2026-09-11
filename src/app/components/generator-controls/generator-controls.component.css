@@ -1,0 +1,182 @@
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+.controls {
+  position: sticky;
+  top: 18px;
+  align-self: start;
+  max-height: calc(100vh - 36px);
+  overflow: auto;
+}
+
+.section {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.section:first-child {
+  padding-top: 0;
+}
+
+.section:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+h2 {
+  font-size: 18px;
+  margin: 0 0 14px;
+}
+
+label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  margin: 10px 0 6px;
+  color: #5d4939;
+}
+
+input[type='number'],
+input[type='file'] {
+  width: 100%;
+  border: 1px solid #d7c2ad;
+  border-radius: 12px;
+  background: #fff;
+  padding: 10px 12px;
+  color: #3d2616;
+}
+
+input[type='file'] {
+  padding: 8px;
+  font-size: 12px;
+}
+
+input[type='range'] {
+  width: 100%;
+}
+
+.range-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.range-row label {
+  font-weight: 600;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+button {
+  border: 0;
+  border-radius: 12px;
+  padding: 11px 14px;
+  font-weight: 800;
+  cursor: pointer;
+  background: var(--brown);
+  color: #fff;
+}
+
+button.secondary {
+  background: #ead9c8;
+  color: var(--brown);
+}
+
+button.full {
+  grid-column: 1 / -1;
+  background: #ef8a36;
+  color: #2c170b;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.45;
+  margin-top: 8px;
+}
+
+.status {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f4e8da;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.missing {
+  color: #a14b36;
+  font-weight: 700;
+}
+
+@media (max-width: 1050px) {
+  .controls {
+    position: static;
+    max-height: none;
+  }
+}
+
+.library-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.library-button,
+.clear-button {
+  border: 1px solid #d7c2ad;
+  border-radius: 10px;
+  padding: 8px 11px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.library-button {
+  flex: 1;
+  background: #fff;
+  color: var(--brown);
+}
+
+.library-button:hover {
+  background: #f8ede2;
+}
+
+.clear-button {
+  background: transparent;
+  color: #a14b36;
+}
+
+.selected-file {
+  display: grid;
+  gap: 2px;
+  margin-top: 8px;
+  border-radius: 9px;
+  background: #f4e8da;
+  padding: 8px 10px;
+  font-size: 11px;
+}
+
+.selected-file span {
+  color: var(--muted);
+}
+
+.selected-file strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

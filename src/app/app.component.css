@@ -1,0 +1,32 @@
+header {
+  background: var(--brown);
+  color: #fff;
+  padding: 22px 28px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+  letter-spacing: 0.2px;
+}
+
+header p {
+  margin: 6px 0 0;
+  opacity: 0.78;
+  font-size: 14px;
+}
+
+main {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: minmax(330px, 430px) 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 1050px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}

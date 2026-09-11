@@ -1,0 +1,77 @@
+<div class="rank">
+  <div class="rank-title">{{ index + 1 }}º lugar</div>
+
+  <label [for]="'nick-' + index">Nick</label>
+  <input
+    [id]="'nick-' + index"
+    type="text"
+    placeholder="Nick do jogador"
+    [ngModel]="rank.nick"
+    (ngModelChange)="patch({ nick: $event })"
+  />
+
+  <label [for]="'image-' + index">Imagem de fundo</label>
+  <input
+    [id]="'image-' + index"
+    type="file"
+    accept="image/png,image/jpeg,image/webp"
+    (change)="onImageFile($event)"
+  />
+
+  <div class="library-actions">
+    <button class="library-button" type="button" (click)="libraryOpen = true">
+      📚 Abrir biblioteca
+    </button>
+    <button *ngIf="rank.img" class="clear-button" type="button" (click)="clearImage()">
+      Limpar
+    </button>
+  </div>
+
+  <div class="selected-file" *ngIf="rank.imageName">
+    <span>Selecionada</span>
+    <strong>{{ rank.imageName }}</strong>
+  </div>
+
+  <div class="range-row">
+    <label>
+      Zoom
+      <input
+        type="range"
+        min="100"
+        max="260"
+        [ngModel]="rank.zoom"
+        (ngModelChange)="patch({ zoom: +$event })"
+      />
+    </label>
+
+    <label>
+      Posição X
+      <input
+        type="range"
+        min="-100"
+        max="100"
+        [ngModel]="rank.x"
+        (ngModelChange)="patch({ x: +$event })"
+      />
+    </label>
+  </div>
+
+  <label>
+    Posição Y
+    <input
+      type="range"
+      min="-100"
+      max="100"
+      [ngModel]="rank.y"
+      (ngModelChange)="patch({ y: +$event })"
+    />
+  </label>
+</div>
+
+<app-image-library
+  *ngIf="libraryOpen"
+  category="backgrounds"
+  [title]="'Biblioteca — ' + (index + 1) + 'º lugar'"
+  (selected)="onLibrarySelected($event)"
+  (closed)="libraryOpen = false"
+/>

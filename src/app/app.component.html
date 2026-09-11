@@ -1,0 +1,17 @@
+<header>
+  <h1>Taiga's Cup — Gerador de Posts</h1>
+  <p>Gera automaticamente os posts de colocação e roda em 1080 × 1080, mantendo o layout do PSD.</p>
+</header>
+
+<main>
+  <app-generator-controls
+    [state]="state"
+    [fontDetected]="fontDetected"
+    (stateChange)="updateState($event)"
+    (downloadTop3)="downloadTop3()"
+    (downloadWheel)="downloadWheel()"
+    (downloadBoth)="downloadBoth()"
+  />
+
+  <app-post-preview [state]="state" />
+</main>
