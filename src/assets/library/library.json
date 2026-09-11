@@ -1,5 +1,874 @@
 {
-  "generatedAt": "2026-09-11T18:01:33.002Z",
+  "generatedAt": "2026-09-11T18:09:01.962Z",
   "wheels": [],
-  "backgrounds": []
+  "backgrounds": [
+    {
+      "name": "EB01 001 Kouzuki Oden",
+      "fileName": "EB01-001 - Kouzuki Oden.png",
+      "collection": "EB01",
+      "path": "assets/library/backgrounds/EB01/EB01-001%20-%20Kouzuki%20Oden.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "EB01 021 Hannyabal",
+      "fileName": "EB01-021 - Hannyabal.png",
+      "collection": "EB01",
+      "path": "assets/library/backgrounds/EB01/EB01-021%20-%20Hannyabal.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "EB01 040 Kyros",
+      "fileName": "EB01-040 - Kyros.png",
+      "collection": "EB01",
+      "path": "assets/library/backgrounds/EB01/EB01-040%20-%20Kyros.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "EB02 010 Monkey.D.Luffy",
+      "fileName": "EB02-010 - Monkey.D.Luffy.png",
+      "collection": "EB02",
+      "path": "assets/library/backgrounds/EB02/EB02-010%20-%20Monkey.D.Luffy.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "EB03 001 Nefeltari Vivi",
+      "fileName": "EB03-001 - Nefeltari Vivi.png",
+      "collection": "EB03",
+      "path": "assets/library/backgrounds/EB03/EB03-001%20-%20Nefeltari%20Vivi.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP01 001 Roronoa Zoro",
+      "fileName": "OP01-001 - Roronoa Zoro.png",
+      "collection": "OP01",
+      "path": "assets/library/backgrounds/OP01/OP01-001%20-%20Roronoa%20Zoro.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP01 002 Trafalgar Law",
+      "fileName": "OP01-002 - Trafalgar Law.png",
+      "collection": "OP01",
+      "path": "assets/library/backgrounds/OP01/OP01-002%20-%20Trafalgar%20Law.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP01 003 Monkey.D.Luffy",
+      "fileName": "OP01-003 - Monkey.D.Luffy.png",
+      "collection": "OP01",
+      "path": "assets/library/backgrounds/OP01/OP01-003%20-%20Monkey.D.Luffy.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP01 031 Kouzuki Oden",
+      "fileName": "OP01-031 - Kouzuki Oden.png",
+      "collection": "OP01",
+      "path": "assets/library/backgrounds/OP01/OP01-031%20-%20Kouzuki%20Oden.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP01 060 Donquixote Doflamingo",
+      "fileName": "OP01-060 - Donquixote Doflamingo.png",
+      "collection": "OP01",
+      "path": "assets/library/backgrounds/OP01/OP01-060%20-%20Donquixote%20Doflamingo.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP01 061 Kaido",
+      "fileName": "OP01-061 - Kaido.png",
+      "collection": "OP01",
+      "path": "assets/library/backgrounds/OP01/OP01-061%20-%20Kaido.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP01 062 Crocodile",
+      "fileName": "OP01-062 - Crocodile.png",
+      "collection": "OP01",
+      "path": "assets/library/backgrounds/OP01/OP01-062%20-%20Crocodile.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP01 091 King",
+      "fileName": "OP01-091 - King.png",
+      "collection": "OP01",
+      "path": "assets/library/backgrounds/OP01/OP01-091%20-%20King.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP02 001 Edward.Newgate",
+      "fileName": "OP02-001 - Edward.Newgate.png",
+      "collection": "OP02",
+      "path": "assets/library/backgrounds/OP02/OP02-001%20-%20Edward.Newgate.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP02 002 Monkey.D.Garp",
+      "fileName": "OP02-002 - Monkey.D.Garp.png",
+      "collection": "OP02",
+      "path": "assets/library/backgrounds/OP02/OP02-002%20-%20Monkey.D.Garp.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP02 025 Kin'Emon",
+      "fileName": "OP02-025 - Kin'emon.png",
+      "collection": "OP02",
+      "path": "assets/library/backgrounds/OP02/OP02-025%20-%20Kin'emon.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP02 026 Sanji",
+      "fileName": "OP02-026 - Sanji.png",
+      "collection": "OP02",
+      "path": "assets/library/backgrounds/OP02/OP02-026%20-%20Sanji.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP02 049 Emporio.Ivankov",
+      "fileName": "OP02-049 - Emporio.Ivankov.png",
+      "collection": "OP02",
+      "path": "assets/library/backgrounds/OP02/OP02-049%20-%20Emporio.Ivankov.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP02 071 Magellan",
+      "fileName": "OP02-071 - Magellan.png",
+      "collection": "OP02",
+      "path": "assets/library/backgrounds/OP02/OP02-071%20-%20Magellan.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP02 072 Zephyr",
+      "fileName": "OP02-072 - Zephyr.png",
+      "collection": "OP02",
+      "path": "assets/library/backgrounds/OP02/OP02-072%20-%20Zephyr.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP02 093 Smoker",
+      "fileName": "OP02-093 - Smoker.png",
+      "collection": "OP02",
+      "path": "assets/library/backgrounds/OP02/OP02-093%20-%20Smoker.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP03 001 Portgas.D.Ace",
+      "fileName": "OP03-001 - Portgas.D.Ace.png",
+      "collection": "OP03",
+      "path": "assets/library/backgrounds/OP03/OP03-001%20-%20Portgas.D.Ace.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP03 021 Kuro",
+      "fileName": "OP03-021 - Kuro.png",
+      "collection": "OP03",
+      "path": "assets/library/backgrounds/OP03/OP03-021%20-%20Kuro.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP03 022 Arlong",
+      "fileName": "OP03-022 - Arlong.png",
+      "collection": "OP03",
+      "path": "assets/library/backgrounds/OP03/OP03-022%20-%20Arlong.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP03 040 Nami",
+      "fileName": "OP03-040 - Nami.png",
+      "collection": "OP03",
+      "path": "assets/library/backgrounds/OP03/OP03-040%20-%20Nami.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP03 058 Iceburg",
+      "fileName": "OP03-058 - Iceburg.png",
+      "collection": "OP03",
+      "path": "assets/library/backgrounds/OP03/OP03-058%20-%20Iceburg.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP03 076 Rob Lucci",
+      "fileName": "OP03-076 - Rob Lucci.png",
+      "collection": "OP03",
+      "path": "assets/library/backgrounds/OP03/OP03-076%20-%20Rob%20Lucci.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP03 077 Charlotte Linlin",
+      "fileName": "OP03-077 - Charlotte Linlin.png",
+      "collection": "OP03",
+      "path": "assets/library/backgrounds/OP03/OP03-077%20-%20Charlotte%20Linlin.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP03 099 Charlotte Katakuri",
+      "fileName": "OP03-099 - Charlotte Katakuri.png",
+      "collection": "OP03",
+      "path": "assets/library/backgrounds/OP03/OP03-099%20-%20Charlotte%20Katakuri.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP04 001 Nefeltari Vivi",
+      "fileName": "OP04-001 - Nefeltari Vivi.png",
+      "collection": "OP04",
+      "path": "assets/library/backgrounds/OP04/OP04-001%20-%20Nefeltari%20Vivi.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP04 019 Donquixote Doflamingo",
+      "fileName": "OP04-019 - Donquixote Doflamingo.png",
+      "collection": "OP04",
+      "path": "assets/library/backgrounds/OP04/OP04-019%20-%20Donquixote%20Doflamingo.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP04 020 Issho",
+      "fileName": "OP04-020 - Issho.png",
+      "collection": "OP04",
+      "path": "assets/library/backgrounds/OP04/OP04-020%20-%20Issho.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP04 039 Rebecca",
+      "fileName": "OP04-039 - Rebecca.png",
+      "collection": "OP04",
+      "path": "assets/library/backgrounds/OP04/OP04-039%20-%20Rebecca.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP04 040 Queen",
+      "fileName": "OP04-040 - Queen.png",
+      "collection": "OP04",
+      "path": "assets/library/backgrounds/OP04/OP04-040%20-%20Queen.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP04 058 Crocodile",
+      "fileName": "OP04-058 - Crocodile.png",
+      "collection": "OP04",
+      "path": "assets/library/backgrounds/OP04/OP04-058%20-%20Crocodile.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP05 001 Sabo",
+      "fileName": "OP05-001 - Sabo.png",
+      "collection": "OP05",
+      "path": "assets/library/backgrounds/OP05/OP05-001%20-%20Sabo.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP05 002 Belo Betty",
+      "fileName": "OP05-002 - Belo Betty.png",
+      "collection": "OP05",
+      "path": "assets/library/backgrounds/OP05/OP05-002%20-%20Belo%20Betty.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP05 022 Donquixote Rosinante",
+      "fileName": "OP05-022 - Donquixote Rosinante.png",
+      "collection": "OP05",
+      "path": "assets/library/backgrounds/OP05/OP05-022%20-%20Donquixote%20Rosinante.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP05 041 Sakazuki",
+      "fileName": "OP05-041 - Sakazuki.png",
+      "collection": "OP05",
+      "path": "assets/library/backgrounds/OP05/OP05-041%20-%20Sakazuki.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP05 060 Monkey.D.Luffy",
+      "fileName": "OP05-060 - Monkey.D.Luffy.png",
+      "collection": "OP05",
+      "path": "assets/library/backgrounds/OP05/OP05-060%20-%20Monkey.D.Luffy.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP05 098 Enel",
+      "fileName": "OP05-098 - Enel.png",
+      "collection": "OP05",
+      "path": "assets/library/backgrounds/OP05/OP05-098%20-%20Enel.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP06 001 Uta",
+      "fileName": "OP06-001 - Uta.png",
+      "collection": "OP06",
+      "path": "assets/library/backgrounds/OP06/OP06-001%20-%20Uta.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP06 020 Hody Jones",
+      "fileName": "OP06-020 - Hody Jones.png",
+      "collection": "OP06",
+      "path": "assets/library/backgrounds/OP06/OP06-020%20-%20Hody%20Jones.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP06 021 Perona",
+      "fileName": "OP06-021 - Perona.png",
+      "collection": "OP06",
+      "path": "assets/library/backgrounds/OP06/OP06-021%20-%20Perona.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP06 022 Yamato",
+      "fileName": "OP06-022 - Yamato.png",
+      "collection": "OP06",
+      "path": "assets/library/backgrounds/OP06/OP06-022%20-%20Yamato.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP06 042 Vinsmoke Reiju",
+      "fileName": "OP06-042 - Vinsmoke Reiju.png",
+      "collection": "OP06",
+      "path": "assets/library/backgrounds/OP06/OP06-042%20-%20Vinsmoke%20Reiju.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP06 080 Gecko Moria",
+      "fileName": "OP06-080 - Gecko Moria.png",
+      "collection": "OP06",
+      "path": "assets/library/backgrounds/OP06/OP06-080%20-%20Gecko%20Moria.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP07 001 Monkey.D.Dragon",
+      "fileName": "OP07-001 - Monkey.D.Dragon.png",
+      "collection": "OP07",
+      "path": "assets/library/backgrounds/OP07/OP07-001%20-%20Monkey.D.Dragon.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP07 019 Jewelry Bonney",
+      "fileName": "OP07-019 - Jewelry Bonney.png",
+      "collection": "OP07",
+      "path": "assets/library/backgrounds/OP07/OP07-019%20-%20Jewelry%20Bonney.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP07 038 Boa Hancock",
+      "fileName": "OP07-038 - Boa Hancock.png",
+      "collection": "OP07",
+      "path": "assets/library/backgrounds/OP07/OP07-038%20-%20Boa%20Hancock.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP07 059 Foxy",
+      "fileName": "OP07-059 - Foxy.png",
+      "collection": "OP07",
+      "path": "assets/library/backgrounds/OP07/OP07-059%20-%20Foxy.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP07 079 Rob Lucci",
+      "fileName": "OP07-079 - Rob Lucci.png",
+      "collection": "OP07",
+      "path": "assets/library/backgrounds/OP07/OP07-079%20-%20Rob%20Lucci.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP07 097 Vegapunk",
+      "fileName": "OP07-097 - Vegapunk.png",
+      "collection": "OP07",
+      "path": "assets/library/backgrounds/OP07/OP07-097%20-%20Vegapunk.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP08 001 Tony Tony.Chopper",
+      "fileName": "OP08-001 - Tony Tony.Chopper.png",
+      "collection": "OP08",
+      "path": "assets/library/backgrounds/OP08/OP08-001%20-%20Tony%20Tony.Chopper.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP08 002 Marco",
+      "fileName": "OP08-002 - Marco.png",
+      "collection": "OP08",
+      "path": "assets/library/backgrounds/OP08/OP08-002%20-%20Marco.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP08 021 Carrot",
+      "fileName": "OP08-021 - Carrot.png",
+      "collection": "OP08",
+      "path": "assets/library/backgrounds/OP08/OP08-021%20-%20Carrot.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP08 057 King",
+      "fileName": "OP08-057 - King.png",
+      "collection": "OP08",
+      "path": "assets/library/backgrounds/OP08/OP08-057%20-%20King.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP08 058 Charlotte Pudding",
+      "fileName": "OP08-058 - Charlotte Pudding.png",
+      "collection": "OP08",
+      "path": "assets/library/backgrounds/OP08/OP08-058%20-%20Charlotte%20Pudding.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP08 098 Kalgara",
+      "fileName": "OP08-098 - Kalgara.png",
+      "collection": "OP08",
+      "path": "assets/library/backgrounds/OP08/OP08-098%20-%20Kalgara.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP09 001 Shanks",
+      "fileName": "OP09-001 - Shanks.png",
+      "collection": "OP09",
+      "path": "assets/library/backgrounds/OP09/OP09-001%20-%20Shanks.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP09 022 Lim",
+      "fileName": "OP09-022 - Lim.png",
+      "collection": "OP09",
+      "path": "assets/library/backgrounds/OP09/OP09-022%20-%20Lim.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP09 042 Buggy",
+      "fileName": "OP09-042 - Buggy.png",
+      "collection": "OP09",
+      "path": "assets/library/backgrounds/OP09/OP09-042%20-%20Buggy.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP09 061 Monkey.D.Luffy",
+      "fileName": "OP09-061 - Monkey.D.Luffy.png",
+      "collection": "OP09",
+      "path": "assets/library/backgrounds/OP09/OP09-061%20-%20Monkey.D.Luffy.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP09 062 Nico Robin",
+      "fileName": "OP09-062 - Nico Robin.png",
+      "collection": "OP09",
+      "path": "assets/library/backgrounds/OP09/OP09-062%20-%20Nico%20Robin.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP09 081 Marshall.D.Teach",
+      "fileName": "OP09-081 - Marshall.D.Teach.png",
+      "collection": "OP09",
+      "path": "assets/library/backgrounds/OP09/OP09-081%20-%20Marshall.D.Teach.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP10 001 Smoker",
+      "fileName": "OP10-001 - Smoker.png",
+      "collection": "OP10",
+      "path": "assets/library/backgrounds/OP10/OP10-001%20-%20Smoker.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP10 002 Caesar Clown",
+      "fileName": "OP10-002 - Caesar Clown.png",
+      "collection": "OP10",
+      "path": "assets/library/backgrounds/OP10/OP10-002%20-%20Caesar%20Clown.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP10 003 Sugar",
+      "fileName": "OP10-003 - Sugar.png",
+      "collection": "OP10",
+      "path": "assets/library/backgrounds/OP10/OP10-003%20-%20Sugar.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP10 022 Trafalgar Law",
+      "fileName": "OP10-022 - Trafalgar Law.png",
+      "collection": "OP10",
+      "path": "assets/library/backgrounds/OP10/OP10-022%20-%20Trafalgar%20Law.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP10 042 Usopp",
+      "fileName": "OP10-042 - Usopp.png",
+      "collection": "OP10",
+      "path": "assets/library/backgrounds/OP10/OP10-042%20-%20Usopp.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP10 099 Eustass Captain Kid",
+      "fileName": "OP10-099 - Eustass_Captain_Kid.png",
+      "collection": "OP10",
+      "path": "assets/library/backgrounds/OP10/OP10-099%20-%20Eustass_Captain_Kid.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP11 001 Koby",
+      "fileName": "OP11-001 - Koby.png",
+      "collection": "OP11",
+      "path": "assets/library/backgrounds/OP11/OP11-001%20-%20Koby.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP11 021 Jinbe",
+      "fileName": "OP11-021 - Jinbe.png",
+      "collection": "OP11",
+      "path": "assets/library/backgrounds/OP11/OP11-021%20-%20Jinbe.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP11 022 Shirahoshi",
+      "fileName": "OP11-022 - Shirahoshi.png",
+      "collection": "OP11",
+      "path": "assets/library/backgrounds/OP11/OP11-022%20-%20Shirahoshi.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP11 040 Monkey.D.Luffy",
+      "fileName": "OP11-040 - Monkey.D.Luffy.png",
+      "collection": "OP11",
+      "path": "assets/library/backgrounds/OP11/OP11-040%20-%20Monkey.D.Luffy.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP11 041 Nami",
+      "fileName": "OP11-041 - Nami.png",
+      "collection": "OP11",
+      "path": "assets/library/backgrounds/OP11/OP11-041%20-%20Nami.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP11 062 Charlotte Katakuri",
+      "fileName": "OP11-062 - Charlotte Katakuri.png",
+      "collection": "OP11",
+      "path": "assets/library/backgrounds/OP11/OP11-062%20-%20Charlotte%20Katakuri.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP12 001 Silvers Rayleigh",
+      "fileName": "OP12-001 - Silvers Rayleigh.png",
+      "collection": "OP12",
+      "path": "assets/library/backgrounds/OP12/OP12-001%20-%20Silvers%20Rayleigh.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP12 020 Roronoa Zoro",
+      "fileName": "OP12-020 - Roronoa Zoro.png",
+      "collection": "OP12",
+      "path": "assets/library/backgrounds/OP12/OP12-020%20-%20Roronoa%20Zoro.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP12 040 Kuzan",
+      "fileName": "OP12-040 - Kuzan.png",
+      "collection": "OP12",
+      "path": "assets/library/backgrounds/OP12/OP12-040%20-%20Kuzan.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP12 041 Sanji",
+      "fileName": "OP12-041 - Sanji.png",
+      "collection": "OP12",
+      "path": "assets/library/backgrounds/OP12/OP12-041%20-%20Sanji.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP12 061 Donquixote Rosinante",
+      "fileName": "OP12-061 - Donquixote Rosinante.png",
+      "collection": "OP12",
+      "path": "assets/library/backgrounds/OP12/OP12-061%20-%20Donquixote%20Rosinante.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP12 081 Koala",
+      "fileName": "OP12-081 - Koala.png",
+      "collection": "OP12",
+      "path": "assets/library/backgrounds/OP12/OP12-081%20-%20Koala.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP13 001 Monkey.D.Luffy",
+      "fileName": "OP13-001 - Monkey.D.Luffy.png",
+      "collection": "OP13",
+      "path": "assets/library/backgrounds/OP13/OP13-001%20-%20Monkey.D.Luffy.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP13 002 Portgas.D.Ace",
+      "fileName": "OP13-002 - Portgas.D.Ace.png",
+      "collection": "OP13",
+      "path": "assets/library/backgrounds/OP13/OP13-002%20-%20Portgas.D.Ace.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP13 003 Gol.D.Roger",
+      "fileName": "OP13-003 - Gol.D.Roger.png",
+      "collection": "OP13",
+      "path": "assets/library/backgrounds/OP13/OP13-003%20-%20Gol.D.Roger.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP13 004 Sabo",
+      "fileName": "OP13-004 - Sabo.png",
+      "collection": "OP13",
+      "path": "assets/library/backgrounds/OP13/OP13-004%20-%20Sabo.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP13 079 Imu",
+      "fileName": "OP13-079 - Imu.png",
+      "collection": "OP13",
+      "path": "assets/library/backgrounds/OP13/OP13-079%20-%20Imu.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP13 100 Jewelry Bonney",
+      "fileName": "OP13-100 - Jewelry Bonney.png",
+      "collection": "OP13",
+      "path": "assets/library/backgrounds/OP13/OP13-100%20-%20Jewelry%20Bonney.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP16 001 Portgas.D.Ace",
+      "fileName": "OP16-001 - Portgas.D.Ace.png",
+      "collection": "OP16",
+      "path": "assets/library/backgrounds/OP16/OP16-001%20-%20Portgas.D.Ace.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP16 022 Monkey.D.Luffy",
+      "fileName": "OP16-022 - Monkey.D.Luffy.png",
+      "collection": "OP16",
+      "path": "assets/library/backgrounds/OP16/OP16-022%20-%20Monkey.D.Luffy.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP16 041 Buggy",
+      "fileName": "OP16-041 - Buggy.png",
+      "collection": "OP16",
+      "path": "assets/library/backgrounds/OP16/OP16-041%20-%20Buggy.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP16 060 Sengoku",
+      "fileName": "OP16-060 - Sengoku.png",
+      "collection": "OP16",
+      "path": "assets/library/backgrounds/OP16/OP16-060%20-%20Sengoku.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP16 079 Yamato",
+      "fileName": "OP16-079 - Yamato.png",
+      "collection": "OP16",
+      "path": "assets/library/backgrounds/OP16/OP16-079%20-%20Yamato.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP16 080 Marshall.D.Teach",
+      "fileName": "OP16-080 - Marshall.D.Teach.png",
+      "collection": "OP16",
+      "path": "assets/library/backgrounds/OP16/OP16-080%20-%20Marshall.D.Teach.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP17 001 Edward.Newgate",
+      "fileName": "OP17-001 - Edward.Newgate.png",
+      "collection": "OP17",
+      "path": "assets/library/backgrounds/OP17/OP17-001%20-%20Edward.Newgate.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP17 020 Shanks",
+      "fileName": "OP17-020 - Shanks.png",
+      "collection": "OP17",
+      "path": "assets/library/backgrounds/OP17/OP17-020%20-%20Shanks.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP17 039 Rocks.D.Xebec",
+      "fileName": "OP17-039 - Rocks.D.Xebec.png",
+      "collection": "OP17",
+      "path": "assets/library/backgrounds/OP17/OP17-039%20-%20Rocks.D.Xebec.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP17 058 Kaido",
+      "fileName": "OP17-058 - Kaido.png",
+      "collection": "OP17",
+      "path": "assets/library/backgrounds/OP17/OP17-058%20-%20Kaido.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP17 079 Monkey.D.Luffy",
+      "fileName": "OP17-079 - Monkey.D.Luffy.png",
+      "collection": "OP17",
+      "path": "assets/library/backgrounds/OP17/OP17-079%20-%20Monkey.D.Luffy.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "OP17 099 Charlotte Linlin",
+      "fileName": "OP17-099 - Charlotte Linlin.png",
+      "collection": "OP17",
+      "path": "assets/library/backgrounds/OP17/OP17-099%20-%20Charlotte%20Linlin.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "PRB01 001 Sanji",
+      "fileName": "PRB01-001 - Sanji.png",
+      "collection": "PRB01",
+      "path": "assets/library/backgrounds/PRB01/PRB01-001%20-%20Sanji.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST01 001 Monkey.D.Luffy",
+      "fileName": "ST01-001 - Monkey.D.Luffy.png",
+      "collection": "ST01",
+      "path": "assets/library/backgrounds/ST01/ST01-001%20-%20Monkey.D.Luffy.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST02 001 Eustass Captain Kid",
+      "fileName": "ST02-001 - Eustass_Captain_Kid.png",
+      "collection": "ST02",
+      "path": "assets/library/backgrounds/ST02/ST02-001%20-%20Eustass_Captain_Kid.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST03 001 Crocodile",
+      "fileName": "ST03-001 - Crocodile.png",
+      "collection": "ST03",
+      "path": "assets/library/backgrounds/ST03/ST03-001%20-%20Crocodile.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST04 001 Kaido",
+      "fileName": "ST04-001 - Kaido.png",
+      "collection": "ST04",
+      "path": "assets/library/backgrounds/ST04/ST04-001%20-%20Kaido.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST05 001 Shanks",
+      "fileName": "ST05-001 - Shanks.png",
+      "collection": "ST05",
+      "path": "assets/library/backgrounds/ST05/ST05-001%20-%20Shanks.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST06 001 Sakazuki",
+      "fileName": "ST06-001 - Sakazuki.png",
+      "collection": "ST06",
+      "path": "assets/library/backgrounds/ST06/ST06-001%20-%20Sakazuki.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST07 001 Charlotte Linlin",
+      "fileName": "ST07-001 - Charlotte Linlin.png",
+      "collection": "ST07",
+      "path": "assets/library/backgrounds/ST07/ST07-001%20-%20Charlotte%20Linlin.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST08 001 Monkey.D.Luffy",
+      "fileName": "ST08-001 - Monkey.D.Luffy.png",
+      "collection": "ST08",
+      "path": "assets/library/backgrounds/ST08/ST08-001%20-%20Monkey.D.Luffy.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST09 001 Yamato",
+      "fileName": "ST09-001 - Yamato.png",
+      "collection": "ST09",
+      "path": "assets/library/backgrounds/ST09/ST09-001%20-%20Yamato.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST10 001 Trafalgar Law",
+      "fileName": "ST10-001 - Trafalgar Law.png",
+      "collection": "ST10",
+      "path": "assets/library/backgrounds/ST10/ST10-001%20-%20Trafalgar%20Law.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST10 002 Monkey.D.Luffy",
+      "fileName": "ST10-002 - Monkey.D.Luffy.png",
+      "collection": "ST10",
+      "path": "assets/library/backgrounds/ST10/ST10-002%20-%20Monkey.D.Luffy.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST10 003 Eustass Captain Kid",
+      "fileName": "ST10-003 - Eustass_Captain_Kid.png",
+      "collection": "ST10",
+      "path": "assets/library/backgrounds/ST10/ST10-003%20-%20Eustass_Captain_Kid.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST11 001 Uta",
+      "fileName": "ST11-001 - Uta.png",
+      "collection": "ST11",
+      "path": "assets/library/backgrounds/ST11/ST11-001%20-%20Uta.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST12 001 Roronoa Zoro & Sanji",
+      "fileName": "ST12-001 - Roronoa Zoro & Sanji.png",
+      "collection": "ST12",
+      "path": "assets/library/backgrounds/ST12/ST12-001%20-%20Roronoa%20Zoro%20%26%20Sanji.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST13 001 Sabo",
+      "fileName": "ST13-001 - Sabo.png",
+      "collection": "ST13",
+      "path": "assets/library/backgrounds/ST13/ST13-001%20-%20Sabo.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST13 002 Portgas.D.Ace",
+      "fileName": "ST13-002 - Portgas.D.Ace.png",
+      "collection": "ST13",
+      "path": "assets/library/backgrounds/ST13/ST13-002%20-%20Portgas.D.Ace.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST13 003 Monkey.D.Luffy",
+      "fileName": "ST13-003 - Monkey.D.Luffy.png",
+      "collection": "ST13",
+      "path": "assets/library/backgrounds/ST13/ST13-003%20-%20Monkey.D.Luffy.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST14 001 Monkey.D.Luffy",
+      "fileName": "ST14-001 - Monkey.D.Luffy.png",
+      "collection": "ST14",
+      "path": "assets/library/backgrounds/ST14/ST14-001%20-%20Monkey.D.Luffy.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST21 001 Monkey.D.Luffy",
+      "fileName": "ST21-001 - Monkey.D.Luffy.png",
+      "collection": "ST21",
+      "path": "assets/library/backgrounds/ST21/ST21-001%20-%20Monkey.D.Luffy.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST22 001 Ace & Newgate",
+      "fileName": "ST22-001 - Ace & Newgate.png",
+      "collection": "ST22",
+      "path": "assets/library/backgrounds/ST22/ST22-001%20-%20Ace%20%26%20Newgate.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST29 001 Monkey.D.Luffy",
+      "fileName": "ST29-001 - Monkey.D.Luffy.png",
+      "collection": "ST29",
+      "path": "assets/library/backgrounds/ST29/ST29-001%20-%20Monkey.D.Luffy.png",
+      "category": "backgrounds"
+    },
+    {
+      "name": "ST30 001 Luffy & Ace",
+      "fileName": "ST30-001 - Luffy & Ace.png",
+      "collection": "ST30",
+      "path": "assets/library/backgrounds/ST30/ST30-001%20-%20Luffy%20%26%20Ace.png",
+      "category": "backgrounds"
+    }
+  ]
 }

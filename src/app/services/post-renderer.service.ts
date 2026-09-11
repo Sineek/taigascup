@@ -4,9 +4,11 @@ import { GeneratorState, RankSlot, RankState } from '../models/post-generator.mo
 @Injectable({ providedIn: 'root' })
 export class PostRendererService {
   private readonly colors = {
-    brown: '#3d2616',
+    brown: '#766c64',
     cream: '#fdf0e0',
   };
+
+  private readonly backgroundOverlayAlpha = 0.50;
 
   private readonly slots: RankSlot[] = [
     { y: 318, h: 148, x: 339, w: 517, nameX: 358, nameY: 392, font: 72, maxW: 470 },
@@ -64,7 +66,8 @@ export class PostRendererService {
       ctx.fillRect(slot.x, slot.y, slot.w, slot.h);
 
       if (rank.img) {
-        this.drawCover(ctx, rank.img, slot.x, slot.y, slot.w, slot.h, rank.zoom, rank.x, rank.y, 0.62);
+        this.drawCover(ctx, rank.img, slot.x, slot.y, slot.w, slot.h, rank.zoom, rank.x, rank.y);
+        this.drawBackgroundOverlay(ctx, slot);
       } else {
         this.drawPlaceholder(ctx, slot);
       }
@@ -216,6 +219,14 @@ export class PostRendererService {
     ctx.fillStyle = '#fff';
     ctx.strokeText(text, slot.nameX, slot.nameY);
     ctx.fillText(text, slot.nameX, slot.nameY);
+    ctx.restore();
+  }
+
+  private drawBackgroundOverlay(ctx: CanvasRenderingContext2D, slot: RankSlot): void {
+    ctx.save();
+    ctx.globalAlpha = this.backgroundOverlayAlpha;
+    ctx.fillStyle = this.colors.brown;
+    ctx.fillRect(slot.x, slot.y, slot.w, slot.h);
     ctx.restore();
   }
 

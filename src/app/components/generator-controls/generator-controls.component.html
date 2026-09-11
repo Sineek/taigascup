@@ -80,7 +80,7 @@
   <div class="section">
     <h2>Top 3</h2>
     <app-rank-editor
-      *ngFor="let rank of state.top3; let index = index"
+      *ngFor="let rank of state.top3; let index = index; trackBy: trackRankByIndex"
       [rank]="rank"
       [index]="index"
       (rankChange)="updateRank(index, $event)"

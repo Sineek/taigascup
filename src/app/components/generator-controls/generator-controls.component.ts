@@ -77,4 +77,9 @@ export class GeneratorControlsComponent {
   clearWheel(): void {
     this.patchState({ wheel: null, wheelName: null, wheelZoom: 100, wheelX: 0, wheelY: 0 });
   }
+
+  trackRankByIndex(index: number): number {
+    return index;
+  }
+
 }

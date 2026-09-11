@@ -1,0 +1,25 @@
+﻿ONE PIECE TCG - LEADERS
+
+Gerado em: 2026-09-11 10:38:56
+Imagens encontradas: 124
+Falhas: 0
+Registros processados: 124
+
+Estrutura:
+  OP01\
+  OP02\
+  ...
+  OP17\
+  ST01\
+  ...
+  EB01\
+  ...
+  PRB01\
+  ...
+
+Este pacote usa somente a arte base de cada Leader.
+Artes alternativas/paralelas (_p1, _p2...) e reprints (_r1...) sao ignoradas.
+
+As imagens pertencem aos respectivos detentores de direitos de One Piece /
+One Piece Card Game. Use para seu projeto pessoal conforme permitido pelas
+fontes e termos aplicaveis.
