@@ -79,7 +79,12 @@ export class DeckCalculatorComponent {
         this.error = `Linha ${index + 1} inválida: ${line}`;
         return;
       }
-      parsed.push({ quantity: Number(match[1]), code: match[2].toUpperCase() });
+      const quantity = Number(match[1]);
+      if (quantity < 1) {
+        this.error = `Linha ${index + 1}: a quantidade deve ser maior que zero.`;
+        return;
+      }
+      parsed.push({ quantity, code: match[2].toUpperCase() });
     }
 
     if (parsed[0].quantity !== 1) {
