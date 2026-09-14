@@ -39,6 +39,16 @@ export class ScoringAdminComponent {
     return Object.entries(this.rules?.cards ?? {}).sort(([a], [b]) => a.localeCompare(b));
   }
 
+  cardImageError(event: Event, code: string): void {
+    const image = event.target as HTMLImageElement;
+    if (image.dataset['fallback'] !== 'tried') {
+      image.dataset['fallback'] = 'tried';
+      image.src = `https://www.onepiece-cardgame.com/images/cardlist/card/${code}.png`;
+    } else {
+      image.hidden = true;
+    }
+  }
+
   save(): void {
     if (!this.rules) return;
     const code = this.code.trim().toUpperCase();
