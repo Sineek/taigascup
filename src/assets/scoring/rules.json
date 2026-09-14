@@ -1,6 +1,8 @@
 {
   "version": "rascunho-1",
   "pointCap": 100,
-  "leaders": {},
+  "leaders": {
+    "OP15-058": 50
+  },
   "cards": {}
 }
