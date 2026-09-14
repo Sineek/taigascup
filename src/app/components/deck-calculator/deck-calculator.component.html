@@ -1,0 +1,33 @@
+<section class="calculator">
+  <h2>Calculadora de pontos</h2>
+  <p>Cole o líder na primeira linha e as 50 cartas do deck abaixo, no formato <code>4xOP17-021</code>.</p>
+  <label for="deck-list">Lista do deck</label>
+  <textarea id="deck-list" [(ngModel)]="deckText" rows="17" placeholder="1xOP17-020&#10;4xOP17-021"></textarea>
+  <button type="button" (click)="calculate()" [disabled]="loading">Calcular pontos</button>
+
+  @if (rules) {
+    <p class="note">Tabela {{ rules.version }} · Teto: {{ rules.pointCap }} pontos. Cartas sem pontuação definida custam 0.</p>
+  }
+  @if (error) {
+    <p class="error" role="alert">{{ error }}</p>
+  }
+  @if (evaluated && leader) {
+    <div class="result" aria-live="polite">
+      <h3>{{ eligible ? 'Apto pelo limite de pontos e quantidade' : 'Não apto' }}</h3>
+      <p><strong>{{ total }} / {{ rules?.pointCap }} pontos</strong> · {{ cardCount }} / 50 cartas</p>
+      @if (cardCount !== 50) {
+        <p class="error">O deck deve ter exatamente 50 cartas, além do líder.</p>
+      }
+      <table>
+        <thead><tr><th>Código</th><th>Qtd.</th><th>Pontos/cópia</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td>{{ leader.code }} (líder)</td><td>1</td><td>{{ leader.points }}</td><td>{{ leader.points }}</td></tr>
+          @for (card of cards; track card.code) {
+            <tr><td>{{ card.code }}</td><td>{{ card.quantity }}</td><td>{{ card.points }}</td><td>{{ card.quantity * card.points }}</td></tr>
+          }
+        </tbody>
+      </table>
+      <p class="note">A checagem de cores, identidade das cartas e restrições oficiais ainda exige conferência da staff.</p>
+    </div>
+  }
+</section>
