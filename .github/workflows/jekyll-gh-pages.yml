@@ -27,6 +27,8 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
+      - name: Update missing scoring images
+        run: node scripts/update-scoring-images.mjs
       - name: Build for GitHub Pages
         run: npm run build -- --base-href /taigascup/
       - name: Setup Pages
