@@ -1,0 +1,32 @@
+<main class="admin">
+  <h2>Tabela de pontuação</h2>
+  <p>Edite os valores abaixo, baixe o arquivo e publique-o no repositório como <code>src/assets/scoring/rules.json</code>. Só uma alteração publicada no GitHub valerá para todos.</p>
+  @if (error) { <p class="error" role="alert">{{ error }}</p> }
+  @if (rules) {
+    <div class="fields">
+      <label>Versão <input [(ngModel)]="rules.version"></label>
+      <label>Teto de pontos <input type="number" min="0" [(ngModel)]="rules.pointCap"></label>
+    </div>
+    <h3>Definir pontuação</h3>
+    <div class="fields">
+      <label>Tipo
+        <select [(ngModel)]="kind"><option value="leaders">Líder</option><option value="cards">Carta</option></select>
+      </label>
+      <label>Código <input [(ngModel)]="code" placeholder="OP17-020"></label>
+      <label>Pontos <input type="number" min="0" max="100" [(ngModel)]="points"></label>
+      <button type="button" (click)="save()">Adicionar ou alterar</button>
+    </div>
+    <h3>Líderes</h3>
+    @if (!leaderEntries.length) { <p>Nenhum líder pontuado.</p> }
+    @for (entry of leaderEntries; track entry[0]) {
+      <div class="entry"><span>{{ entry[0] }} — {{ entry[1] }} pontos</span><button type="button" (click)="remove('leaders', entry[0])">Remover</button></div>
+    }
+    <h3>Cartas</h3>
+    @if (!cardEntries.length) { <p>Nenhuma carta pontuada.</p> }
+    @for (entry of cardEntries; track entry[0]) {
+      <div class="entry"><span>{{ entry[0] }} — {{ entry[1] }} pontos/cópia</span><button type="button" (click)="remove('cards', entry[0])">Remover</button></div>
+    }
+    <button class="download" type="button" (click)="download()">Baixar tabela para publicação</button>
+    <p><a href="https://github.com/Sineek/taigascup/edit/main/src/assets/scoring/rules.json" target="_blank" rel="noopener noreferrer">Publicar no GitHub</a></p>
+  }
+</main>
