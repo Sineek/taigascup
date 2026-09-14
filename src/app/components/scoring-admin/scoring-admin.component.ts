@@ -43,6 +43,13 @@ export class ScoringAdminComponent {
         }
       },
     });
+    this.http.get<Record<string, string>>('assets/scoring/ligaonepiece-images.json').subscribe({
+      next: (images) => {
+        for (const [code, url] of Object.entries(images)) {
+          if (!this.imageByCode[code]) this.imageByCode[code] = url;
+        }
+      },
+    });
     this.http.get<Rules>(`assets/scoring/rules.json?v=${Date.now()}`).subscribe({
       next: (rules) => { this.rules = rules; this.loading = false; },
       error: () => { this.error = 'Não foi possível carregar a tabela.'; this.loading = false; },
@@ -55,6 +62,10 @@ export class ScoringAdminComponent {
 
   get cardEntries(): [string, number][] {
     return Object.entries(this.rules?.cards ?? {}).sort(([a], [b]) => a.localeCompare(b));
+  }
+
+  imageLoadError(code: string): void {
+    this.imageByCode[code] = '';
   }
 
   save(): void {
