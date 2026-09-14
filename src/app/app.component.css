@@ -16,11 +16,38 @@ header p {
   font-size: 14px;
 }
 
-.back-link {
-  color: #fff;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+.module-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
 }
+
+.module-nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.module-nav a:hover,
+.module-nav a:focus-visible,
+.module-nav a[aria-current="page"] {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.module-nav a:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.module-nav .home-link {
+  margin-right: 12px;
+  padding-left: 0;
+  font-weight: 800;
+}
+
 
 main.generator {
   max-width: 1480px;
