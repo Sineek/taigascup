@@ -21,7 +21,7 @@
     @for (entry of leaderEntries; track entry[0]) {
       <div class="entry">
         <div class="entry-info">
-          <img #leaderImage class="card-thumbnail" [src]="'https://en.onepiece-cardgame.com/images/cardlist/card/' + entry[0] + '.png'" [alt]="'Imagem do líder ' + entry[0]" loading="lazy" (error)="leaderImage.hidden = true">
+          <img #leaderImage class="card-thumbnail" [src]="'https://en.onepiece-cardgame.com/images/cardlist/card/' + entry[0] + '.png'" [alt]="'Imagem do líder ' + entry[0]" loading="lazy" (error)="cardImageError($event, entry[0])">
           <span>{{ entry[0] }} — {{ entry[1] }} pontos</span>
         </div>
         <button type="button" (click)="remove('leaders', entry[0])">Remover</button>
@@ -32,7 +32,7 @@
     @for (entry of cardEntries; track entry[0]) {
       <div class="entry">
         <div class="entry-info">
-          <img #cardImage class="card-thumbnail" [src]="'https://en.onepiece-cardgame.com/images/cardlist/card/' + entry[0] + '.png'" [alt]="'Imagem da carta ' + entry[0]" loading="lazy" (error)="cardImage.hidden = true">
+          <img #cardImage class="card-thumbnail" [src]="'https://en.onepiece-cardgame.com/images/cardlist/card/' + entry[0] + '.png'" [alt]="'Imagem da carta ' + entry[0]" loading="lazy" (error)="cardImageError($event, entry[0])">
           <span>{{ entry[0] }} — {{ entry[1] }} pontos/cópia</span>
         </div>
         <button type="button" (click)="remove('cards', entry[0])">Remover</button>
