@@ -4,6 +4,10 @@ label { display: grid; gap: 5px; font-weight: 700; }
 input, select { min-width: 120px; padding: 9px; border: 1px solid var(--line); border-radius: 8px; }
 button { padding: 9px 14px; border: 0; border-radius: 8px; color: white; background: var(--brown); cursor: pointer; }
 .entry { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding: 7px 0; }
-.entry button { background: #854a36; }
+.entry { gap: 12px; }
+.entry-info { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.card-thumbnail { display: block; width: 44px; height: 61px; flex: none; object-fit: cover; border-radius: 4px; background: #eee4da; }
+.card-thumbnail[hidden] { display: none; }
+.entry button { background: #854a36; flex: none; }
 .download { margin-top: 20px; }
 .error { color: #a12828; }
