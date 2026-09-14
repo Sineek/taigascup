@@ -77,7 +77,7 @@ export class ScoringAdminComponent {
         this.refreshingImages = false;
         if (showMessage) {
           this.imageRefreshMessage = missing
-            ? `${added} imagem(ns) atualizada(s). Ainda faltam ${missing}; publique a tabela no GitHub, aguarde o deploy e tente novamente.`
+            ? `${added} imagem(ns) atualizada(s). Ainda faltam ${missing}; adicione a referência dessas cartas ao arquivo ligaonepiece-images.json, publique no GitHub e tente novamente.`
             : `Imagens atualizadas. ${added} nova(s) miniatura(s) encontrada(s).`;
         }
       },
