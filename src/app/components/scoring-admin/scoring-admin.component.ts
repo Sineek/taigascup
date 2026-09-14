@@ -64,7 +64,7 @@ export class ScoringAdminComponent {
       next: ({ library, fallback }) => {
         const nextImages: Record<string, string> = { ...fallback };
         for (const image of library.backgrounds ?? []) {
-          const code = image.fileName.match(/^([A-Z]{1,5}\\d{2,3}-\\d{3})\\s+-\\s+/)?.[1];
+          const code = image.fileName.match(/^([A-Z]{1,5}\d{2,3}-\d{3})\s+-\s+/)?.[1];
           if (code) nextImages[code] = image.path;
         }
         const codes = [
