@@ -1,3 +1,22 @@
+@if (page !== 'home') {
+  <header>
+    <nav class="module-nav" aria-label="Navegação principal">
+      <a class="home-link" href="#">Taiga's Cup</a>
+      <a href="#/gerador" [attr.aria-current]="page === 'generator' ? 'page' : null">Gerador de Post</a>
+      <a href="#/calculadora" [attr.aria-current]="page === 'calculator' ? 'page' : null">Calculadora</a>
+      <a href="#/administrativo" [attr.aria-current]="page === 'admin' ? 'page' : null">Administrativo</a>
+    </nav>
+    @if (page === 'generator') {
+      <h1>Taiga's Cup — Gerador de Posts</h1>
+      <p>Gera automaticamente os posts de colocação e roda em 1080 × 1080, mantendo o layout do PSD.</p>
+    } @else if (page === 'calculator') {
+      <h1>Taiga's Cup — Calculadora</h1>
+    } @else {
+      <h1>Taiga's Cup — Administrativo</h1>
+    }
+  </header>
+}
+
 @if (page === 'home') {
   <main class="home">
     <h1>Taiga's Cup</h1>
@@ -9,12 +28,6 @@
     </nav>
   </main>
 } @else if (page === 'generator') {
-  <header>
-    <a class="back-link" href="#">← Início</a>
-    <h1>Taiga's Cup — Gerador de Posts</h1>
-    <p>Gera automaticamente os posts de colocação e roda em 1080 × 1080, mantendo o layout do PSD.</p>
-  </header>
-
   <main class="generator">
     <app-generator-controls
       [state]="state"
@@ -28,15 +41,7 @@
     <app-post-preview [state]="state" />
   </main>
 } @else if (page === 'calculator') {
-  <header>
-    <a class="back-link" href="#">← Início</a>
-    <h1>Taiga's Cup — Calculadora</h1>
-  </header>
   <app-deck-calculator />
 } @else {
-  <header>
-    <a class="back-link" href="#">← Início</a>
-    <h1>Taiga's Cup — Administrativo</h1>
-  </header>
   <app-scoring-admin />
 }
