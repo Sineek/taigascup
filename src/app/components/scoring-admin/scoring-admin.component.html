@@ -22,7 +22,7 @@
       <div class="entry">
         <div class="entry-info">
           @if (imageByCode[entry[0]]) {
-            <img class="card-thumbnail" [src]="imageByCode[entry[0]]" [alt]="'Imagem do líder ' + entry[0]" loading="lazy">
+            <img class="card-thumbnail" [src]="imageByCode[entry[0]]" [alt]="'Imagem do líder ' + entry[0]" loading="lazy" (error)="imageLoadError(entry[0])">
           } @else {
             <span class="card-thumbnail thumbnail-missing" aria-label="Imagem indisponível">Sem imagem</span>
           }
@@ -37,7 +37,7 @@
       <div class="entry">
         <div class="entry-info">
           @if (imageByCode[entry[0]]) {
-            <img class="card-thumbnail" [src]="imageByCode[entry[0]]" [alt]="'Imagem da carta ' + entry[0]" loading="lazy">
+            <img class="card-thumbnail" [src]="imageByCode[entry[0]]" [alt]="'Imagem da carta ' + entry[0]" loading="lazy" (error)="imageLoadError(entry[0])">
           } @else {
             <span class="card-thumbnail thumbnail-missing" aria-label="Imagem indisponível">Sem imagem</span>
           }
@@ -46,6 +46,7 @@
         <button type="button" (click)="remove('cards', entry[0])">Remover</button>
       </div>
     }
+    <p class="image-credit">Imagens complementares: <a href="https://www.ligaonepiece.com.br/" target="_blank" rel="noopener noreferrer">Liga One Piece</a>.</p>
     <button class="download" type="button" (click)="download()">Baixar tabela para publicação</button>
     <p><a href="https://github.com/Sineek/taigascup/edit/main/src/assets/scoring/rules.json" target="_blank" rel="noopener noreferrer">Publicar no GitHub</a></p>
   }
