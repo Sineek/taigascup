@@ -5,6 +5,7 @@
     <nav class="home-actions" aria-label="Ferramentas">
       <a class="action" href="#/gerador">Gerador de Post</a>
       <a class="action" href="#/calculadora">Calculadora</a>
+      <a class="action" href="#/administrativo">Administrativo</a>
     </nav>
   </main>
 } @else if (page === 'generator') {
@@ -26,13 +27,21 @@
 
     <app-post-preview [state]="state" />
   </main>
-} @else {
+} @else if (page === 'calculator') {
   <header>
     <a class="back-link" href="#">← Início</a>
     <h1>Taiga's Cup — Calculadora</h1>
   </header>
+  <app-deck-calculator />
+} @else {
+  <header>
+    <a class="back-link" href="#">← Início</a>
+    <h1>Taiga's Cup — Administrativo</h1>
+  </header>
   <main class="placeholder">
-    <h2>Calculadora em breve</h2>
-    <p>Esta ferramenta está em desenvolvimento.</p>
+    <h2>Tabela de pontuação</h2>
+    <p>As pontuações oficiais do campeonato são publicadas em <code>src/assets/scoring/rules.json</code>.</p>
+    <p>O acesso para editar e publicar a tabela é controlado pelas permissões do repositório no GitHub.</p>
+    <a href="https://github.com/Sineek/taigascup/edit/main/src/assets/scoring/rules.json" target="_blank" rel="noopener noreferrer">Editar tabela no GitHub</a>
   </main>
 }
