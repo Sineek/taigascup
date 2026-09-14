@@ -2,6 +2,15 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
+interface LibraryImage {
+  fileName: string;
+  path: string;
+}
+
+interface LibraryIndex {
+  backgrounds: LibraryImage[];
+}
+
 interface Rules {
   version: string;
   pointCap: number;
@@ -18,6 +27,7 @@ interface Rules {
 })
 export class ScoringAdminComponent {
   rules: Rules | null = null;
+  imageByCode: Record<string, string> = {};
   code = '';
   points = 0;
   kind: 'leaders' | 'cards' = 'cards';
@@ -25,6 +35,14 @@ export class ScoringAdminComponent {
   loading = true;
 
   constructor(private readonly http: HttpClient) {
+    this.http.get<LibraryIndex>('assets/library/library.json').subscribe({
+      next: (library) => {
+        for (const image of library.backgrounds ?? []) {
+          const code = image.fileName.match(/^([A-Z]{1,5}\d{2,3}-\d{3})\s+-\s+/)?.[1];
+          if (code) this.imageByCode[code] = image.path;
+        }
+      },
+    });
     this.http.get<Rules>(`assets/scoring/rules.json?v=${Date.now()}`).subscribe({
       next: (rules) => { this.rules = rules; this.loading = false; },
       error: () => { this.error = 'Não foi possível carregar a tabela.'; this.loading = false; },
@@ -37,16 +55,6 @@ export class ScoringAdminComponent {
 
   get cardEntries(): [string, number][] {
     return Object.entries(this.rules?.cards ?? {}).sort(([a], [b]) => a.localeCompare(b));
-  }
-
-  cardImageError(event: Event, code: string): void {
-    const image = event.target as HTMLImageElement;
-    if (image.dataset['fallback'] !== 'tried') {
-      image.dataset['fallback'] = 'tried';
-      image.src = `https://www.onepiece-cardgame.com/images/cardlist/card/${code}.png`;
-    } else {
-      image.hidden = true;
-    }
   }
 
   save(): void {
