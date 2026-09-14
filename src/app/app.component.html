@@ -1,17 +1,38 @@
-<header>
-  <h1>Taiga's Cup — Gerador de Posts</h1>
-  <p>Gera automaticamente os posts de colocação e roda em 1080 × 1080, mantendo o layout do PSD.</p>
-</header>
+@if (page === 'home') {
+  <main class="home">
+    <h1>Taiga's Cup</h1>
+    <p>Escolha uma ferramenta para começar.</p>
+    <nav class="home-actions" aria-label="Ferramentas">
+      <a class="action" href="#/gerador">Gerador de Post</a>
+      <a class="action" href="#/calculadora">Calculadora</a>
+    </nav>
+  </main>
+} @else if (page === 'generator') {
+  <header>
+    <a class="back-link" href="#">← Início</a>
+    <h1>Taiga's Cup — Gerador de Posts</h1>
+    <p>Gera automaticamente os posts de colocação e roda em 1080 × 1080, mantendo o layout do PSD.</p>
+  </header>
 
-<main>
-  <app-generator-controls
-    [state]="state"
-    [fontDetected]="fontDetected"
-    (stateChange)="updateState($event)"
-    (downloadTop3)="downloadTop3()"
-    (downloadWheel)="downloadWheel()"
-    (downloadBoth)="downloadBoth()"
-  />
+  <main class="generator">
+    <app-generator-controls
+      [state]="state"
+      [fontDetected]="fontDetected"
+      (stateChange)="updateState($event)"
+      (downloadTop3)="downloadTop3()"
+      (downloadWheel)="downloadWheel()"
+      (downloadBoth)="downloadBoth()"
+    />
 
-  <app-post-preview [state]="state" />
-</main>
+    <app-post-preview [state]="state" />
+  </main>
+} @else {
+  <header>
+    <a class="back-link" href="#">← Início</a>
+    <h1>Taiga's Cup — Calculadora</h1>
+  </header>
+  <main class="placeholder">
+    <h2>Calculadora em breve</h2>
+    <p>Esta ferramenta está em desenvolvimento.</p>
+  </main>
+}
