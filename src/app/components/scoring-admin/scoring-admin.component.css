@@ -7,7 +7,7 @@ button { padding: 9px 14px; border: 0; border-radius: 8px; color: white; backgro
 .entry { gap: 12px; }
 .entry-info { display: flex; align-items: center; gap: 12px; min-width: 0; }
 .card-thumbnail { display: block; width: 44px; height: 61px; flex: none; object-fit: cover; border-radius: 4px; background: #eee4da; }
-.card-thumbnail[hidden] { display: none; }
+.thumbnail-missing { display: flex; align-items: center; justify-content: center; padding: 3px; box-sizing: border-box; color: #685547; font-size: 9px; line-height: 1.1; text-align: center; }
 .entry button { background: #854a36; flex: none; }
 .download { margin-top: 20px; }
 .error { color: #a12828; }
