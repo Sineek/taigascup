@@ -33,7 +33,7 @@ export class DeckCalculatorComponent {
   evaluated = false;
 
   constructor(private readonly http: HttpClient) {
-    this.http.get<Rules>('assets/scoring/rules.json').subscribe({
+    this.http.get<Rules>(`assets/scoring/rules.json?v=${Date.now()}`).subscribe({
       next: (rules) => {
         this.rules = rules;
         this.loading = false;
