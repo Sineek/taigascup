@@ -19,12 +19,24 @@
     <h3>Líderes</h3>
     @if (!leaderEntries.length) { <p>Nenhum líder pontuado.</p> }
     @for (entry of leaderEntries; track entry[0]) {
-      <div class="entry"><span>{{ entry[0] }} — {{ entry[1] }} pontos</span><button type="button" (click)="remove('leaders', entry[0])">Remover</button></div>
+      <div class="entry">
+        <div class="entry-info">
+          <img #leaderImage class="card-thumbnail" [src]="'https://en.onepiece-cardgame.com/images/cardlist/card/' + entry[0] + '.png'" [alt]="'Imagem do líder ' + entry[0]" loading="lazy" (error)="leaderImage.hidden = true">
+          <span>{{ entry[0] }} — {{ entry[1] }} pontos</span>
+        </div>
+        <button type="button" (click)="remove('leaders', entry[0])">Remover</button>
+      </div>
     }
     <h3>Cartas</h3>
     @if (!cardEntries.length) { <p>Nenhuma carta pontuada.</p> }
     @for (entry of cardEntries; track entry[0]) {
-      <div class="entry"><span>{{ entry[0] }} — {{ entry[1] }} pontos/cópia</span><button type="button" (click)="remove('cards', entry[0])">Remover</button></div>
+      <div class="entry">
+        <div class="entry-info">
+          <img #cardImage class="card-thumbnail" [src]="'https://en.onepiece-cardgame.com/images/cardlist/card/' + entry[0] + '.png'" [alt]="'Imagem da carta ' + entry[0]" loading="lazy" (error)="cardImage.hidden = true">
+          <span>{{ entry[0] }} — {{ entry[1] }} pontos/cópia</span>
+        </div>
+        <button type="button" (click)="remove('cards', entry[0])">Remover</button>
+      </div>
     }
     <button class="download" type="button" (click)="download()">Baixar tabela para publicação</button>
     <p><a href="https://github.com/Sineek/taigascup/edit/main/src/assets/scoring/rules.json" target="_blank" rel="noopener noreferrer">Publicar no GitHub</a></p>
