@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, HostListener, ViewChild } from '@angular/core';
 import { GeneratorControlsComponent } from './components/generator-controls/generator-controls.component';
 import { DeckCalculatorComponent } from './components/deck-calculator/deck-calculator.component';
+import { ScoringAdminComponent } from './components/scoring-admin/scoring-admin.component';
 import { PostPreviewComponent } from './components/post-preview/post-preview.component';
 import { createInitialState, GeneratorState } from './models/post-generator.model';
 
@@ -9,7 +10,7 @@ type Page = 'home' | 'generator' | 'calculator' | 'admin';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [GeneratorControlsComponent, DeckCalculatorComponent, PostPreviewComponent],
+  imports: [GeneratorControlsComponent, DeckCalculatorComponent, ScoringAdminComponent, PostPreviewComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
