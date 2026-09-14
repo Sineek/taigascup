@@ -16,6 +16,10 @@
       <label>Pontos <input type="number" min="0" max="100" [(ngModel)]="points"></label>
       <button type="button" (click)="save()">Adicionar ou alterar</button>
     </div>
+    <div class="image-refresh">
+      <button type="button" (click)="refreshImages()" [disabled]="refreshingImages">{{ refreshingImages ? 'Atualizando imagens...' : 'Atualizar imagens' }}</button>
+      @if (imageRefreshMessage) { <p role="status">{{ imageRefreshMessage }}</p> }
+    </div>
     <h3>Líderes</h3>
     @if (!leaderEntries.length) { <p>Nenhum líder pontuado.</p> }
     @for (entry of leaderEntries; track entry[0]) {
