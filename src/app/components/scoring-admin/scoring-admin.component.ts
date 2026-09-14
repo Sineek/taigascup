@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { forkJoin } from 'rxjs';
 
 interface LibraryImage {
   fileName: string;
@@ -33,23 +34,11 @@ export class ScoringAdminComponent {
   kind: 'leaders' | 'cards' = 'cards';
   error = '';
   loading = true;
+  refreshingImages = false;
+  imageRefreshMessage = '';
 
   constructor(private readonly http: HttpClient) {
-    this.http.get<LibraryIndex>('assets/library/library.json').subscribe({
-      next: (library) => {
-        for (const image of library.backgrounds ?? []) {
-          const code = image.fileName.match(/^([A-Z]{1,5}\d{2,3}-\d{3})\s+-\s+/)?.[1];
-          if (code) this.imageByCode[code] = image.path;
-        }
-      },
-    });
-    this.http.get<Record<string, string>>('assets/scoring/ligaonepiece-images.json').subscribe({
-      next: (images) => {
-        for (const [code, url] of Object.entries(images)) {
-          if (!this.imageByCode[code]) this.imageByCode[code] = url;
-        }
-      },
-    });
+    this.refreshImages(false);
     this.http.get<Rules>(`assets/scoring/rules.json?v=${Date.now()}`).subscribe({
       next: (rules) => { this.rules = rules; this.loading = false; },
       error: () => { this.error = 'Não foi possível carregar a tabela.'; this.loading = false; },
@@ -62,6 +51,41 @@ export class ScoringAdminComponent {
 
   get cardEntries(): [string, number][] {
     return Object.entries(this.rules?.cards ?? {}).sort(([a], [b]) => a.localeCompare(b));
+  }
+
+  refreshImages(showMessage = true): void {
+    this.refreshingImages = true;
+    this.imageRefreshMessage = '';
+    const version = Date.now();
+    forkJoin({
+      library: this.http.get<LibraryIndex>(`assets/library/library.json?v=${version}`),
+      fallback: this.http.get<Record<string, string>>(`assets/scoring/ligaonepiece-images.json?v=${version}`),
+    }).subscribe({
+      next: ({ library, fallback }) => {
+        const nextImages: Record<string, string> = { ...fallback };
+        for (const image of library.backgrounds ?? []) {
+          const code = image.fileName.match(/^([A-Z]{1,5}\\d{2,3}-\\d{3})\\s+-\\s+/)?.[1];
+          if (code) nextImages[code] = image.path;
+        }
+        const codes = [
+          ...Object.keys(this.rules?.leaders ?? {}),
+          ...Object.keys(this.rules?.cards ?? {}),
+        ];
+        const added = codes.filter((code) => !this.imageByCode[code] && nextImages[code]).length;
+        const missing = codes.filter((code) => !nextImages[code]).length;
+        this.imageByCode = nextImages;
+        this.refreshingImages = false;
+        if (showMessage) {
+          this.imageRefreshMessage = missing
+            ? `${added} imagem(ns) atualizada(s). Ainda faltam ${missing}; publique a tabela no GitHub, aguarde o deploy e tente novamente.`
+            : `Imagens atualizadas. ${added} nova(s) miniatura(s) encontrada(s).`;
+        }
+      },
+      error: () => {
+        this.refreshingImages = false;
+        if (showMessage) this.imageRefreshMessage = 'Não foi possível atualizar as imagens. Tente novamente.';
+      },
+    });
   }
 
   imageLoadError(code: string): void {
