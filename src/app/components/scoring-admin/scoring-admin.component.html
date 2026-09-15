@@ -22,7 +22,7 @@
     </div>
     <h3>Líderes</h3>
     @if (!leaderEntries.length) { <p>Nenhum líder pontuado.</p> }
-    @for (entry of leaderEntries; track entry[0]) {
+    @for (entry of paginatedLeaderEntries; track entry[0]) {
       <div class="entry">
         <div class="entry-info">
           @if (imageByCode[entry[0]]) {
@@ -35,9 +35,16 @@
         <button type="button" (click)="remove('leaders', entry[0])">Remover</button>
       </div>
     }
+    @if (leaderEntries.length > leadersPerPage) {
+      <nav class="pagination" aria-label="Paginação de líderes">
+        <button type="button" (click)="changeLeaderPage(leaderPage - 1)" [disabled]="leaderPage === 1">Anterior</button>
+        <span>Página {{ leaderPage }} de {{ leaderPageCount }}</span>
+        <button type="button" (click)="changeLeaderPage(leaderPage + 1)" [disabled]="leaderPage === leaderPageCount">Próxima</button>
+      </nav>
+    }
     <h3>Cartas</h3>
     @if (!cardEntries.length) { <p>Nenhuma carta pontuada.</p> }
-    @for (entry of cardEntries; track entry[0]) {
+    @for (entry of paginatedCardEntries; track entry[0]) {
       <div class="entry">
         <div class="entry-info">
           @if (imageByCode[entry[0]]) {
@@ -49,6 +56,13 @@
         </div>
         <button type="button" (click)="remove('cards', entry[0])">Remover</button>
       </div>
+    }
+    @if (cardEntries.length > cardsPerPage) {
+      <nav class="pagination" aria-label="Paginação de cartas">
+        <button type="button" (click)="changeCardPage(cardPage - 1)" [disabled]="cardPage === 1">Anterior</button>
+        <span>Página {{ cardPage }} de {{ cardPageCount }}</span>
+        <button type="button" (click)="changeCardPage(cardPage + 1)" [disabled]="cardPage === cardPageCount">Próxima</button>
+      </nav>
     }
     <p class="image-credit">Imagens complementares: <a href="https://www.ligaonepiece.com.br/" target="_blank" rel="noopener noreferrer">Liga One Piece</a>.</p>
     <button class="download" type="button" (click)="download()">Baixar tabela para publicação</button>
