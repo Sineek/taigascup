@@ -136,13 +136,6 @@ export class ScoringAdminComponent {
     this.error = '';
   }
 
-  remove(kind: 'leaders' | 'cards', code: string): void {
-    if (!this.rules) return;
-    delete this.rules[kind][code];
-    if (kind === 'leaders') this.changeLeaderPage(this.leaderPage);
-    else this.changeCardPage(this.cardPage);
-  }
-
   download(): void {
     if (!this.rules) return;
     const data = JSON.stringify(this.rules, null, 2) + '\n';
