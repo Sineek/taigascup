@@ -36,6 +36,10 @@ export class ScoringAdminComponent {
   loading = true;
   refreshingImages = false;
   imageRefreshMessage = '';
+  readonly leadersPerPage = 5;
+  readonly cardsPerPage = 10;
+  leaderPage = 1;
+  cardPage = 1;
 
   constructor(private readonly http: HttpClient) {
     this.refreshImages(false);
@@ -51,6 +55,32 @@ export class ScoringAdminComponent {
 
   get cardEntries(): [string, number][] {
     return Object.entries(this.rules?.cards ?? {}).sort(([a], [b]) => a.localeCompare(b));
+  }
+
+  get paginatedLeaderEntries(): [string, number][] {
+    const start = (this.leaderPage - 1) * this.leadersPerPage;
+    return this.leaderEntries.slice(start, start + this.leadersPerPage);
+  }
+
+  get paginatedCardEntries(): [string, number][] {
+    const start = (this.cardPage - 1) * this.cardsPerPage;
+    return this.cardEntries.slice(start, start + this.cardsPerPage);
+  }
+
+  get leaderPageCount(): number {
+    return Math.max(1, Math.ceil(this.leaderEntries.length / this.leadersPerPage));
+  }
+
+  get cardPageCount(): number {
+    return Math.max(1, Math.ceil(this.cardEntries.length / this.cardsPerPage));
+  }
+
+  changeLeaderPage(page: number): void {
+    this.leaderPage = Math.min(Math.max(1, page), this.leaderPageCount);
+  }
+
+  changeCardPage(page: number): void {
+    this.cardPage = Math.min(Math.max(1, page), this.cardPageCount);
   }
 
   refreshImages(showMessage = true): void {
@@ -107,7 +137,10 @@ export class ScoringAdminComponent {
   }
 
   remove(kind: 'leaders' | 'cards', code: string): void {
-    if (this.rules) delete this.rules[kind][code];
+    if (!this.rules) return;
+    delete this.rules[kind][code];
+    if (kind === 'leaders') this.changeLeaderPage(this.leaderPage);
+    else this.changeCardPage(this.cardPage);
   }
 
   download(): void {
