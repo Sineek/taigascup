@@ -32,7 +32,6 @@
           }
           <span>{{ entry[0] }} — {{ entry[1] }} pontos</span>
         </div>
-        <button type="button" (click)="remove('leaders', entry[0])">Remover</button>
       </div>
     }
     @if (leaderEntries.length > leadersPerPage) {
@@ -54,7 +53,6 @@
           }
           <span>{{ entry[0] }} — {{ entry[1] }} pontos/cópia</span>
         </div>
-        <button type="button" (click)="remove('cards', entry[0])">Remover</button>
       </div>
     }
     @if (cardEntries.length > cardsPerPage) {
