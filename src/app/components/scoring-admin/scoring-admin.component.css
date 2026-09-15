@@ -14,3 +14,10 @@ button { padding: 9px 14px; border: 0; border-radius: 8px; color: white; backgro
 .image-refresh { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 20px 0; }
 .image-refresh p { margin: 0; }
 button:disabled { opacity: .6; cursor: wait; }
+.pagination { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 14px 0 24px; }
+.pagination span { color: var(--muted); font-weight: 700; }
+.pagination button:disabled { cursor: default; }
+@media (max-width: 480px) {
+  .pagination { justify-content: space-between; gap: 6px; }
+  .pagination button { padding: 8px 10px; }
+}
