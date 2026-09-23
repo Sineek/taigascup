@@ -18,16 +18,43 @@
       @if (cardCount !== 50) {
         <p class="error">O deck deve ter exatamente 50 cartas, além do líder.</p>
       }
-      <table>
-        <thead><tr><th>Código</th><th>Qtd.</th><th>Pontos/cópia</th><th>Total</th></tr></thead>
-        <tbody>
-          <tr><td>{{ leader.code }} (líder)</td><td>1</td><td>{{ leader.points }}</td><td>{{ leader.points }}</td></tr>
-          @for (card of cards; track card.code) {
-            <tr><td>{{ card.code }}</td><td>{{ card.quantity }}</td><td>{{ card.points }}</td><td>{{ card.quantity * card.points }}</td></tr>
-          }
-        </tbody>
-      </table>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Código</th><th>Qtd.</th><th>Pontos/cópia</th><th>Total</th></tr></thead>
+          <tbody>
+            <tr [class.has-points]="leader.points > 0" [class.over-cap]="lineExceedsCap(leader)">
+              <td>
+                <div class="card-code">
+                  @if (!missingImages.has(leader.code)) {
+                    <img [src]="cardImagePath(leader.code)" [alt]="'Imagem do líder ' + leader.code" loading="lazy" (error)="imageLoadError(leader.code)">
+                  } @else {
+                    <span class="thumbnail-missing" aria-label="Imagem indisponível">Sem imagem</span>
+                  }
+                  <span>{{ leader.code }} (líder)</span>
+                </div>
+              </td>
+              <td>1</td><td>{{ leader.points }}</td><td>{{ leader.points }}</td>
+            </tr>
+            @for (card of cards; track card.code) {
+              <tr [class.has-points]="card.points > 0" [class.over-cap]="lineExceedsCap(card)">
+                <td>
+                  <div class="card-code">
+                    @if (!missingImages.has(card.code)) {
+                      <img [src]="cardImagePath(card.code)" [alt]="'Imagem da carta ' + card.code" loading="lazy" (error)="imageLoadError(card.code)">
+                    } @else {
+                      <span class="thumbnail-missing" aria-label="Imagem indisponível">Sem imagem</span>
+                    }
+                    <span>{{ card.code }}</span>
+                  </div>
+                </td>
+                <td>{{ card.quantity }}</td><td>{{ card.points }}</td><td>{{ lineTotal(card) }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
       <p class="note">A checagem de cores, identidade das cartas e restrições oficiais ainda exige conferência da staff.</p>
     </div>
   }
 </section>
+
