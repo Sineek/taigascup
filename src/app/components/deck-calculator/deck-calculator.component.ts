@@ -69,7 +69,7 @@ export class DeckCalculatorComponent {
   }
 
   lineExceedsCap(line: DeckLine): boolean {
-    return this.lineTotal(line) > (this.rules?.pointCap ?? 100);
+    return this.lineTotal(line) >= (this.rules?.pointCap ?? 100);
   }
 
   calculate(): void {
