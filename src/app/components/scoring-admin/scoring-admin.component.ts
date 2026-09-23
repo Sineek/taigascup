@@ -25,13 +25,16 @@ export class ScoringAdminComponent {
   error = '';
   loading = true;
   readonly leadersPerPage = 5;
-  readonly cardsPerPage = 10;
   leaderPage = 1;
-  cardPage = 1;
+  selectedCardCollection = '';
 
   constructor(private readonly http: HttpClient) {
     this.http.get<Rules>(`assets/scoring/rules.json?v=${Date.now()}`).subscribe({
-      next: (rules) => { this.rules = rules; this.loading = false; },
+      next: (rules) => {
+        this.rules = rules;
+        this.selectedCardCollection = this.cardCollections[0] ?? '';
+        this.loading = false;
+      },
       error: () => { this.error = 'Não foi possível carregar a tabela.'; this.loading = false; },
     });
   }
@@ -49,25 +52,21 @@ export class ScoringAdminComponent {
     return this.leaderEntries.slice(start, start + this.leadersPerPage);
   }
 
-  get paginatedCardEntries(): [string, number][] {
-    const start = (this.cardPage - 1) * this.cardsPerPage;
-    return this.cardEntries.slice(start, start + this.cardsPerPage);
+  get cardCollections(): string[] {
+    return [...new Set(this.cardEntries.map(([code]) => code.split('-')[0]))]
+      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+  }
+
+  get selectedCardEntries(): [string, number][] {
+    return this.cardEntries.filter(([code]) => code.startsWith(`${this.selectedCardCollection}-`));
   }
 
   get leaderPageCount(): number {
     return Math.max(1, Math.ceil(this.leaderEntries.length / this.leadersPerPage));
   }
 
-  get cardPageCount(): number {
-    return Math.max(1, Math.ceil(this.cardEntries.length / this.cardsPerPage));
-  }
-
   changeLeaderPage(page: number): void {
     this.leaderPage = Math.min(Math.max(1, page), this.leaderPageCount);
-  }
-
-  changeCardPage(page: number): void {
-    this.cardPage = Math.min(Math.max(1, page), this.cardPageCount);
   }
 
   cardImagePath(code: string): string {
@@ -88,6 +87,7 @@ export class ScoringAdminComponent {
       return;
     }
     this.rules[this.kind][code] = this.points;
+    if (this.kind === 'cards') this.selectedCardCollection = code.split('-')[0];
     this.code = '';
     this.points = 0;
     this.error = '';
