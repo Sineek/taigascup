@@ -16,17 +16,13 @@
       <label>Pontos <input type="number" min="0" max="100" [(ngModel)]="points"></label>
       <button type="button" (click)="save()">Adicionar ou alterar</button>
     </div>
-    <div class="image-refresh">
-      <button type="button" (click)="refreshImages()" [disabled]="refreshingImages">{{ refreshingImages ? 'Atualizando imagens...' : 'Atualizar imagens' }}</button>
-      @if (imageRefreshMessage) { <p role="status">{{ imageRefreshMessage }}</p> }
-    </div>
     <h3>Líderes</h3>
     @if (!leaderEntries.length) { <p>Nenhum líder pontuado.</p> }
     @for (entry of paginatedLeaderEntries; track entry[0]) {
       <div class="entry">
         <div class="entry-info">
-          @if (imageByCode[entry[0]]) {
-            <img class="card-thumbnail" [src]="imageByCode[entry[0]]" [alt]="'Imagem do líder ' + entry[0]" loading="lazy" (error)="imageLoadError(entry[0])">
+          @if (!missingImages.has(entry[0])) {
+            <img class="card-thumbnail" [src]="cardImagePath(entry[0])" [alt]="'Imagem do líder ' + entry[0]" loading="lazy" (error)="imageLoadError(entry[0])">
           } @else {
             <span class="card-thumbnail thumbnail-missing" aria-label="Imagem indisponível">Sem imagem</span>
           }
@@ -46,8 +42,8 @@
     @for (entry of paginatedCardEntries; track entry[0]) {
       <div class="entry">
         <div class="entry-info">
-          @if (imageByCode[entry[0]]) {
-            <img class="card-thumbnail" [src]="imageByCode[entry[0]]" [alt]="'Imagem da carta ' + entry[0]" loading="lazy" (error)="imageLoadError(entry[0])">
+          @if (!missingImages.has(entry[0])) {
+            <img class="card-thumbnail" [src]="cardImagePath(entry[0])" [alt]="'Imagem da carta ' + entry[0]" loading="lazy" (error)="imageLoadError(entry[0])">
           } @else {
             <span class="card-thumbnail thumbnail-missing" aria-label="Imagem indisponível">Sem imagem</span>
           }
@@ -62,8 +58,8 @@
         <button type="button" (click)="changeCardPage(cardPage + 1)" [disabled]="cardPage === cardPageCount">Próxima</button>
       </nav>
     }
-    <p class="image-credit">Imagens complementares: <a href="https://www.ligaonepiece.com.br/" target="_blank" rel="noopener noreferrer">Liga One Piece</a>.</p>
     <button class="download" type="button" (click)="download()">Baixar tabela para publicação</button>
     <p><a href="https://github.com/Sineek/taigascup/edit/main/src/assets/scoring/rules.json" target="_blank" rel="noopener noreferrer">Publicar no GitHub</a></p>
   }
 </main>
+
