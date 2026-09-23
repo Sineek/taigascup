@@ -31,4 +31,18 @@ button:disabled { opacity: .5; cursor: wait; }
 .result h3 { margin-top: 0; }
 table { width: 100%; border-collapse: collapse; }
 th, td { padding: 8px; border-bottom: 1px solid var(--line); text-align: left; }
-@media (max-width: 600px) { th, td { font-size: 12px; padding: 6px 3px; } }
+.table-wrap { overflow-x: auto; }
+tbody tr.has-points { background: #fff4bf; }
+tbody tr.over-cap { background: #f8caca; }
+.card-code { display: flex; align-items: center; gap: 10px; min-width: 170px; }
+.card-code img,
+.thumbnail-missing { width: 36px; height: 50px; flex: none; border-radius: 4px; }
+.card-code img { display: block; object-fit: cover; background: #eee4da; }
+.thumbnail-missing { display: flex; align-items: center; justify-content: center; box-sizing: border-box; padding: 2px; color: var(--muted); background: #eee4da; font-size: 7px; line-height: 1.1; text-align: center; }
+@media (max-width: 600px) {
+  th, td { font-size: 12px; padding: 6px 3px; }
+  .card-code { min-width: 145px; gap: 6px; }
+  .card-code img,
+  .thumbnail-missing { width: 32px; height: 44px; }
+}
+
