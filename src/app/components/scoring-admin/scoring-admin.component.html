@@ -1,0 +1,69 @@
+<main class="admin">
+  <h2>Tabela de pontuação</h2>
+  <p>Edite os valores abaixo, baixe o arquivo e publique-o no repositório como <code>src/assets/scoring/rules.json</code>. Só uma alteração publicada no GitHub valerá para todos.</p>
+  @if (error) { <p class="error" role="alert">{{ error }}</p> }
+  @if (rules) {
+    <div class="fields">
+      <label>Versão <input [(ngModel)]="rules.version"></label>
+      <label>Teto de pontos <input type="number" min="0" [(ngModel)]="rules.pointCap"></label>
+    </div>
+    <h3>Definir pontuação</h3>
+    <div class="fields">
+      <label>Tipo
+        <select [(ngModel)]="kind"><option value="leaders">Líder</option><option value="cards">Carta</option></select>
+      </label>
+      <label>Código <input [(ngModel)]="code" placeholder="OP17-020"></label>
+      <label>Pontos <input type="number" min="0" max="100" [(ngModel)]="points"></label>
+      <button type="button" (click)="save()">Adicionar ou alterar</button>
+    </div>
+    <div class="image-refresh">
+      <button type="button" (click)="refreshImages()" [disabled]="refreshingImages">{{ refreshingImages ? 'Atualizando imagens...' : 'Atualizar imagens' }}</button>
+      @if (imageRefreshMessage) { <p role="status">{{ imageRefreshMessage }}</p> }
+    </div>
+    <h3>Líderes</h3>
+    @if (!leaderEntries.length) { <p>Nenhum líder pontuado.</p> }
+    @for (entry of paginatedLeaderEntries; track entry[0]) {
+      <div class="entry">
+        <div class="entry-info">
+          @if (imageByCode[entry[0]]) {
+            <img class="card-thumbnail" [src]="imageByCode[entry[0]]" [alt]="'Imagem do líder ' + entry[0]" loading="lazy" (error)="imageLoadError(entry[0])">
+          } @else {
+            <span class="card-thumbnail thumbnail-missing" aria-label="Imagem indisponível">Sem imagem</span>
+          }
+          <span>{{ entry[0] }} — {{ entry[1] }} pontos</span>
+        </div>
+      </div>
+    }
+    @if (leaderEntries.length > leadersPerPage) {
+      <nav class="pagination" aria-label="Paginação de líderes">
+        <button type="button" (click)="changeLeaderPage(leaderPage - 1)" [disabled]="leaderPage === 1">Anterior</button>
+        <span>Página {{ leaderPage }} de {{ leaderPageCount }}</span>
+        <button type="button" (click)="changeLeaderPage(leaderPage + 1)" [disabled]="leaderPage === leaderPageCount">Próxima</button>
+      </nav>
+    }
+    <h3>Cartas</h3>
+    @if (!cardEntries.length) { <p>Nenhuma carta pontuada.</p> }
+    @for (entry of paginatedCardEntries; track entry[0]) {
+      <div class="entry">
+        <div class="entry-info">
+          @if (imageByCode[entry[0]]) {
+            <img class="card-thumbnail" [src]="imageByCode[entry[0]]" [alt]="'Imagem da carta ' + entry[0]" loading="lazy" (error)="imageLoadError(entry[0])">
+          } @else {
+            <span class="card-thumbnail thumbnail-missing" aria-label="Imagem indisponível">Sem imagem</span>
+          }
+          <span>{{ entry[0] }} — {{ entry[1] }} pontos/cópia</span>
+        </div>
+      </div>
+    }
+    @if (cardEntries.length > cardsPerPage) {
+      <nav class="pagination" aria-label="Paginação de cartas">
+        <button type="button" (click)="changeCardPage(cardPage - 1)" [disabled]="cardPage === 1">Anterior</button>
+        <span>Página {{ cardPage }} de {{ cardPageCount }}</span>
+        <button type="button" (click)="changeCardPage(cardPage + 1)" [disabled]="cardPage === cardPageCount">Próxima</button>
+      </nav>
+    }
+    <p class="image-credit">Imagens complementares: <a href="https://www.ligaonepiece.com.br/" target="_blank" rel="noopener noreferrer">Liga One Piece</a>.</p>
+    <button class="download" type="button" (click)="download()">Baixar tabela para publicação</button>
+    <p><a href="https://github.com/Sineek/taigascup/edit/main/src/assets/scoring/rules.json" target="_blank" rel="noopener noreferrer">Publicar no GitHub</a></p>
+  }
+</main>

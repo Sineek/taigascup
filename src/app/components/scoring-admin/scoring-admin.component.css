@@ -1,0 +1,23 @@
+.admin { max-width: 900px; margin: 0 auto; padding: 24px; }
+.fields { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; margin: 16px 0; }
+label { display: grid; gap: 5px; font-weight: 700; }
+input, select { min-width: 120px; padding: 9px; border: 1px solid var(--line); border-radius: 8px; }
+button { padding: 9px 14px; border: 0; border-radius: 8px; color: white; background: var(--brown); cursor: pointer; }
+.entry { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding: 7px 0; }
+.entry { gap: 12px; }
+.entry-info { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.card-thumbnail { display: block; width: 44px; height: 61px; flex: none; object-fit: cover; border-radius: 4px; background: #eee4da; }
+.thumbnail-missing { display: flex; align-items: center; justify-content: center; padding: 3px; box-sizing: border-box; color: #685547; font-size: 9px; line-height: 1.1; text-align: center; }
+.entry button { background: #854a36; flex: none; }
+.download { margin-top: 20px; }
+.error { color: #a12828; }
+.image-refresh { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 20px 0; }
+.image-refresh p { margin: 0; }
+button:disabled { opacity: .6; cursor: wait; }
+.pagination { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 14px 0 24px; }
+.pagination span { color: var(--muted); font-weight: 700; }
+.pagination button:disabled { cursor: default; }
+@media (max-width: 480px) {
+  .pagination { justify-content: space-between; gap: 6px; }
+  .pagination button { padding: 8px 10px; }
+}

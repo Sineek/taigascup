@@ -92,7 +92,7 @@ export class PostRendererService {
     const size = this.fitFont(ctx, title, 150, 770, 88);
 
     ctx.save();
-    ctx.fillStyle = this.colors.brown;
+    ctx.fillStyle = '#3D2616';
     ctx.font = `${size}px ${this.fontFamily()}`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';

@@ -5,7 +5,7 @@ header {
 }
 
 header h1 {
-  margin: 0;
+  margin: 12px 0 0;
   font-size: 24px;
   letter-spacing: 0.2px;
 }
@@ -16,7 +16,40 @@ header p {
   font-size: 14px;
 }
 
-main {
+.module-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.module-nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.module-nav a:hover,
+.module-nav a:focus-visible,
+.module-nav a[aria-current="page"] {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.module-nav a:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.module-nav .home-link {
+  margin-right: 12px;
+  padding-left: 0;
+  font-weight: 800;
+}
+
+
+main.generator {
   max-width: 1480px;
   margin: 0 auto;
   padding: 24px;
@@ -25,8 +58,51 @@ main {
   gap: 24px;
 }
 
+.home,
+.placeholder {
+  max-width: 720px;
+  margin: 12vh auto 0;
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.home h1 {
+  font-size: clamp(32px, 6vw, 52px);
+  margin: 0 0 12px;
+}
+
+.home p,
+.placeholder p {
+  color: var(--muted);
+}
+
+.home-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.action {
+  display: inline-block;
+  min-width: 200px;
+  padding: 18px 24px;
+  border-radius: 12px;
+  background: var(--brown);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: var(--shadow);
+}
+
+.action:hover,
+.action:focus-visible {
+  background: #654027;
+}
+
 @media (max-width: 1050px) {
-  main {
+  main.generator {
     grid-template-columns: 1fr;
   }
 }

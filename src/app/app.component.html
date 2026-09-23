@@ -1,17 +1,47 @@
-<header>
-  <h1>Taiga's Cup — Gerador de Posts</h1>
-  <p>Gera automaticamente os posts de colocação e roda em 1080 × 1080, mantendo o layout do PSD.</p>
-</header>
+@if (page !== 'home') {
+  <header>
+    <nav class="module-nav" aria-label="Navegação principal">
+      <a class="home-link" href="#">Taiga's Cup</a>
+      <a href="#/gerador" [attr.aria-current]="page === 'generator' ? 'page' : null">Gerador de Post</a>
+      <a href="#/calculadora" [attr.aria-current]="page === 'calculator' ? 'page' : null">Calculadora</a>
+      <a href="#/administrativo" [attr.aria-current]="page === 'admin' ? 'page' : null">Administrativo</a>
+    </nav>
+    @if (page === 'generator') {
+      <h1>Taiga's Cup — Gerador de Posts</h1>
+      <p>Gera automaticamente os posts de colocação e roda em 1080 × 1080, mantendo o layout do PSD.</p>
+    } @else if (page === 'calculator') {
+      <h1>Taiga's Cup — Calculadora</h1>
+    } @else {
+      <h1>Taiga's Cup — Administrativo</h1>
+    }
+  </header>
+}
 
-<main>
-  <app-generator-controls
-    [state]="state"
-    [fontDetected]="fontDetected"
-    (stateChange)="updateState($event)"
-    (downloadTop3)="downloadTop3()"
-    (downloadWheel)="downloadWheel()"
-    (downloadBoth)="downloadBoth()"
-  />
+@if (page === 'home') {
+  <main class="home">
+    <h1>Taiga's Cup</h1>
+    <p>Escolha uma ferramenta para começar.</p>
+    <nav class="home-actions" aria-label="Ferramentas">
+      <a class="action" href="#/gerador">Gerador de Post</a>
+      <a class="action" href="#/calculadora">Calculadora</a>
+      <a class="action" href="#/administrativo">Administrativo</a>
+    </nav>
+  </main>
+} @else if (page === 'generator') {
+  <main class="generator">
+    <app-generator-controls
+      [state]="state"
+      [fontDetected]="fontDetected"
+      (stateChange)="updateState($event)"
+      (downloadTop3)="downloadTop3()"
+      (downloadWheel)="downloadWheel()"
+      (downloadBoth)="downloadBoth()"
+    />
 
-  <app-post-preview [state]="state" />
-</main>
+    <app-post-preview [state]="state" />
+  </main>
+} @else if (page === 'calculator') {
+  <app-deck-calculator />
+} @else {
+  <app-scoring-admin />
+}
