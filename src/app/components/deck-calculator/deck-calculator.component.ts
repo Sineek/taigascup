@@ -29,6 +29,7 @@ export class DeckCalculatorComponent {
   error = '';
   leader: DeckLine | null = null;
   cards: DeckLine[] = [];
+  missingImages = new Set<string>();
   total = 0;
   evaluated = false;
 
@@ -54,11 +55,29 @@ export class DeckCalculatorComponent {
       this.total <= (this.rules?.pointCap ?? 0);
   }
 
+  cardImagePath(code: string): string {
+    const collection = code.split('-')[0];
+    return `assets/library/Cards/${collection}/${code}_small.jpg`;
+  }
+
+  imageLoadError(code: string): void {
+    this.missingImages.add(code);
+  }
+
+  lineTotal(line: DeckLine): number {
+    return line.quantity * line.points;
+  }
+
+  lineExceedsCap(line: DeckLine): boolean {
+    return this.lineTotal(line) > (this.rules?.pointCap ?? 100);
+  }
+
   calculate(): void {
     this.error = '';
     this.evaluated = false;
     this.leader = null;
     this.cards = [];
+    this.missingImages.clear();
     this.total = 0;
 
     if (!this.rules) {
@@ -117,3 +136,4 @@ export class DeckCalculatorComponent {
     this.evaluated = true;
   }
 }
+
