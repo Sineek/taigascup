@@ -39,24 +39,35 @@
     }
     <h3>Cartas</h3>
     @if (!cardEntries.length) { <p>Nenhuma carta pontuada.</p> }
-    @for (entry of paginatedCardEntries; track entry[0]) {
-      <div class="entry">
-        <div class="entry-info">
-          @if (!missingImages.has(entry[0])) {
-            <img class="card-thumbnail" [src]="cardImagePath(entry[0])" [alt]="'Imagem da carta ' + entry[0]" loading="lazy" (error)="imageLoadError(entry[0])">
-          } @else {
-            <span class="card-thumbnail thumbnail-missing" aria-label="Imagem indisponível">Sem imagem</span>
+    @if (cardEntries.length) {
+      <div class="cards-browser">
+        <nav class="collection-menu" aria-label="Coleções de cartas">
+          @for (collection of cardCollections; track collection) {
+            <button
+              type="button"
+              [class.active]="collection === selectedCardCollection"
+              [attr.aria-current]="collection === selectedCardCollection ? 'true' : null"
+              (click)="selectedCardCollection = collection">
+              {{ collection }}
+            </button>
           }
-          <span>{{ entry[0] }} — {{ entry[1] }} pontos/cópia</span>
+        </nav>
+        <div class="collection-cards">
+          <h4>{{ selectedCardCollection }}</h4>
+          @for (entry of selectedCardEntries; track entry[0]) {
+            <div class="entry">
+              <div class="entry-info">
+                @if (!missingImages.has(entry[0])) {
+                  <img class="card-thumbnail" [src]="cardImagePath(entry[0])" [alt]="'Imagem da carta ' + entry[0]" loading="lazy" (error)="imageLoadError(entry[0])">
+                } @else {
+                  <span class="card-thumbnail thumbnail-missing" aria-label="Imagem indisponível">Sem imagem</span>
+                }
+                <span>{{ entry[0] }} — {{ entry[1] }} pontos/cópia</span>
+              </div>
+            </div>
+          }
         </div>
       </div>
-    }
-    @if (cardEntries.length > cardsPerPage) {
-      <nav class="pagination" aria-label="Paginação de cartas">
-        <button type="button" (click)="changeCardPage(cardPage - 1)" [disabled]="cardPage === 1">Anterior</button>
-        <span>Página {{ cardPage }} de {{ cardPageCount }}</span>
-        <button type="button" (click)="changeCardPage(cardPage + 1)" [disabled]="cardPage === cardPageCount">Próxima</button>
-      </nav>
     }
     <button class="download" type="button" (click)="download()">Baixar tabela para publicação</button>
     <p><a href="https://github.com/Sineek/taigascup/edit/main/src/assets/scoring/rules.json" target="_blank" rel="noopener noreferrer">Publicar no GitHub</a></p>
