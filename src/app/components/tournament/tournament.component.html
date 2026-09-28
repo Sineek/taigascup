@@ -26,12 +26,13 @@
       <h2>Classificação</h2>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>#</th><th>Jogador</th><th>Deck</th><th>V</th><th>D</th><th>Situação</th></tr></thead>
+          <thead><tr><th>#</th><th>Jogador</th><th>Deck</th><th>V</th><th>D</th><th title="Soma das vitórias dos adversários enfrentados">BH</th><th>Situação</th></tr></thead>
           <tbody>
             @for (player of standings; track player.id; let position = $index) {
               <tr [class.undefeated]="player.losses === 0">
                 <td>{{ position + 1 }}</td><td>{{ player.nick }}</td><td>{{ player.deck }}</td>
                 <td>{{ player.wins }}</td><td>{{ player.losses }}</td>
+                <td>{{ buchholz(player.id) }}</td>
                 <td>{{ player.losses === 0 ? 'Invicto' : 'Em disputa' }}</td>
               </tr>
             }
