@@ -2,11 +2,11 @@
   <section class="registration panel">
     <div>
       <h2>Participantes</h2>
-      <p>Cadastre o nick e o líder. Novos jogadores podem entrar enquanto o torneio estiver em andamento.</p>
+      <p>Cadastre o nick e o deck. Novos jogadores podem entrar enquanto o torneio estiver em andamento.</p>
     </div>
     <div class="participant-form">
       <label>Nick <input [(ngModel)]="nick" placeholder="Nome do jogador"></label>
-      <label>Líder <input [(ngModel)]="leader" placeholder="OP16-079" (keyup.enter)="addParticipant()"></label>
+      <label>Deck <input [(ngModel)]="deck" placeholder="Nome ou descrição do deck" (keyup.enter)="addParticipant()"></label>
       <button type="button" (click)="addParticipant()" [disabled]="state.status === 'finished'">Adicionar</button>
     </div>
     @if (error) { <p class="error" role="alert">{{ error }}</p> }
@@ -26,11 +26,11 @@
       <h2>Classificação</h2>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>#</th><th>Jogador</th><th>Líder</th><th>V</th><th>D</th><th>Situação</th></tr></thead>
+          <thead><tr><th>#</th><th>Jogador</th><th>Deck</th><th>V</th><th>D</th><th>Situação</th></tr></thead>
           <tbody>
             @for (player of standings; track player.id; let position = $index) {
               <tr [class.undefeated]="player.losses === 0">
-                <td>{{ position + 1 }}</td><td>{{ player.nick }}</td><td>{{ player.leader }}</td>
+                <td>{{ position + 1 }}</td><td>{{ player.nick }}</td><td>{{ player.deck }}</td>
                 <td>{{ player.wins }}</td><td>{{ player.losses }}</td>
                 <td>{{ player.losses === 0 ? 'Invicto' : 'Em disputa' }}</td>
               </tr>
@@ -45,7 +45,7 @@
     <section class="champion" aria-live="polite">
       <span>Campeão invicto</span>
       <strong>{{ champion.nick }}</strong>
-      <small>{{ champion.leader }} · {{ champion.wins }} vitórias</small>
+      <small>{{ champion.deck }} · {{ champion.wins }} vitórias</small>
     </section>
   }
 
@@ -63,7 +63,7 @@
                 [disabled]="round !== currentRound || state.status !== 'running' || match.player2Id === null"
                 (click)="selectWinner(match, match.player1Id)">
                 <strong>{{ participant(match.player1Id)?.nick }}</strong>
-                <span>{{ participant(match.player1Id)?.leader }}</span>
+                <span>{{ participant(match.player1Id)?.deck }}</span>
               </button>
               <span class="versus">×</span>
               @if (match.player2Id !== null) {
@@ -74,7 +74,7 @@
                   [disabled]="round !== currentRound || state.status !== 'running'"
                   (click)="selectWinner(match, match.player2Id)">
                   <strong>{{ participant(match.player2Id)?.nick }}</strong>
-                  <span>{{ participant(match.player2Id)?.leader }}</span>
+                  <span>{{ participant(match.player2Id)?.deck }}</span>
                 </button>
               } @else {
                 <div class="player bye"><strong>BYE</strong><span>Vitória automática</span></div>
