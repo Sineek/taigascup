@@ -4,6 +4,7 @@
       <a class="home-link" href="#">Taiga's Cup</a>
       <a href="#/gerador" [attr.aria-current]="page === 'generator' ? 'page' : null">Gerador de Post</a>
       <a href="#/calculadora" [attr.aria-current]="page === 'calculator' ? 'page' : null">Calculadora</a>
+      <a href="#/torneio" [attr.aria-current]="page === 'tournament' ? 'page' : null">Torneio</a>
       <a href="#/administrativo" [attr.aria-current]="page === 'admin' ? 'page' : null">Administrativo</a>
     </nav>
     @if (page === 'generator') {
@@ -11,6 +12,8 @@
       <p>Gera automaticamente os posts de colocação e roda em 1080 × 1080, mantendo o layout do PSD.</p>
     } @else if (page === 'calculator') {
       <h1>Taiga's Cup — Calculadora</h1>
+    } @else if (page === 'tournament') {
+      <h1>Taiga's Cup — Torneio</h1>
     } @else {
       <h1>Taiga's Cup — Administrativo</h1>
     }
@@ -24,6 +27,7 @@
     <nav class="home-actions" aria-label="Ferramentas">
       <a class="action" href="#/gerador">Gerador de Post</a>
       <a class="action" href="#/calculadora">Calculadora</a>
+      <a class="action" href="#/torneio">Torneio</a>
       <a class="action" href="#/administrativo">Administrativo</a>
     </nav>
   </main>
@@ -42,6 +46,9 @@
   </main>
 } @else if (page === 'calculator') {
   <app-deck-calculator />
+} @else if (page === 'tournament') {
+  <app-tournament />
 } @else {
   <app-scoring-admin />
 }
+
