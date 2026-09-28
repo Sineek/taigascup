@@ -4,10 +4,15 @@ import { FormsModule } from '@angular/forms';
 interface Participant {
   id: number;
   nick: string;
-  leader: string;
+  deck: string;
   wins: number;
   losses: number;
   byes: number;
+}
+
+interface SavedParticipant extends Omit<Participant, 'deck'> {
+  deck?: string;
+  leader?: string;
 }
 
 interface Match {
@@ -54,7 +59,7 @@ function initialState(): TournamentState {
 export class TournamentComponent {
   state = this.loadState();
   nick = '';
-  leader = '';
+  deck = '';
   error = '';
 
   get currentRound(): Round | null {
@@ -73,9 +78,9 @@ export class TournamentComponent {
 
   addParticipant(): void {
     const nick = this.nick.trim();
-    const leader = this.leader.trim().toUpperCase();
-    if (!nick || !/^[A-Z]{1,5}\d{2,3}-\d{3}$/.test(leader)) {
-      this.error = 'Informe o nick e um código de líder válido.';
+    const deck = this.deck.trim();
+    if (!nick || !deck) {
+      this.error = 'Informe o nick e o deck do participante.';
       return;
     }
     if (this.state.participants.some((participant) => participant.nick.toLocaleLowerCase() === nick.toLocaleLowerCase())) {
@@ -90,7 +95,7 @@ export class TournamentComponent {
     const participant: Participant = {
       id: this.state.nextParticipantId++,
       nick,
-      leader,
+      deck,
       wins: 0,
       losses: 0,
       byes: 0,
@@ -102,7 +107,7 @@ export class TournamentComponent {
     }
 
     this.nick = '';
-    this.leader = '';
+    this.deck = '';
     this.error = '';
     this.saveState();
   }
@@ -136,7 +141,7 @@ export class TournamentComponent {
   clearTournament(): void {
     this.state = initialState();
     this.nick = '';
-    this.leader = '';
+    this.deck = '';
     this.error = '';
     localStorage.removeItem(STORAGE_KEY);
   }
@@ -247,7 +252,17 @@ export class TournamentComponent {
   private loadState(): TournamentState {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      return saved ? JSON.parse(saved) as TournamentState : initialState();
+      if (!saved) return initialState();
+      const parsed = JSON.parse(saved) as Omit<TournamentState, 'participants'> & {
+        participants: SavedParticipant[];
+      };
+      return {
+        ...parsed,
+        participants: parsed.participants.map((participant) => ({
+          ...participant,
+          deck: participant.deck ?? participant.leader ?? '',
+        })),
+      };
     } catch {
       return initialState();
     }
