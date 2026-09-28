@@ -8,14 +8,7 @@
       <a href="#/administrativo" [attr.aria-current]="page === 'admin' ? 'page' : null">Administrativo</a>
     </nav>
     @if (page === 'generator') {
-      <h1>Taiga's Cup — Gerador de Posts</h1>
       <p>Gera automaticamente os posts de colocação e roda em 1080 × 1080, mantendo o layout do PSD.</p>
-    } @else if (page === 'calculator') {
-      <h1>Taiga's Cup — Calculadora</h1>
-    } @else if (page === 'tournament') {
-      <h1>Taiga's Cup — Torneio</h1>
-    } @else {
-      <h1>Taiga's Cup — Administrativo</h1>
     }
   </header>
 }
