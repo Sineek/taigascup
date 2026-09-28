@@ -1,0 +1,89 @@
+<main class="tournament">
+  <section class="registration panel">
+    <div>
+      <h2>Participantes</h2>
+      <p>Cadastre o nick e o líder. Novos jogadores podem entrar enquanto o torneio estiver em andamento.</p>
+    </div>
+    <div class="participant-form">
+      <label>Nick <input [(ngModel)]="nick" placeholder="Nome do jogador"></label>
+      <label>Líder <input [(ngModel)]="leader" placeholder="OP16-079" (keyup.enter)="addParticipant()"></label>
+      <button type="button" (click)="addParticipant()" [disabled]="state.status === 'finished'">Adicionar</button>
+    </div>
+    @if (error) { <p class="error" role="alert">{{ error }}</p> }
+    <div class="actions">
+      @if (state.status === 'registration') {
+        <button type="button" (click)="startTournament()">Iniciar torneio</button>
+      }
+      @if (state.status === 'running') {
+        <button type="button" (click)="repairCurrentRound()">Reparear rodada</button>
+      }
+      <button class="secondary" type="button" (click)="clearTournament()">Limpar</button>
+    </div>
+  </section>
+
+  @if (state.participants.length) {
+    <section class="panel standings">
+      <h2>Classificação</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Jogador</th><th>Líder</th><th>V</th><th>D</th><th>Situação</th></tr></thead>
+          <tbody>
+            @for (player of standings; track player.id; let position = $index) {
+              <tr [class.undefeated]="player.losses === 0">
+                <td>{{ position + 1 }}</td><td>{{ player.nick }}</td><td>{{ player.leader }}</td>
+                <td>{{ player.wins }}</td><td>{{ player.losses }}</td>
+                <td>{{ player.losses === 0 ? 'Invicto' : 'Em disputa' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+  }
+
+  @if (champion) {
+    <section class="champion" aria-live="polite">
+      <span>Campeão invicto</span>
+      <strong>{{ champion.nick }}</strong>
+      <small>{{ champion.leader }} · {{ champion.wins }} vitórias</small>
+    </section>
+  }
+
+  @if (state.rounds.length) {
+    <section class="rounds">
+      @for (round of state.rounds; track round.number) {
+        <article class="round panel" [class.current]="round === currentRound && state.status === 'running'">
+          <h2>Rodada {{ round.number }}</h2>
+          @for (match of round.matches; track match.id) {
+            <div class="match" [class.decided]="match.winnerId !== null">
+              <button
+                type="button"
+                class="player"
+                [class.winner]="match.winnerId === match.player1Id"
+                [disabled]="round !== currentRound || state.status !== 'running' || match.player2Id === null"
+                (click)="selectWinner(match, match.player1Id)">
+                <strong>{{ participant(match.player1Id)?.nick }}</strong>
+                <span>{{ participant(match.player1Id)?.leader }}</span>
+              </button>
+              <span class="versus">×</span>
+              @if (match.player2Id !== null) {
+                <button
+                  type="button"
+                  class="player"
+                  [class.winner]="match.winnerId === match.player2Id"
+                  [disabled]="round !== currentRound || state.status !== 'running'"
+                  (click)="selectWinner(match, match.player2Id)">
+                  <strong>{{ participant(match.player2Id)?.nick }}</strong>
+                  <span>{{ participant(match.player2Id)?.leader }}</span>
+                </button>
+              } @else {
+                <div class="player bye"><strong>BYE</strong><span>Vitória automática</span></div>
+              }
+            </div>
+          }
+        </article>
+      }
+    </section>
+  }
+</main>
+
