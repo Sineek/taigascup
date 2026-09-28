@@ -1,0 +1,260 @@
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+interface Participant {
+  id: number;
+  nick: string;
+  leader: string;
+  wins: number;
+  losses: number;
+  byes: number;
+}
+
+interface Match {
+  id: number;
+  player1Id: number;
+  player2Id: number | null;
+  winnerId: number | null;
+}
+
+interface Round {
+  number: number;
+  matches: Match[];
+}
+
+interface TournamentState {
+  participants: Participant[];
+  rounds: Round[];
+  status: 'registration' | 'running' | 'finished';
+  championId: number | null;
+  nextParticipantId: number;
+  nextMatchId: number;
+}
+
+const STORAGE_KEY = 'taigas-cup-tournament-v1';
+
+function initialState(): TournamentState {
+  return {
+    participants: [],
+    rounds: [],
+    status: 'registration',
+    championId: null,
+    nextParticipantId: 1,
+    nextMatchId: 1,
+  };
+}
+
+@Component({
+  selector: 'app-tournament',
+  standalone: true,
+  imports: [FormsModule],
+  templateUrl: './tournament.component.html',
+  styleUrl: './tournament.component.css',
+})
+export class TournamentComponent {
+  state = this.loadState();
+  nick = '';
+  leader = '';
+  error = '';
+
+  get currentRound(): Round | null {
+    return this.state.rounds.at(-1) ?? null;
+  }
+
+  get champion(): Participant | null {
+    return this.participant(this.state.championId);
+  }
+
+  get standings(): Participant[] {
+    return [...this.state.participants].sort((a, b) =>
+      b.wins - a.wins || a.losses - b.losses || a.nick.localeCompare(b.nick),
+    );
+  }
+
+  addParticipant(): void {
+    const nick = this.nick.trim();
+    const leader = this.leader.trim().toUpperCase();
+    if (!nick || !/^[A-Z]{1,5}\d{2,3}-\d{3}$/.test(leader)) {
+      this.error = 'Informe o nick e um código de líder válido.';
+      return;
+    }
+    if (this.state.participants.some((participant) => participant.nick.toLocaleLowerCase() === nick.toLocaleLowerCase())) {
+      this.error = 'Já existe um participante com esse nick.';
+      return;
+    }
+    if (this.state.status === 'finished') {
+      this.error = 'Limpe o torneio antes de iniciar uma nova disputa.';
+      return;
+    }
+
+    const participant: Participant = {
+      id: this.state.nextParticipantId++,
+      nick,
+      leader,
+      wins: 0,
+      losses: 0,
+      byes: 0,
+    };
+    this.state.participants.push(participant);
+
+    if (this.state.status === 'running' && this.currentRound) {
+      this.addLateParticipantToCurrentRound(participant, this.currentRound);
+    }
+
+    this.nick = '';
+    this.leader = '';
+    this.error = '';
+    this.saveState();
+  }
+
+  startTournament(): void {
+    if (this.state.participants.length < 2) {
+      this.error = 'Adicione pelo menos dois participantes.';
+      return;
+    }
+    this.state.status = 'running';
+    this.error = '';
+    this.createNextRound();
+  }
+
+  selectWinner(match: Match, winnerId: number): void {
+    if (this.state.status !== 'running' || match.player2Id === null) return;
+    match.winnerId = winnerId;
+    this.saveState();
+    if (this.currentRound?.matches.every((item) => item.winnerId !== null)) {
+      this.completeCurrentRound();
+    }
+  }
+
+  repairCurrentRound(): void {
+    if (this.state.status !== 'running' || !this.currentRound) return;
+    this.currentRound.matches = this.buildMatches(this.state.participants);
+    this.error = '';
+    this.saveState();
+  }
+
+  clearTournament(): void {
+    this.state = initialState();
+    this.nick = '';
+    this.leader = '';
+    this.error = '';
+    localStorage.removeItem(STORAGE_KEY);
+  }
+
+  participant(id: number | null): Participant | null {
+    return id === null ? null : this.state.participants.find((item) => item.id === id) ?? null;
+  }
+
+  private addLateParticipantToCurrentRound(participant: Participant, round: Round): void {
+    const byeMatch = round.matches.find((match) => match.player2Id === null);
+    if (byeMatch) {
+      const previousBye = this.participant(byeMatch.player1Id);
+      if (previousBye && byeMatch.winnerId === previousBye.id) {
+        byeMatch.player2Id = participant.id;
+        byeMatch.winnerId = null;
+        return;
+      }
+    }
+    round.matches.push({
+      id: this.state.nextMatchId++,
+      player1Id: participant.id,
+      player2Id: null,
+      winnerId: participant.id,
+    });
+  }
+
+  private createNextRound(): void {
+    const round: Round = {
+      number: this.state.rounds.length + 1,
+      matches: this.buildMatches(this.state.participants),
+    };
+    this.state.rounds.push(round);
+    this.saveState();
+  }
+
+  private buildMatches(participants: Participant[]): Match[] {
+    const pool = this.shuffle([...participants]).sort((a, b) => a.losses - b.losses || b.wins - a.wins);
+    const matches: Match[] = [];
+
+    if (pool.length % 2 === 1) {
+      const byeCandidate = [...pool].sort((a, b) => a.byes - b.byes || b.losses - a.losses || a.wins - b.wins)[0];
+      pool.splice(pool.findIndex((item) => item.id === byeCandidate.id), 1);
+      matches.push({
+        id: this.state.nextMatchId++,
+        player1Id: byeCandidate.id,
+        player2Id: null,
+        winnerId: byeCandidate.id,
+      });
+    }
+
+    while (pool.length) {
+      const player1 = pool.shift()!;
+      let opponentIndex = pool.findIndex((candidate) => !this.havePlayed(player1.id, candidate.id));
+      if (opponentIndex < 0) opponentIndex = 0;
+      const player2 = pool.splice(opponentIndex, 1)[0];
+      matches.push({
+        id: this.state.nextMatchId++,
+        player1Id: player1.id,
+        player2Id: player2.id,
+        winnerId: null,
+      });
+    }
+    return matches;
+  }
+
+  private completeCurrentRound(): void {
+    const round = this.currentRound;
+    if (!round) return;
+
+    for (const match of round.matches) {
+      const winner = this.participant(match.winnerId);
+      if (!winner) continue;
+      winner.wins += 1;
+      if (match.player2Id === null) {
+        winner.byes += 1;
+        continue;
+      }
+      const loserId = match.player1Id === winner.id ? match.player2Id : match.player1Id;
+      const loser = this.participant(loserId);
+      if (loser) loser.losses += 1;
+    }
+
+    const undefeated = this.state.participants.filter((participant) => participant.losses === 0);
+    if (undefeated.length === 1) {
+      this.state.status = 'finished';
+      this.state.championId = undefeated[0].id;
+      this.saveState();
+      return;
+    }
+    this.createNextRound();
+  }
+
+  private havePlayed(player1Id: number, player2Id: number): boolean {
+    return this.state.rounds.some((round) => round.matches.some((match) =>
+      (match.player1Id === player1Id && match.player2Id === player2Id) ||
+      (match.player1Id === player2Id && match.player2Id === player1Id),
+    ));
+  }
+
+  private shuffle<T>(items: T[]): T[] {
+    for (let index = items.length - 1; index > 0; index--) {
+      const target = Math.floor(Math.random() * (index + 1));
+      [items[index], items[target]] = [items[target], items[index]];
+    }
+    return items;
+  }
+
+  private loadState(): TournamentState {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) as TournamentState : initialState();
+    } catch {
+      return initialState();
+    }
+  }
+
+  private saveState(): void {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state));
+  }
+}
+
