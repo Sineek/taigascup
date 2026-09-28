@@ -71,9 +71,16 @@ export class TournamentComponent {
   }
 
   get standings(): Participant[] {
-    return [...this.state.participants].sort((a, b) =>
-      b.wins - a.wins || a.losses - b.losses || a.nick.localeCompare(b.nick),
-    );
+    return [...this.state.participants].sort((a, b) => this.compareParticipants(a, b));
+  }
+
+  buchholz(participantId: number): number {
+    return this.completedRounds().reduce((total, round) => total + round.matches.reduce((roundTotal, match) => {
+      if (match.player2Id === null) return roundTotal;
+      if (match.player1Id !== participantId && match.player2Id !== participantId) return roundTotal;
+      const opponentId = match.player1Id === participantId ? match.player2Id : match.player1Id;
+      return roundTotal + (this.participant(opponentId)?.wins ?? 0);
+    }, 0), 0);
   }
 
   addParticipant(): void {
@@ -178,11 +185,12 @@ export class TournamentComponent {
   }
 
   private buildMatches(participants: Participant[]): Match[] {
-    const pool = this.shuffle([...participants]).sort((a, b) => a.losses - b.losses || b.wins - a.wins);
+    const pool = this.shuffle([...participants]).sort((a, b) => this.compareParticipants(a, b));
     const matches: Match[] = [];
 
     if (pool.length % 2 === 1) {
-      const byeCandidate = [...pool].sort((a, b) => a.byes - b.byes || b.losses - a.losses || a.wins - b.wins)[0];
+      const minimumByes = Math.min(...pool.map((participant) => participant.byes));
+      const byeCandidate = [...pool].reverse().find((participant) => participant.byes === minimumByes)!;
       pool.splice(pool.findIndex((item) => item.id === byeCandidate.id), 1);
       matches.push({
         id: this.state.nextMatchId++,
@@ -239,6 +247,20 @@ export class TournamentComponent {
       (match.player1Id === player1Id && match.player2Id === player2Id) ||
       (match.player1Id === player2Id && match.player2Id === player1Id),
     ));
+  }
+
+  private compareParticipants(a: Participant, b: Participant): number {
+    return b.wins - a.wins ||
+      this.buchholz(b.id) - this.buchholz(a.id) ||
+      a.losses - b.losses ||
+      a.byes - b.byes ||
+      a.nick.localeCompare(b.nick);
+  }
+
+  private completedRounds(): Round[] {
+    return this.state.rounds.filter((round) =>
+      round.matches.every((match) => match.winnerId !== null),
+    );
   }
 
   private shuffle<T>(items: T[]): T[] {
