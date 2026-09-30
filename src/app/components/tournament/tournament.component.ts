@@ -185,7 +185,7 @@ export class TournamentComponent {
   }
 
   private buildMatches(participants: Participant[]): Match[] {
-    const pool = this.shuffle([...participants]).sort((a, b) => this.compareParticipants(a, b));
+    const pool = this.shuffle([...participants]).sort((a, b) => this.comparePairingParticipants(a, b));
     const matches: Match[] = [];
 
     if (pool.length % 2 === 1) {
@@ -255,6 +255,13 @@ export class TournamentComponent {
       a.losses - b.losses ||
       a.byes - b.byes ||
       a.nick.localeCompare(b.nick);
+  }
+
+  private comparePairingParticipants(a: Participant, b: Participant): number {
+    return b.wins - a.wins ||
+      this.buchholz(b.id) - this.buchholz(a.id) ||
+      a.losses - b.losses ||
+      a.byes - b.byes;
   }
 
   private completedRounds(): Round[] {
