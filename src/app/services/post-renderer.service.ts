@@ -81,6 +81,7 @@ export class PostRendererService {
       }
 
       this.drawOutlinedName(ctx, rank.nick, slot);
+      this.drawRankBorder(ctx, slot);
     });
   }
 
@@ -248,6 +249,14 @@ export class PostRendererService {
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(String(position), 274, slot.y + slot.h / 2 + 2);
+    ctx.restore();
+  }
+
+  private drawRankBorder(ctx: CanvasRenderingContext2D, slot: RankSlot): void {
+    ctx.save();
+    ctx.strokeStyle = '#3D2616';
+    ctx.lineWidth = 10;
+    ctx.strokeRect(215, slot.y + 5, 646, slot.h - 10);
     ctx.restore();
   }
 
