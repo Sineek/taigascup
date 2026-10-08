@@ -34,7 +34,7 @@ export class GeneratorControlsComponent {
       missing.push('roda');
     }
 
-    this.state.top3.forEach((rank, index) => {
+    this.state.top4.forEach((rank, index) => {
       if (!rank.nick.trim()) {
         missing.push(`nick do ${index + 1}º`);
       }
@@ -55,10 +55,10 @@ export class GeneratorControlsComponent {
   }
 
   updateRank(index: number, rank: RankState): void {
-    const top3 = this.state.top3.map((current, currentIndex) =>
+    const top4 = this.state.top4.map((current, currentIndex) =>
       currentIndex === index ? rank : current,
     );
-    this.patchState({ top3 });
+    this.patchState({ top4 });
   }
 
   async onWheelFile(event: Event): Promise<void> {
@@ -83,3 +83,4 @@ export class GeneratorControlsComponent {
   }
 
 }
+
