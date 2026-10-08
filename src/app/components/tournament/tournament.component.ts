@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { LibraryImage } from '../../models/image-library.model';
+import { ImageLibraryService } from '../../services/image-library.service';
 
 interface Participant {
   id: number;
@@ -61,6 +63,46 @@ export class TournamentComponent {
   nick = '';
   deck = '';
   error = '';
+  leaders: LibraryImage[] = [];
+  leaderSearchOpen = false;
+
+  constructor(private readonly imageLibrary: ImageLibraryService) {
+    this.imageLibrary.getManifest().subscribe((manifest) => {
+      this.leaders = manifest.backgrounds;
+    });
+  }
+
+  get leaderSuggestions(): LibraryImage[] {
+    const query = this.normalize(this.deck);
+    if (!this.leaderSearchOpen || query.length < 2) return [];
+    return this.leaders
+      .filter((leader) =>
+        this.normalize(`${leader.name} ${leader.fileName}`).includes(query),
+      )
+      .slice(0, 8);
+  }
+
+  leaderCode(leader: LibraryImage): string {
+    return leader.fileName.match(/^([A-Z0-9]+-\d+)/i)?.[1].toUpperCase() ?? leader.collection;
+  }
+
+  leaderName(leader: LibraryImage): string {
+    return leader.fileName
+      .replace(/^[A-Z0-9]+-\d+\s*-\s*/i, '')
+      .replace(/\.[^.]+$/, '')
+      .replaceAll('_', ' ');
+  }
+
+  selectLeader(leader: LibraryImage): void {
+    this.deck = this.leaderCode(leader);
+    this.leaderSearchOpen = false;
+  }
+
+  closeLeaderSearch(): void {
+    window.setTimeout(() => {
+      this.leaderSearchOpen = false;
+    }, 150);
+  }
 
   get currentRound(): Round | null {
     return this.state.rounds.at(-1) ?? null;
@@ -115,6 +157,7 @@ export class TournamentComponent {
 
     this.nick = '';
     this.deck = '';
+    this.leaderSearchOpen = false;
     this.error = '';
     this.saveState();
   }
@@ -352,5 +395,14 @@ export class TournamentComponent {
   private saveState(): void {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state));
   }
+
+  private normalize(value: string): string {
+    return value
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLocaleLowerCase()
+      .trim();
+  }
 }
+
 
