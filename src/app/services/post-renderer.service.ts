@@ -11,9 +11,10 @@ export class PostRendererService {
   private readonly backgroundOverlayAlpha = 0.50;
 
   private readonly slots: RankSlot[] = [
-    { y: 318, h: 148, x: 339, w: 517, nameX: 358, nameY: 392, font: 72, maxW: 470 },
-    { y: 499, h: 148, x: 339, w: 517, nameX: 358, nameY: 573, font: 75, maxW: 470 },
-    { y: 681, h: 148, x: 339, w: 517, nameX: 356, nameY: 755, font: 75, maxW: 472 },
+    { y: 300, h: 122, x: 339, w: 517, nameX: 358, nameY: 361, font: 62, maxW: 470 },
+    { y: 438, h: 122, x: 339, w: 517, nameX: 358, nameY: 499, font: 62, maxW: 470 },
+    { y: 576, h: 122, x: 339, w: 517, nameX: 358, nameY: 637, font: 62, maxW: 470 },
+    { y: 714, h: 122, x: 339, w: 517, nameX: 358, nameY: 775, font: 62, maxW: 470 },
   ];
 
   imageFromSrc(src: string): Promise<HTMLImageElement> {
@@ -48,7 +49,7 @@ export class PostRendererService {
     });
   }
 
-  renderTop3(
+  renderTop4(
     ctx: CanvasRenderingContext2D,
     baseTop3: HTMLImageElement,
     ranks: RankState[],
@@ -56,11 +57,18 @@ export class PostRendererService {
     ctx.clearRect(0, 0, 1080, 1080);
     ctx.drawImage(baseTop3, 0, 0, 1080, 1080);
 
+    // The original template contains three baked-in rows. Clear that area so
+    // the four rows can be drawn consistently without requiring a new bitmap.
+    ctx.fillStyle = this.colors.cream;
+    ctx.fillRect(190, 286, 696, 566);
+
     ranks.forEach((rank, index) => {
       const slot = this.slots[index];
       if (!slot) {
         return;
       }
+
+      this.drawRankFrame(ctx, slot, index + 1);
 
       ctx.fillStyle = this.colors.cream;
       ctx.fillRect(slot.x, slot.y, slot.w, slot.h);
@@ -88,7 +96,9 @@ export class PostRendererService {
     ctx.fillRect(155, 82, 790, 190);
 
     const edition = state.edition || 29;
-    const title = `${edition}ª edição`;
+    const title = state.wheelTitle === 'extra'
+      ? `${edition}ª Grande Lutinha Extra`
+      : `${edition}ª edição`;
     const size = this.fitFont(ctx, title, 150, 770, 88);
 
     ctx.save();
@@ -222,6 +232,25 @@ export class PostRendererService {
     ctx.restore();
   }
 
+  private drawRankFrame(ctx: CanvasRenderingContext2D, slot: RankSlot, position: number): void {
+    const frameX = 210;
+    const frameWidth = 656;
+
+    ctx.save();
+    ctx.fillStyle = this.colors.cream;
+    ctx.fillRect(frameX, slot.y, frameWidth, slot.h);
+    ctx.strokeStyle = '#3D2616';
+    ctx.lineWidth = 10;
+    ctx.strokeRect(frameX + 5, slot.y + 5, frameWidth - 10, slot.h - 10);
+
+    ctx.fillStyle = '#3D2616';
+    ctx.font = `96px ${this.fontFamily()}`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(String(position), 274, slot.y + slot.h / 2 + 2);
+    ctx.restore();
+  }
+
   private drawBackgroundOverlay(ctx: CanvasRenderingContext2D, slot: RankSlot): void {
     ctx.save();
     ctx.globalAlpha = this.backgroundOverlayAlpha;
@@ -266,3 +295,4 @@ export class PostRendererService {
     return '"VAG Local", "VAG Rounded BT", "Arial Rounded MT Bold", "Trebuchet MS", sans-serif';
   }
 }
+
