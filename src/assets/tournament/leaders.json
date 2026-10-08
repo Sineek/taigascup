@@ -1,0 +1,727 @@
+{
+  "generatedAt": "2026-10-08T15:30:51.305Z",
+  "source": "Local Cards library with verified Leader metadata",
+  "leaders": [
+    {
+      "code": "EB01-001",
+      "name": "Kouzuki Oden",
+      "image": "assets/library/Cards/EB01/EB01-001.png"
+    },
+    {
+      "code": "EB01-021",
+      "name": "Hannyabal",
+      "image": "assets/library/Cards/EB01/EB01-021.png"
+    },
+    {
+      "code": "EB01-040",
+      "name": "Kyros",
+      "image": "assets/library/Cards/EB01/EB01-040.png"
+    },
+    {
+      "code": "EB02-010",
+      "name": "Monkey.D.Luffy",
+      "image": "assets/library/Cards/EB02/EB02-010.jpg"
+    },
+    {
+      "code": "EB03-001",
+      "name": "Nefeltari Vivi",
+      "image": "assets/library/Cards/EB03/EB03-001.jpg"
+    },
+    {
+      "code": "EB04-001",
+      "name": "Jewelry Bonney",
+      "image": "assets/library/Cards/EB04/EB04-001.jpg"
+    },
+    {
+      "code": "EB05-010",
+      "name": "Nico Robin",
+      "image": "assets/library/Cards/EB05/EB05-010.jpg"
+    },
+    {
+      "code": "OP01-001",
+      "name": "Roronoa Zoro",
+      "image": "assets/library/Cards/OP01/OP01-001.png"
+    },
+    {
+      "code": "OP01-002",
+      "name": "Trafalgar Law",
+      "image": "assets/library/Cards/OP01/OP01-002.png"
+    },
+    {
+      "code": "OP01-003",
+      "name": "Monkey.D.Luffy",
+      "image": "assets/library/Cards/OP01/OP01-003.png"
+    },
+    {
+      "code": "OP01-031",
+      "name": "Kouzuki Oden",
+      "image": "assets/library/Cards/OP01/OP01-031.png"
+    },
+    {
+      "code": "OP01-060",
+      "name": "Donquixote Doflamingo",
+      "image": "assets/library/Cards/OP01/OP01-060.png"
+    },
+    {
+      "code": "OP01-061",
+      "name": "Kaido",
+      "image": "assets/library/Cards/OP01/OP01-061.png"
+    },
+    {
+      "code": "OP01-062",
+      "name": "Crocodile",
+      "image": "assets/library/Cards/OP01/OP01-062.png"
+    },
+    {
+      "code": "OP01-091",
+      "name": "King",
+      "image": "assets/library/Cards/OP01/OP01-091.png"
+    },
+    {
+      "code": "OP02-001",
+      "name": "Edward.Newgate",
+      "image": "assets/library/Cards/OP02/OP02-001.png"
+    },
+    {
+      "code": "OP02-002",
+      "name": "Monkey.D.Garp",
+      "image": "assets/library/Cards/OP02/OP02-002.png"
+    },
+    {
+      "code": "OP02-025",
+      "name": "Kin'emon",
+      "image": "assets/library/Cards/OP02/OP02-025.png"
+    },
+    {
+      "code": "OP02-026",
+      "name": "Sanji",
+      "image": "assets/library/Cards/OP02/OP02-026.png"
+    },
+    {
+      "code": "OP02-049",
+      "name": "Emporio.Ivankov",
+      "image": "assets/library/Cards/OP02/OP02-049.png"
+    },
+    {
+      "code": "OP02-071",
+      "name": "Magellan",
+      "image": "assets/library/Cards/OP02/OP02-071.png"
+    },
+    {
+      "code": "OP02-072",
+      "name": "Zephyr",
+      "image": "assets/library/Cards/OP02/OP02-072.png"
+    },
+    {
+      "code": "OP02-093",
+      "name": "Smoker",
+      "image": "assets/library/Cards/OP02/OP02-093.png"
+    },
+    {
+      "code": "OP03-001",
+      "name": "Portgas.D.Ace",
+      "image": "assets/library/Cards/OP03/OP03-001.png"
+    },
+    {
+      "code": "OP03-021",
+      "name": "Kuro",
+      "image": "assets/library/Cards/OP03/OP03-021.png"
+    },
+    {
+      "code": "OP03-022",
+      "name": "Arlong",
+      "image": "assets/library/Cards/OP03/OP03-022.png"
+    },
+    {
+      "code": "OP03-040",
+      "name": "Nami",
+      "image": "assets/library/Cards/OP03/OP03-040.png"
+    },
+    {
+      "code": "OP03-058",
+      "name": "Iceburg",
+      "image": "assets/library/Cards/OP03/OP03-058.png"
+    },
+    {
+      "code": "OP03-076",
+      "name": "Rob Lucci",
+      "image": "assets/library/Cards/OP03/OP03-076.png"
+    },
+    {
+      "code": "OP03-077",
+      "name": "Charlotte Linlin",
+      "image": "assets/library/Cards/OP03/OP03-077.png"
+    },
+    {
+      "code": "OP03-099",
+      "name": "Charlotte Katakuri",
+      "image": "assets/library/Cards/OP03/OP03-099.png"
+    },
+    {
+      "code": "OP04-001",
+      "name": "Nefeltari Vivi",
+      "image": "assets/library/Cards/OP04/OP04-001.png"
+    },
+    {
+      "code": "OP04-019",
+      "name": "Donquixote Doflamingo",
+      "image": "assets/library/Cards/OP04/OP04-019.png"
+    },
+    {
+      "code": "OP04-020",
+      "name": "Issho",
+      "image": "assets/library/Cards/OP04/OP04-020.png"
+    },
+    {
+      "code": "OP04-039",
+      "name": "Rebecca",
+      "image": "assets/library/Cards/OP04/OP04-039.png"
+    },
+    {
+      "code": "OP04-040",
+      "name": "Queen",
+      "image": "assets/library/Cards/OP04/OP04-040.png"
+    },
+    {
+      "code": "OP04-058",
+      "name": "Crocodile",
+      "image": "assets/library/Cards/OP04/OP04-058.png"
+    },
+    {
+      "code": "OP05-001",
+      "name": "Sabo",
+      "image": "assets/library/Cards/OP05/OP05-001.png"
+    },
+    {
+      "code": "OP05-002",
+      "name": "Belo Betty",
+      "image": "assets/library/Cards/OP05/OP05-002.png"
+    },
+    {
+      "code": "OP05-022",
+      "name": "Donquixote Rosinante",
+      "image": "assets/library/Cards/OP05/OP05-022.png"
+    },
+    {
+      "code": "OP05-041",
+      "name": "Sakazuki",
+      "image": "assets/library/Cards/OP05/OP05-041.png"
+    },
+    {
+      "code": "OP05-060",
+      "name": "Monkey.D.Luffy",
+      "image": "assets/library/Cards/OP05/OP05-060.png"
+    },
+    {
+      "code": "OP05-098",
+      "name": "Enel",
+      "image": "assets/library/Cards/OP05/OP05-098.png"
+    },
+    {
+      "code": "OP06-001",
+      "name": "Uta",
+      "image": "assets/library/Cards/OP06/OP06-001.png"
+    },
+    {
+      "code": "OP06-020",
+      "name": "Hody Jones",
+      "image": "assets/library/Cards/OP06/OP06-020.png"
+    },
+    {
+      "code": "OP06-021",
+      "name": "Perona",
+      "image": "assets/library/Cards/OP06/OP06-021.png"
+    },
+    {
+      "code": "OP06-022",
+      "name": "Yamato",
+      "image": "assets/library/Cards/OP06/OP06-022.png"
+    },
+    {
+      "code": "OP06-042",
+      "name": "Vinsmoke Reiju",
+      "image": "assets/library/Cards/OP06/OP06-042.png"
+    },
+    {
+      "code": "OP06-080",
+      "name": "Gecko Moria",
+      "image": "assets/library/Cards/OP06/OP06-080.png"
+    },
+    {
+      "code": "OP07-001",
+      "name": "Monkey.D.Dragon",
+      "image": "assets/library/Cards/OP07/OP07-001.png"
+    },
+    {
+      "code": "OP07-019",
+      "name": "Jewelry Bonney",
+      "image": "assets/library/Cards/OP07/OP07-019.png"
+    },
+    {
+      "code": "OP07-038",
+      "name": "Boa Hancock",
+      "image": "assets/library/Cards/OP07/OP07-038.png"
+    },
+    {
+      "code": "OP07-059",
+      "name": "Foxy",
+      "image": "assets/library/Cards/OP07/OP07-059.png"
+    },
+    {
+      "code": "OP07-079",
+      "name": "Rob Lucci",
+      "image": "assets/library/Cards/OP07/OP07-079.png"
+    },
+    {
+      "code": "OP07-097",
+      "name": "Vegapunk",
+      "image": "assets/library/Cards/OP07/OP07-097.png"
+    },
+    {
+      "code": "OP08-001",
+      "name": "Tony Tony.Chopper",
+      "image": "assets/library/Cards/OP08/OP08-001.png"
+    },
+    {
+      "code": "OP08-002",
+      "name": "Marco",
+      "image": "assets/library/Cards/OP08/OP08-002.png"
+    },
+    {
+      "code": "OP08-021",
+      "name": "Carrot",
+      "image": "assets/library/Cards/OP08/OP08-021.png"
+    },
+    {
+      "code": "OP08-057",
+      "name": "King",
+      "image": "assets/library/Cards/OP08/OP08-057.png"
+    },
+    {
+      "code": "OP08-058",
+      "name": "Charlotte Pudding",
+      "image": "assets/library/Cards/OP08/OP08-058.png"
+    },
+    {
+      "code": "OP08-098",
+      "name": "Kalgara",
+      "image": "assets/library/Cards/OP08/OP08-098.png"
+    },
+    {
+      "code": "OP09-001",
+      "name": "Shanks",
+      "image": "assets/library/Cards/OP09/OP09-001.jpg"
+    },
+    {
+      "code": "OP09-022",
+      "name": "Lim",
+      "image": "assets/library/Cards/OP09/OP09-022.jpg"
+    },
+    {
+      "code": "OP09-042",
+      "name": "Buggy",
+      "image": "assets/library/Cards/OP09/OP09-042.jpg"
+    },
+    {
+      "code": "OP09-061",
+      "name": "Monkey.D.Luffy",
+      "image": "assets/library/Cards/OP09/OP09-061.jpg"
+    },
+    {
+      "code": "OP09-062",
+      "name": "Nico Robin",
+      "image": "assets/library/Cards/OP09/OP09-062.jpg"
+    },
+    {
+      "code": "OP09-081",
+      "name": "Marshall.D.Teach",
+      "image": "assets/library/Cards/OP09/OP09-081.jpg"
+    },
+    {
+      "code": "OP10-001",
+      "name": "Smoker",
+      "image": "assets/library/Cards/OP10/OP10-001.jpg"
+    },
+    {
+      "code": "OP10-002",
+      "name": "Caesar Clown",
+      "image": "assets/library/Cards/OP10/OP10-002.jpg"
+    },
+    {
+      "code": "OP10-003",
+      "name": "Sugar",
+      "image": "assets/library/Cards/OP10/OP10-003.jpg"
+    },
+    {
+      "code": "OP10-022",
+      "name": "Trafalgar Law",
+      "image": "assets/library/Cards/OP10/OP10-022.jpg"
+    },
+    {
+      "code": "OP10-042",
+      "name": "Usopp",
+      "image": "assets/library/Cards/OP10/OP10-042.jpg"
+    },
+    {
+      "code": "OP10-099",
+      "name": "Eustass Captain Kid",
+      "image": "assets/library/Cards/OP10/OP10-099.jpg"
+    },
+    {
+      "code": "OP11-001",
+      "name": "Koby",
+      "image": "assets/library/Cards/OP11/OP11-001.jpg"
+    },
+    {
+      "code": "OP11-021",
+      "name": "Jinbe",
+      "image": "assets/library/Cards/OP11/OP11-021.jpg"
+    },
+    {
+      "code": "OP11-022",
+      "name": "Shirahoshi",
+      "image": "assets/library/Cards/OP11/OP11-022.jpg"
+    },
+    {
+      "code": "OP11-040",
+      "name": "Monkey.D.Luffy",
+      "image": "assets/library/Cards/OP11/OP11-040.jpg"
+    },
+    {
+      "code": "OP11-041",
+      "name": "Nami",
+      "image": "assets/library/Cards/OP11/OP11-041.jpg"
+    },
+    {
+      "code": "OP11-062",
+      "name": "Charlotte Katakuri",
+      "image": "assets/library/Cards/OP11/OP11-062.jpg"
+    },
+    {
+      "code": "OP12-001",
+      "name": "Silvers Rayleigh",
+      "image": "assets/library/Cards/OP12/OP12-001.jpg"
+    },
+    {
+      "code": "OP12-020",
+      "name": "Roronoa Zoro",
+      "image": "assets/library/Cards/OP12/OP12-020.jpg"
+    },
+    {
+      "code": "OP12-040",
+      "name": "Kuzan",
+      "image": "assets/library/Cards/OP12/OP12-040.jpg"
+    },
+    {
+      "code": "OP12-041",
+      "name": "Sanji",
+      "image": "assets/library/Cards/OP12/OP12-041.jpg"
+    },
+    {
+      "code": "OP12-061",
+      "name": "Donquixote Rosinante",
+      "image": "assets/library/Cards/OP12/OP12-061.jpg"
+    },
+    {
+      "code": "OP12-081",
+      "name": "Koala",
+      "image": "assets/library/Cards/OP12/OP12-081.jpg"
+    },
+    {
+      "code": "OP13-001",
+      "name": "Monkey.D.Luffy",
+      "image": "assets/library/Cards/OP13/OP13-001.jpg"
+    },
+    {
+      "code": "OP13-002",
+      "name": "Portgas.D.Ace",
+      "image": "assets/library/Cards/OP13/OP13-002.jpg"
+    },
+    {
+      "code": "OP13-003",
+      "name": "Gol.D.Roger",
+      "image": "assets/library/Cards/OP13/OP13-003.jpg"
+    },
+    {
+      "code": "OP13-004",
+      "name": "Sabo",
+      "image": "assets/library/Cards/OP13/OP13-004.jpg"
+    },
+    {
+      "code": "OP13-079",
+      "name": "Imu",
+      "image": "assets/library/Cards/OP13/OP13-079.jpg"
+    },
+    {
+      "code": "OP13-100",
+      "name": "Jewelry Bonney",
+      "image": "assets/library/Cards/OP13/OP13-100.jpg"
+    },
+    {
+      "code": "OP14-001",
+      "name": "Trafalgar Law",
+      "image": "assets/library/Cards/OP14/OP14-001.jpg"
+    },
+    {
+      "code": "OP14-020",
+      "name": "Dracule Mihawk",
+      "image": "assets/library/Cards/OP14/OP14-020.jpg"
+    },
+    {
+      "code": "OP14-040",
+      "name": "Jinbe",
+      "image": "assets/library/Cards/OP14/OP14-040.jpg"
+    },
+    {
+      "code": "OP14-041",
+      "name": "Boa Hancock",
+      "image": "assets/library/Cards/OP14/OP14-041.jpg"
+    },
+    {
+      "code": "OP14-060",
+      "name": "Donquixote Doflamingo",
+      "image": "assets/library/Cards/OP14/OP14-060.jpg"
+    },
+    {
+      "code": "OP14-079",
+      "name": "Crocodile",
+      "image": "assets/library/Cards/OP14/OP14-079.jpg"
+    },
+    {
+      "code": "OP14-080",
+      "name": "Gecko Moria",
+      "image": "assets/library/Cards/OP14/OP14-080.jpg"
+    },
+    {
+      "code": "OP15-001",
+      "name": "Krieg",
+      "image": "assets/library/Cards/OP15/OP15-001.jpg"
+    },
+    {
+      "code": "OP15-002",
+      "name": "Lucy",
+      "image": "assets/library/Cards/OP15/OP15-002.jpg"
+    },
+    {
+      "code": "OP15-022",
+      "name": "Brook",
+      "image": "assets/library/Cards/OP15/OP15-022.jpg"
+    },
+    {
+      "code": "OP15-039",
+      "name": "Rebecca",
+      "image": "assets/library/Cards/OP15/OP15-039.jpg"
+    },
+    {
+      "code": "OP15-058",
+      "name": "Enel",
+      "image": "assets/library/Cards/OP15/OP15-058.jpg"
+    },
+    {
+      "code": "OP15-098",
+      "name": "Monkey.D.Luffy",
+      "image": "assets/library/Cards/OP15/OP15-098.jpg"
+    },
+    {
+      "code": "OP16-001",
+      "name": "Portgas.D.Ace",
+      "image": "assets/library/Cards/OP16/OP16-001.jpg"
+    },
+    {
+      "code": "OP16-022",
+      "name": "Monkey.D.Luffy",
+      "image": "assets/library/Cards/OP16/OP16-022.jpg"
+    },
+    {
+      "code": "OP16-041",
+      "name": "Buggy",
+      "image": "assets/library/Cards/OP16/OP16-041.jpg"
+    },
+    {
+      "code": "OP16-060",
+      "name": "Sengoku",
+      "image": "assets/library/Cards/OP16/OP16-060.jpg"
+    },
+    {
+      "code": "OP16-079",
+      "name": "Yamato",
+      "image": "assets/library/Cards/OP16/OP16-079.jpg"
+    },
+    {
+      "code": "OP16-080",
+      "name": "Marshall.D.Teach",
+      "image": "assets/library/Cards/OP16/OP16-080.jpg"
+    },
+    {
+      "code": "OP17-001",
+      "name": "Edward.Newgate",
+      "image": "assets/library/Cards/OP17/OP17-001.jpg"
+    },
+    {
+      "code": "OP17-020",
+      "name": "Shanks",
+      "image": "assets/library/Cards/OP17/OP17-020.jpg"
+    },
+    {
+      "code": "OP17-039",
+      "name": "Rocks.D.Xebec",
+      "image": "assets/library/Cards/OP17/OP17-039.jpg"
+    },
+    {
+      "code": "OP17-058",
+      "name": "Kaido",
+      "image": "assets/library/Cards/OP17/OP17-058.jpg"
+    },
+    {
+      "code": "OP17-079",
+      "name": "Monkey.D.Luffy",
+      "image": "assets/library/Cards/OP17/OP17-079.jpg"
+    },
+    {
+      "code": "OP17-099",
+      "name": "Charlotte Linlin",
+      "image": "assets/library/Cards/OP17/OP17-099.jpg"
+    },
+    {
+      "code": "OP18-021",
+      "name": "Franky",
+      "image": "assets/library/Cards/OP18/OP18-021.jpg"
+    },
+    {
+      "code": "OP18-060",
+      "name": "Saint Gunko",
+      "image": "assets/library/Cards/OP18/OP18-060.jpg"
+    },
+    {
+      "code": "P-011",
+      "name": "Uta",
+      "image": "assets/library/Cards/P/P-011.png"
+    },
+    {
+      "code": "P-047",
+      "name": "Monkey.D.Luffy",
+      "image": "assets/library/Cards/P/P-047.png"
+    },
+    {
+      "code": "P-076",
+      "name": "Sakazuki",
+      "image": "assets/library/Cards/P/P-076.png"
+    },
+    {
+      "code": "PRB01-001",
+      "name": "Sanji",
+      "image": "assets/library/Cards/PRB01/PRB01-001.jpg"
+    },
+    {
+      "code": "ST01-001",
+      "name": "Monkey.D.Luffy",
+      "image": "assets/library/Cards/ST01/ST01-001.png"
+    },
+    {
+      "code": "ST02-001",
+      "name": "Eustass Captain Kid",
+      "image": "assets/library/Cards/ST02/ST02-001.png"
+    },
+    {
+      "code": "ST03-001",
+      "name": "Crocodile",
+      "image": "assets/library/Cards/ST03/ST03-001.png"
+    },
+    {
+      "code": "ST04-001",
+      "name": "Kaido",
+      "image": "assets/library/Cards/ST04/ST04-001.png"
+    },
+    {
+      "code": "ST05-001",
+      "name": "Shanks",
+      "image": "assets/library/Cards/ST05/ST05-001.png"
+    },
+    {
+      "code": "ST06-001",
+      "name": "Sakazuki",
+      "image": "assets/library/Cards/ST06/ST06-001.png"
+    },
+    {
+      "code": "ST07-001",
+      "name": "Charlotte Linlin",
+      "image": "assets/library/Cards/ST07/ST07-001.png"
+    },
+    {
+      "code": "ST08-001",
+      "name": "Monkey.D.Luffy",
+      "image": "assets/library/Cards/ST08/ST08-001.png"
+    },
+    {
+      "code": "ST09-001",
+      "name": "Yamato",
+      "image": "assets/library/Cards/ST09/ST09-001.png"
+    },
+    {
+      "code": "ST10-001",
+      "name": "Trafalgar Law",
+      "image": "assets/library/Cards/ST10/ST10-001.png"
+    },
+    {
+      "code": "ST10-002",
+      "name": "Monkey.D.Luffy",
+      "image": "assets/library/Cards/ST10/ST10-002.png"
+    },
+    {
+      "code": "ST10-003",
+      "name": "Eustass Captain Kid",
+      "image": "assets/library/Cards/ST10/ST10-003.png"
+    },
+    {
+      "code": "ST11-001",
+      "name": "Uta",
+      "image": "assets/library/Cards/ST11/ST11-001.png"
+    },
+    {
+      "code": "ST12-001",
+      "name": "Roronoa Zoro & Sanji",
+      "image": "assets/library/Cards/ST12/ST12-001.png"
+    },
+    {
+      "code": "ST13-001",
+      "name": "Sabo",
+      "image": "assets/library/Cards/ST13/ST13-001.png"
+    },
+    {
+      "code": "ST13-002",
+      "name": "Portgas.D.Ace",
+      "image": "assets/library/Cards/ST13/ST13-002.png"
+    },
+    {
+      "code": "ST13-003",
+      "name": "Monkey.D.Luffy",
+      "image": "assets/library/Cards/ST13/ST13-003.png"
+    },
+    {
+      "code": "ST14-001",
+      "name": "Monkey.D.Luffy",
+      "image": "assets/library/Cards/ST14/ST14-001.png"
+    },
+    {
+      "code": "ST21-001",
+      "name": "Monkey.D.Luffy",
+      "image": "assets/library/Cards/ST21/ST21-001.jpg"
+    },
+    {
+      "code": "ST22-001",
+      "name": "Ace & Newgate",
+      "image": "assets/library/Cards/ST22/ST22-001.jpg"
+    },
+    {
+      "code": "ST29-001",
+      "name": "Monkey.D.Luffy",
+      "image": "assets/library/Cards/ST29/ST29-001.jpg"
+    },
+    {
+      "code": "ST30-001",
+      "name": "Luffy & Ace",
+      "image": "assets/library/Cards/ST30/ST30-001.jpg"
+    }
+  ]
+}
+
