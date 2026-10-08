@@ -98,3 +98,11 @@ input[type='range'] {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.hint {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
