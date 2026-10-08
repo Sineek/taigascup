@@ -9,12 +9,13 @@ export interface RankState {
 
 export interface GeneratorState {
   edition: number;
+  wheelTitle: 'edition' | 'extra';
   wheel: HTMLImageElement | null;
   wheelName: string | null;
   wheelZoom: number;
   wheelX: number;
   wheelY: number;
-  top3: RankState[];
+  top4: RankState[];
 }
 
 export interface RankSlot {
@@ -31,12 +32,13 @@ export interface RankSlot {
 export function createInitialState(): GeneratorState {
   return {
     edition: 29,
+    wheelTitle: 'edition',
     wheel: null,
     wheelName: null,
     wheelZoom: 100,
     wheelX: 0,
     wheelY: 0,
-    top3: Array.from({ length: 3 }, () => ({
+    top4: Array.from({ length: 4 }, () => ({
       nick: '',
       img: null,
       imageName: null,
@@ -46,3 +48,4 @@ export function createInitialState(): GeneratorState {
     })),
   };
 }
+
