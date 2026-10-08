@@ -74,7 +74,7 @@ export class PostRendererService {
       ctx.fillRect(slot.x, slot.y, slot.w, slot.h);
 
       if (rank.img) {
-        this.drawCover(ctx, rank.img, slot.x, slot.y, slot.w, slot.h, rank.zoom, rank.x, rank.y);
+        this.drawCover(ctx, rank.img, slot.x, slot.y, slot.w, slot.h, rank.zoom, 0, rank.y);
         this.drawBackgroundOverlay(ctx, slot);
       } else {
         this.drawPlaceholder(ctx, slot);
