@@ -21,7 +21,7 @@ import { PostRendererService } from '../../services/post-renderer.service';
 export class PostPreviewComponent implements AfterViewInit, OnChanges {
   @Input({ required: true }) state!: GeneratorState;
 
-  @ViewChild('top3Canvas', { static: true }) top3Canvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('top4Canvas', { static: true }) top4Canvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('wheelCanvas', { static: true }) wheelCanvas!: ElementRef<HTMLCanvasElement>;
 
   private baseTop3: HTMLImageElement | null = null;
@@ -48,7 +48,7 @@ export class PostPreviewComponent implements AfterViewInit, OnChanges {
 
   downloadTop3(): void {
     this.renderer.downloadCanvas(
-      this.top3Canvas.nativeElement,
+      this.top4Canvas.nativeElement,
       `taigas-cup-${this.editionValue()}-colocacao.png`,
     );
   }
@@ -70,14 +70,14 @@ export class PostPreviewComponent implements AfterViewInit, OnChanges {
       return;
     }
 
-    const top3Context = this.top3Canvas.nativeElement.getContext('2d');
+    const top4Context = this.top4Canvas.nativeElement.getContext('2d');
     const wheelContext = this.wheelCanvas.nativeElement.getContext('2d');
 
-    if (!top3Context || !wheelContext) {
+    if (!top4Context || !wheelContext) {
       return;
     }
 
-    this.renderer.renderTop3(top3Context, this.baseTop3, this.state.top3);
+    this.renderer.renderTop4(top4Context, this.baseTop3, this.state.top4);
     this.renderer.renderWheel(wheelContext, this.baseWheel, this.state);
   }
 
@@ -85,3 +85,4 @@ export class PostPreviewComponent implements AfterViewInit, OnChanges {
     return String(this.state.edition || 'edicao').trim();
   }
 }
+
