@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LibraryImage } from '../../models/image-library.model';
-import { ImageLibraryService } from '../../services/image-library.service';
+import { LeaderCatalogEntry } from '../../models/leader-catalog.model';
+import { LeaderCatalogService } from '../../services/leader-catalog.service';
 
 interface Participant {
   id: number;
@@ -63,38 +63,27 @@ export class TournamentComponent {
   nick = '';
   deck = '';
   error = '';
-  leaders: LibraryImage[] = [];
+  leaders: LeaderCatalogEntry[] = [];
   leaderSearchOpen = false;
 
-  constructor(private readonly imageLibrary: ImageLibraryService) {
-    this.imageLibrary.getManifest().subscribe((manifest) => {
-      this.leaders = manifest.backgrounds;
+  constructor(private readonly leaderCatalog: LeaderCatalogService) {
+    this.leaderCatalog.getLeaders().subscribe((leaders) => {
+      this.leaders = leaders;
     });
   }
 
-  get leaderSuggestions(): LibraryImage[] {
+  get leaderSuggestions(): LeaderCatalogEntry[] {
     const query = this.normalize(this.deck);
     if (!this.leaderSearchOpen || query.length < 2) return [];
     return this.leaders
       .filter((leader) =>
-        this.normalize(`${leader.name} ${leader.fileName}`).includes(query),
+        this.normalize(`${leader.name} ${leader.code}`).includes(query),
       )
       .slice(0, 8);
   }
 
-  leaderCode(leader: LibraryImage): string {
-    return leader.fileName.match(/^([A-Z0-9]+-\d+)/i)?.[1].toUpperCase() ?? leader.collection;
-  }
-
-  leaderName(leader: LibraryImage): string {
-    return leader.fileName
-      .replace(/^[A-Z0-9]+-\d+\s*-\s*/i, '')
-      .replace(/\.[^.]+$/, '')
-      .replaceAll('_', ' ');
-  }
-
-  selectLeader(leader: LibraryImage): void {
-    this.deck = this.leaderCode(leader);
+  selectLeader(leader: LeaderCatalogEntry): void {
+    this.deck = leader.code;
     this.leaderSearchOpen = false;
   }
 
