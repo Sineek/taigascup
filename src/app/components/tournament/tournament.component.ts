@@ -255,11 +255,8 @@ export class TournamentComponent {
       });
     }
 
-    while (pool.length) {
-      const player1 = pool.shift()!;
-      let opponentIndex = pool.findIndex((candidate) => !this.havePlayed(player1.id, candidate.id));
-      if (opponentIndex < 0) opponentIndex = 0;
-      const player2 = pool.splice(opponentIndex, 1)[0];
+    const pairings = this.findBestPairings(pool, false) ?? this.findBestPairings(pool, true) ?? [];
+    for (const [player1, player2] of pairings) {
       matches.push({
         id: this.state.nextMatchId++,
         player1Id: player1.id,
@@ -268,6 +265,52 @@ export class TournamentComponent {
       });
     }
     return matches;
+  }
+
+  private findBestPairings(
+    participants: Participant[],
+    allowRematches: boolean,
+  ): Array<[Participant, Participant]> | null {
+    interface PairingResult {
+      score: number;
+      pairs: Array<[Participant, Participant]>;
+    }
+
+    const memo = new Map<string, PairingResult | null>();
+    const solve = (remaining: Participant[]): PairingResult | null => {
+      if (remaining.length === 0) return { score: 0, pairs: [] };
+
+      const key = remaining.map((participant) => participant.id).sort((a, b) => a - b).join(',');
+      if (memo.has(key)) return memo.get(key) ?? null;
+
+      const player1 = remaining[0];
+      let best: PairingResult | null = null;
+
+      for (let index = 1; index < remaining.length; index += 1) {
+        const player2 = remaining[index];
+        const rematch = this.havePlayed(player1.id, player2.id);
+        if (rematch && !allowRematches) continue;
+
+        const rest = remaining.filter((_, currentIndex) => currentIndex !== 0 && currentIndex !== index);
+        const result = solve(rest);
+        if (!result) continue;
+
+        const score = result.score +
+          (rematch ? 1_000_000_000 : 0) +
+          Math.abs(player1.wins - player2.wins) * 1_000_000 +
+          Math.abs(this.buchholz(player1.id) - this.buchholz(player2.id)) * 1_000 +
+          Math.abs(player1.losses - player2.losses) * 100;
+
+        if (!best || score < best.score) {
+          best = { score, pairs: [[player1, player2], ...result.pairs] };
+        }
+      }
+
+      memo.set(key, best);
+      return best;
+    };
+
+    return solve(participants)?.pairs ?? null;
   }
 
   private completeCurrentRound(): void {
