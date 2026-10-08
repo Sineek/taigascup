@@ -4,7 +4,18 @@
       Colocação
       <span class="tag">1080 × 1080</span>
     </h2>
-    <canvas #top4Canvas width="1080" height="1080"></canvas>
+    <p class="drag-hint">Arraste a imagem de cada líder para ajustar a posição vertical.</p>
+    <canvas
+      #top4Canvas
+      class="placement-canvas"
+      [class.dragging]="draggingRankIndex !== null"
+      width="1080"
+      height="1080"
+      (pointerdown)="startRankDrag($event)"
+      (pointermove)="moveRankDrag($event)"
+      (pointerup)="stopRankDrag($event)"
+      (pointercancel)="stopRankDrag($event)"
+    ></canvas>
   </article>
 
   <article class="preview-card">
