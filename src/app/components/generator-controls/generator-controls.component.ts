@@ -1,16 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LibraryImage } from '../../models/image-library.model';
 import { GeneratorState, RankState } from '../../models/post-generator.model';
 import { PostRendererService } from '../../services/post-renderer.service';
-import { ImageLibraryComponent } from '../image-library/image-library.component';
 import { RankEditorComponent } from '../rank-editor/rank-editor.component';
 
 @Component({
   selector: 'app-generator-controls',
   standalone: true,
-  imports: [CommonModule, FormsModule, RankEditorComponent, ImageLibraryComponent],
+  imports: [CommonModule, FormsModule, RankEditorComponent],
   templateUrl: './generator-controls.component.html',
   styleUrl: './generator-controls.component.css',
 })
@@ -22,8 +20,6 @@ export class GeneratorControlsComponent {
   @Output() downloadTop3 = new EventEmitter<void>();
   @Output() downloadWheel = new EventEmitter<void>();
   @Output() downloadBoth = new EventEmitter<void>();
-
-  wheelLibraryOpen = false;
 
   constructor(private readonly renderer: PostRendererService) {}
 
@@ -65,13 +61,13 @@ export class GeneratorControlsComponent {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
     const wheel = await this.renderer.imageFromFile(file);
-    this.patchState({ wheel, wheelName: file?.name ?? null });
-  }
-
-  async onWheelLibrarySelected(item: LibraryImage): Promise<void> {
-    const wheel = await this.renderer.imageFromSrc(item.path);
-    this.patchState({ wheel, wheelName: item.name });
-    this.wheelLibraryOpen = false;
+    this.patchState({
+      wheel,
+      wheelName: file?.name ?? null,
+      wheelZoom: 100,
+      wheelX: 0,
+      wheelY: 0,
+    });
   }
 
   clearWheel(): void {
