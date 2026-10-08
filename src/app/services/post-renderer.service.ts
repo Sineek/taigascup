@@ -99,7 +99,7 @@ export class PostRendererService {
     const title = state.wheelTitle === 'extra'
       ? `${edition}ª Grande Lutinha Extra`
       : `${edition}ª edição`;
-    const size = this.fitFont(ctx, title, 150, 770, 88);
+    const size = this.fitFont(ctx, title, 150, 770, 48);
 
     ctx.save();
     ctx.fillStyle = '#3D2616';
