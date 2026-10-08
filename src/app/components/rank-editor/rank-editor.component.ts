@@ -30,12 +30,12 @@ export class RankEditorComponent {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
     const image = await this.renderer.imageFromFile(file);
-    this.patch({ img: image, imageName: file?.name ?? null });
+    this.patch({ img: image, imageName: file?.name ?? null, x: 0 });
   }
 
   async onLibrarySelected(item: LibraryImage): Promise<void> {
     const image = await this.renderer.imageFromSrc(item.path);
-    this.patch({ img: image, imageName: item.name });
+    this.patch({ img: image, imageName: item.name, x: 0 });
     this.libraryOpen = false;
   }
 
@@ -43,3 +43,4 @@ export class RankEditorComponent {
     this.patch({ img: null, imageName: null, zoom: 100, x: 0, y: 0 });
   }
 }
+
