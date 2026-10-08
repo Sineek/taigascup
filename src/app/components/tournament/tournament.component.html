@@ -6,7 +6,37 @@
     </div>
     <div class="participant-form">
       <label>Nick <input [(ngModel)]="nick" placeholder="Nome do jogador"></label>
-      <label>Deck <input [(ngModel)]="deck" placeholder="Nome ou descrição do deck" (keyup.enter)="addParticipant()"></label>
+      <label class="deck-field">
+        Deck
+        <input
+          [(ngModel)]="deck"
+          placeholder="Digite o nome ou código do líder"
+          autocomplete="off"
+          (focus)="leaderSearchOpen = true"
+          (input)="leaderSearchOpen = true"
+          (blur)="closeLeaderSearch()"
+          (keyup.enter)="addParticipant()"
+        >
+        @if (leaderSuggestions.length) {
+          <div class="leader-suggestions" role="listbox" aria-label="Sugestões de líderes">
+            @for (leader of leaderSuggestions; track leader.path) {
+              <button
+                type="button"
+                class="leader-suggestion"
+                role="option"
+                (mousedown)="$event.preventDefault()"
+                (click)="selectLeader(leader)"
+              >
+                <img [src]="leader.path" [alt]="leaderName(leader)" loading="lazy">
+                <span>
+                  <strong>{{ leaderName(leader) }}</strong>
+                  <small>{{ leaderCode(leader) }}</small>
+                </span>
+              </button>
+            }
+          </div>
+        }
+      </label>
       <button type="button" (click)="addParticipant()" [disabled]="state.status === 'finished'">Adicionar</button>
     </div>
     @if (error) { <p class="error" role="alert">{{ error }}</p> }
@@ -85,4 +115,5 @@
     </section>
   }
 </main>
+
 
