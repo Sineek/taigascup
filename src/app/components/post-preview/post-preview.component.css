@@ -36,8 +36,24 @@ canvas {
   background: #fff;
 }
 
+.drag-hint {
+  margin: -7px 0 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.placement-canvas {
+  cursor: grab;
+  touch-action: none;
+}
+
+.placement-canvas.dragging {
+  cursor: grabbing;
+}
+
 @media (max-width: 1050px) {
   .preview-grid {
     grid-template-columns: 1fr;
   }
 }
+
