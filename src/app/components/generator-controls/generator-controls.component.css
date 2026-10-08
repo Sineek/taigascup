@@ -42,6 +42,7 @@ label {
 }
 
 input[type='number'],
+select,
 input[type='file'] {
   width: 100%;
   border: 1px solid #d7c2ad;
@@ -49,6 +50,10 @@ input[type='file'] {
   background: #fff;
   padding: 10px 12px;
   color: #3d2616;
+}
+
+select {
+  cursor: pointer;
 }
 
 input[type='file'] {
@@ -180,3 +185,4 @@ button:disabled {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
