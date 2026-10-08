@@ -32,9 +32,6 @@
     />
 
     <div class="library-actions">
-      <button class="library-button" type="button" (click)="wheelLibraryOpen = true">
-        📚 Abrir biblioteca
-      </button>
       <button
         *ngIf="state.wheel"
         class="clear-button"
@@ -50,40 +47,6 @@
       <strong>{{ state.wheelName }}</strong>
     </div>
 
-    <div class="range-row">
-      <label>
-        Zoom
-        <input
-          type="range"
-          min="107"
-          max="180"
-          [ngModel]="state.wheelZoom"
-          (ngModelChange)="patchState({ wheelZoom: +$event })"
-        />
-      </label>
-
-      <label>
-        Posição X
-        <input
-          type="range"
-          min="-100"
-          max="100"
-          [ngModel]="state.wheelX"
-          (ngModelChange)="patchState({ wheelX: +$event })"
-        />
-      </label>
-    </div>
-
-    <label>
-      Posição Y
-      <input
-        type="range"
-        min="-100"
-        max="100"
-        [ngModel]="state.wheelY"
-        (ngModelChange)="patchState({ wheelY: +$event })"
-      />
-    </label>
   </div>
 
   <div class="section">
@@ -130,12 +93,4 @@
     <div class="hint">Tudo é processado localmente no navegador. Nenhuma imagem é enviada para servidor.</div>
   </div>
 </aside>
-
-<app-image-library
-  *ngIf="wheelLibraryOpen"
-  category="wheels"
-  title="Biblioteca de rodas"
-  (selected)="onWheelLibrarySelected($event)"
-  (closed)="wheelLibraryOpen = false"
-/>
 
