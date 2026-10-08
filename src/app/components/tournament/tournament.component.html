@@ -19,7 +19,7 @@
         >
         @if (leaderSuggestions.length) {
           <div class="leader-suggestions" role="listbox" aria-label="Sugestões de líderes">
-            @for (leader of leaderSuggestions; track leader.path) {
+            @for (leader of leaderSuggestions; track leader.code) {
               <button
                 type="button"
                 class="leader-suggestion"
@@ -27,10 +27,10 @@
                 (mousedown)="$event.preventDefault()"
                 (click)="selectLeader(leader)"
               >
-                <img [src]="leader.path" [alt]="leaderName(leader)" loading="lazy">
+                <img [src]="leader.image" [alt]="leader.name" loading="lazy">
                 <span>
-                  <strong>{{ leaderName(leader) }}</strong>
-                  <small>{{ leaderCode(leader) }}</small>
+                  <strong>{{ leader.name }}</strong>
+                  <small>{{ leader.code }}</small>
                 </span>
               </button>
             }
