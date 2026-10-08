@@ -35,7 +35,7 @@
       (downloadBoth)="downloadBoth()"
     />
 
-    <app-post-preview [state]="state" />
+    <app-post-preview [state]="state" (stateChange)="updateState($event)" />
   </main>
 } @else if (page === 'calculator') {
   <app-deck-calculator />
