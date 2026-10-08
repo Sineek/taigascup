@@ -43,16 +43,6 @@
     />
   </label>
 
-  <label>
-    Posição Y
-    <input
-      type="range"
-      min="-100"
-      max="100"
-      [ngModel]="rank.y"
-      (ngModelChange)="patch({ y: +$event })"
-    />
-  </label>
   <div class="hint">Você também pode arrastar a imagem diretamente na prévia. A posição X permanece centralizada.</div>
 </div>
 
