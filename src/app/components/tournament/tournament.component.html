@@ -59,7 +59,7 @@
                 type="button"
                 class="player"
                 [class.winner]="match.winnerId === match.player1Id"
-                [disabled]="round !== currentRound || state.status !== 'running' || match.player2Id === null"
+                [disabled]="!canEditRound(round) || match.player2Id === null"
                 (click)="selectWinner(match, match.player1Id)">
                 <strong>{{ participant(match.player1Id)?.nick }}</strong>
                 <span>{{ participant(match.player1Id)?.deck }}</span>
@@ -70,7 +70,7 @@
                   type="button"
                   class="player"
                   [class.winner]="match.winnerId === match.player2Id"
-                  [disabled]="round !== currentRound || state.status !== 'running'"
+                  [disabled]="!canEditRound(round)"
                   (click)="selectWinner(match, match.player2Id)">
                   <strong>{{ participant(match.player2Id)?.nick }}</strong>
                   <span>{{ participant(match.player2Id)?.deck }}</span>
