@@ -9,7 +9,16 @@
       [ngModel]="state.edition"
       (ngModelChange)="patchState({ edition: +$event })"
     />
-    <div class="hint">O título da roda será gerado como “29ª edição”, “30ª edição” etc.</div>
+    <label for="wheel-title">Título da roda</label>
+    <select
+      id="wheel-title"
+      [ngModel]="state.wheelTitle"
+      (ngModelChange)="patchState({ wheelTitle: $event })"
+    >
+      <option value="edition">{{ state.edition || 29 }}ª Edição</option>
+      <option value="extra">{{ state.edition || 29 }}ª Grande Lutinha Extra</option>
+    </select>
+    <div class="hint">“Edição” continua selecionada por padrão.</div>
   </div>
 
   <div class="section">
@@ -78,9 +87,9 @@
   </div>
 
   <div class="section">
-    <h2>Top 3</h2>
+    <h2>Top 4</h2>
     <app-rank-editor
-      *ngFor="let rank of state.top3; let index = index; trackBy: trackRankByIndex"
+      *ngFor="let rank of state.top4; let index = index; trackBy: trackRankByIndex"
       [rank]="rank"
       [index]="index"
       (rankChange)="updateRank(index, $event)"
@@ -129,3 +138,4 @@
   (selected)="onWheelLibrarySelected($event)"
   (closed)="wheelLibraryOpen = false"
 />
+
