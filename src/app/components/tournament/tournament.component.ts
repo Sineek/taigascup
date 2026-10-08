@@ -130,12 +130,35 @@ export class TournamentComponent {
   }
 
   selectWinner(match: Match, winnerId: number): void {
-    if (this.state.status !== 'running' || match.player2Id === null) return;
+    if (match.player2Id === null) return;
+
+    const roundIndex = this.state.rounds.findIndex((round) => round.matches.includes(match));
+    if (roundIndex < 0 || !this.canEditRound(this.state.rounds[roundIndex])) return;
+    if (match.winnerId === winnerId) return;
+
+    const wasCompleted = this.state.rounds[roundIndex].matches.every((item) => item.winnerId !== null);
+    const isCurrentRound = roundIndex === this.state.rounds.length - 1;
     match.winnerId = winnerId;
+
+    if (wasCompleted || !isCurrentRound) {
+      this.state.rounds = this.state.rounds.slice(0, roundIndex + 1);
+      this.recalculateStandings();
+      this.advanceAfterCompletedRound();
+      return;
+    }
+
     this.saveState();
     if (this.currentRound?.matches.every((item) => item.winnerId !== null)) {
       this.completeCurrentRound();
     }
+  }
+
+  canEditRound(round: Round): boolean {
+    const roundIndex = this.state.rounds.indexOf(round);
+    if (roundIndex < 0) return false;
+    return this.state.rounds
+      .slice(roundIndex + 1)
+      .every((laterRound) => laterRound.matches.some((match) => match.winnerId === null));
   }
 
   repairCurrentRound(): void {
@@ -185,7 +208,7 @@ export class TournamentComponent {
   }
 
   private buildMatches(participants: Participant[]): Match[] {
-    const pool = this.shuffle([...participants]).sort((a, b) => this.comparePairingParticipants(a, b));
+    const pool = this.shuffle([...participants]).sort((a, b) => this.compareParticipants(a, b));
     const matches: Match[] = [];
 
     if (pool.length % 2 === 1) {
@@ -232,6 +255,10 @@ export class TournamentComponent {
       if (loser) loser.losses += 1;
     }
 
+    this.advanceAfterCompletedRound();
+  }
+
+  private advanceAfterCompletedRound(): void {
     const undefeated = this.state.participants.filter((participant) => participant.losses === 0);
     if (undefeated.length === 1) {
       this.state.status = 'finished';
@@ -239,7 +266,32 @@ export class TournamentComponent {
       this.saveState();
       return;
     }
+    this.state.status = 'running';
+    this.state.championId = null;
     this.createNextRound();
+  }
+
+  private recalculateStandings(): void {
+    for (const participant of this.state.participants) {
+      participant.wins = 0;
+      participant.losses = 0;
+      participant.byes = 0;
+    }
+
+    for (const round of this.state.rounds) {
+      for (const match of round.matches) {
+        const winner = this.participant(match.winnerId);
+        if (!winner) continue;
+        winner.wins += 1;
+        if (match.player2Id === null) {
+          winner.byes += 1;
+          continue;
+        }
+        const loserId = match.player1Id === winner.id ? match.player2Id : match.player1Id;
+        const loser = this.participant(loserId);
+        if (loser) loser.losses += 1;
+      }
+    }
   }
 
   private havePlayed(player1Id: number, player2Id: number): boolean {
