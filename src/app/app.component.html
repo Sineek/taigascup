@@ -6,6 +6,7 @@
       <a href="#/calculadora" [attr.aria-current]="page === 'calculator' ? 'page' : null">Calculadora</a>
       <a href="#/torneio" [attr.aria-current]="page === 'tournament' ? 'page' : null">Torneio</a>
       <a href="#/administrativo" [attr.aria-current]="page === 'admin' ? 'page' : null">Administrativo</a>
+      <a href="https://github.com/Sineek/taigascup" target="_blank" rel="noopener noreferrer">GitHub</a>
     </nav>
     @if (page === 'generator') {
       <p>Gera automaticamente os posts de colocação e roda em 1080 × 1080, mantendo o layout do PSD.</p>
@@ -22,6 +23,7 @@
       <a class="action" href="#/calculadora">Calculadora</a>
       <a class="action" href="#/torneio">Torneio</a>
       <a class="action" href="#/administrativo">Administrativo</a>
+      <a class="action" href="https://github.com/Sineek/taigascup" target="_blank" rel="noopener noreferrer">GitHub</a>
     </nav>
   </main>
 } @else if (page === 'generator') {
@@ -44,4 +46,5 @@
 } @else {
   <app-scoring-admin />
 }
+
 
