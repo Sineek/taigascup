@@ -23,7 +23,19 @@
       Roda
       <span class="tag">1080 × 1080</span>
     </h2>
-    <canvas #wheelCanvas width="1080" height="1080"></canvas>
+    <p class="drag-hint" *ngIf="state.wheelLeaders.length">Arraste um líder dentro do seu setor para ajustar o enquadramento.</p>
+    <canvas
+      #wheelCanvas
+      class="wheel-canvas"
+      [class.dragging]="draggingWheelLeaderIndex !== null"
+      width="1080"
+      height="1080"
+      (pointerdown)="startWheelLeaderDrag($event)"
+      (pointermove)="moveWheelLeaderDrag($event)"
+      (pointerup)="stopWheelLeaderDrag($event)"
+      (pointercancel)="stopWheelLeaderDrag($event)"
+    ></canvas>
   </article>
 </section>
+
 

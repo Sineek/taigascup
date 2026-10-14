@@ -33,6 +33,11 @@ export class PostPreviewComponent implements AfterViewInit, OnChanges {
   draggingRankIndex: number | null = null;
   private dragStartClientY = 0;
   private dragStartPositionY = 0;
+  draggingWheelLeaderIndex: number | null = null;
+  private wheelDragStartClientX = 0;
+  private wheelDragStartClientY = 0;
+  private wheelDragStartX = 0;
+  private wheelDragStartY = 0;
 
   constructor(private readonly renderer: PostRendererService) {}
 
@@ -125,6 +130,54 @@ export class PostPreviewComponent implements AfterViewInit, OnChanges {
     this.draggingRankIndex = null;
   }
 
+  startWheelLeaderDrag(event: PointerEvent): void {
+    if (!this.state.wheelLeaders.length) return;
+    const canvas = event.currentTarget as HTMLCanvasElement;
+    const rect = canvas.getBoundingClientRect();
+    const x = (event.clientX - rect.left) * (canvas.width / rect.width);
+    const y = (event.clientY - rect.top) * (canvas.height / rect.height);
+    const dx = x - 540;
+    const dy = y - 637;
+    if (Math.hypot(dx, dy) > 336) return;
+
+    const sector = (Math.PI * 2) / this.state.wheelLeaders.length;
+    const firstStart = -Math.PI / 2 - sector / 2;
+    const normalized = ((Math.atan2(dy, dx) - firstStart) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
+    const index = Math.min(this.state.wheelLeaders.length - 1, Math.floor(normalized / sector));
+    const leader = this.state.wheelLeaders[index];
+    if (!leader?.img) return;
+
+    event.preventDefault();
+    canvas.setPointerCapture(event.pointerId);
+    this.draggingWheelLeaderIndex = index;
+    this.wheelDragStartClientX = event.clientX;
+    this.wheelDragStartClientY = event.clientY;
+    this.wheelDragStartX = leader.x;
+    this.wheelDragStartY = leader.y;
+  }
+
+  moveWheelLeaderDrag(event: PointerEvent): void {
+    if (this.draggingWheelLeaderIndex === null) return;
+    event.preventDefault();
+    const canvas = event.currentTarget as HTMLCanvasElement;
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const x = Math.max(-500, Math.min(500, this.wheelDragStartX + (event.clientX - this.wheelDragStartClientX) * scaleX));
+    const y = Math.max(-500, Math.min(500, this.wheelDragStartY + (event.clientY - this.wheelDragStartClientY) * scaleY));
+    const wheelLeaders = this.state.wheelLeaders.map((leader, index) =>
+      index === this.draggingWheelLeaderIndex ? { ...leader, x, y } : leader,
+    );
+    this.stateChange.emit({ ...this.state, wheelLeaders });
+  }
+
+  stopWheelLeaderDrag(event: PointerEvent): void {
+    if (this.draggingWheelLeaderIndex === null) return;
+    const canvas = event.currentTarget as HTMLCanvasElement;
+    if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
+    this.draggingWheelLeaderIndex = null;
+  }
+
   private render(): void {
     if (!this.baseTop3 || !this.baseWheel) {
       return;
@@ -145,4 +198,5 @@ export class PostPreviewComponent implements AfterViewInit, OnChanges {
     return String(this.state.edition || 'edicao').trim();
   }
 }
+
 

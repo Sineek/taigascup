@@ -113,6 +113,11 @@ export class PostRendererService {
     ctx.fillStyle = this.colors.cream;
     ctx.fillRect(198, 296, 684, 680);
 
+    if (state.wheelLeaders.length) {
+      this.drawGeneratedWheel(ctx, state);
+      return;
+    }
+
     if (state.wheel) {
       this.drawContain(
         ctx,
@@ -141,6 +146,92 @@ export class PostRendererService {
     ctx.textAlign = 'center';
     ctx.fillText('Envie a roda dos líderes', 540, 642);
     ctx.restore();
+  }
+
+  private drawGeneratedWheel(ctx: CanvasRenderingContext2D, state: GeneratorState): void {
+    const leaders = state.wheelLeaders;
+    const cx = 540;
+    const cy = 637;
+    const radius = 336;
+    const sector = (Math.PI * 2) / leaders.length;
+    const firstStart = -Math.PI / 2 - sector / 2;
+
+    leaders.forEach((leader, index) => {
+      const start = firstStart + index * sector;
+      const end = start + sector;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, radius, start, end);
+      ctx.closePath();
+      ctx.clip();
+
+      if (leader.img) {
+        this.drawWheelImage(ctx, leader.img, cx, cy, radius, leader.zoom, leader.x, leader.y);
+      } else {
+        ctx.fillStyle = '#ead9c8';
+        ctx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2);
+        const angle = start + sector / 2;
+        ctx.fillStyle = '#3D2616';
+        ctx.font = 'bold 18px system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(
+          leader.code || 'Sem imagem',
+          cx + Math.cos(angle) * radius * 0.68,
+          cy + Math.sin(angle) * radius * 0.68,
+          Math.max(80, radius * sector * 0.72),
+        );
+      }
+      ctx.restore();
+    });
+
+    ctx.save();
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 8;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+    ctx.stroke();
+    leaders.forEach((_, index) => {
+      const angle = firstStart + index * sector;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius);
+      ctx.stroke();
+    });
+    ctx.fillStyle = '#000';
+    ctx.beginPath();
+    ctx.arc(cx, cy, 27, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    ctx.arc(cx, cy, 9, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  private drawWheelImage(
+    ctx: CanvasRenderingContext2D,
+    img: HTMLImageElement,
+    cx: number,
+    cy: number,
+    radius: number,
+    zoom: number,
+    offsetX: number,
+    offsetY: number,
+  ): void {
+    const size = radius * 2;
+    const scale = Math.max(size / img.width, size / img.height) * (zoom / 100);
+    const width = img.width * scale;
+    const height = img.height * scale;
+    ctx.drawImage(
+      img,
+      cx - width / 2 + offsetX,
+      cy - height / 2 + offsetY,
+      width,
+      height,
+    );
   }
 
   downloadCanvas(canvas: HTMLCanvasElement, name: string): void {
@@ -304,4 +395,5 @@ export class PostRendererService {
     return '"VAG Local", "VAG Rounded BT", "Arial Rounded MT Bold", "Trebuchet MS", sans-serif';
   }
 }
+
 

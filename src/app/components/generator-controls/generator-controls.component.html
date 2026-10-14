@@ -23,6 +23,33 @@
 
   <div class="section">
     <h2>Roda dos líderes</h2>
+    <div class="tournament-wheel" *ngIf="state.wheelLeaders.length">
+      <strong>Gerada com {{ state.wheelLeaders.length }} líderes do torneio</strong>
+      <span>Arraste cada líder diretamente na roda para ajustar a posição.</span>
+    </div>
+
+    <div class="wheel-leader-list" *ngIf="state.wheelLeaders.length">
+      <div class="wheel-leader-control" *ngFor="let leader of state.wheelLeaders; let index = index">
+        <img *ngIf="leader.img" [src]="leader.img.src" [alt]="leader.name">
+        <div class="wheel-leader-info">
+          <strong>{{ leader.name }}</strong>
+          <span>{{ leader.code }}</span>
+          <label [for]="'wheel-leader-zoom-' + index">Zoom: {{ leader.zoom }}%</label>
+          <input
+            [id]="'wheel-leader-zoom-' + index"
+            type="range"
+            min="80"
+            max="250"
+            step="1"
+            [ngModel]="leader.zoom"
+            (ngModelChange)="updateWheelLeader(index, { zoom: +$event })"
+          >
+        </div>
+        <button class="reset-leader" type="button" (click)="resetWheelLeader(index)">Redefinir</button>
+      </div>
+    </div>
+
+    <div class="manual-wheel" *ngIf="!state.wheelLeaders.length">
     <label for="wheel-file">Imagem da roda</label>
     <input
       id="wheel-file"
@@ -45,6 +72,7 @@
     <div class="selected-file" *ngIf="state.wheelName">
       <span>Selecionada</span>
       <strong>{{ state.wheelName }}</strong>
+    </div>
     </div>
 
   </div>
@@ -93,4 +121,5 @@
     <div class="hint">Tudo é processado localmente no navegador. Nenhuma imagem é enviada para servidor.</div>
   </div>
 </aside>
+
 
