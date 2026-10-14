@@ -24,7 +24,7 @@
   <div class="section">
     <h2>Roda dos líderes</h2>
     <div class="tournament-wheel" *ngIf="state.wheelLeaders.length">
-      <strong>Gerada com {{ state.wheelLeaders.length }} líderes do torneio</strong>
+      <strong>Gerada com {{ wheelParticipantCount }} participantes e {{ state.wheelLeaders.length }} líderes diferentes</strong>
       <span>Arraste cada líder diretamente na roda para ajustar a posição.</span>
     </div>
 
@@ -33,7 +33,7 @@
         <img *ngIf="leader.img" [src]="leader.img.src" [alt]="leader.name">
         <div class="wheel-leader-info">
           <strong>{{ leader.name }}</strong>
-          <span>{{ leader.code }}</span>
+          <span>{{ leader.code }} · {{ leader.count }}× no torneio</span>
           <label [for]="'wheel-leader-zoom-' + index">Zoom: {{ leader.zoom }}%</label>
           <input
             [id]="'wheel-leader-zoom-' + index"

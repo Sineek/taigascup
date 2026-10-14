@@ -46,6 +46,10 @@ export class GeneratorControlsComponent {
     return this.missingFields.length === 0;
   }
 
+  get wheelParticipantCount(): number {
+    return this.state.wheelLeaders.reduce((total, leader) => total + leader.count, 0);
+  }
+
   patchState(changes: Partial<GeneratorState>): void {
     this.stateChange.emit({ ...this.state, ...changes });
   }

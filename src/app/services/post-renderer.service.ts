@@ -153,12 +153,15 @@ export class PostRendererService {
     const cx = 540;
     const cy = 637;
     const radius = 336;
-    const sector = (Math.PI * 2) / leaders.length;
-    const firstStart = -Math.PI / 2 - sector / 2;
+    const total = leaders.reduce((sum, leader) => sum + leader.count, 0);
+    const firstSector = (Math.PI * 2 * leaders[0].count) / total;
+    let currentStart = -Math.PI / 2 - firstSector / 2;
 
     leaders.forEach((leader, index) => {
-      const start = firstStart + index * sector;
+      const sector = (Math.PI * 2 * leader.count) / total;
+      const start = currentStart;
       const end = start + sector;
+      currentStart = end;
 
       ctx.save();
       ctx.beginPath();
@@ -193,12 +196,14 @@ export class PostRendererService {
     ctx.beginPath();
     ctx.arc(cx, cy, radius, 0, Math.PI * 2);
     ctx.stroke();
-    leaders.forEach((_, index) => {
-      const angle = firstStart + index * sector;
+    currentStart = -Math.PI / 2 - firstSector / 2;
+    leaders.forEach((leader) => {
+      const angle = currentStart;
       ctx.beginPath();
       ctx.moveTo(cx, cy);
       ctx.lineTo(cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius);
       ctx.stroke();
+      currentStart += (Math.PI * 2 * leader.count) / total;
     });
     ctx.fillStyle = '#000';
     ctx.beginPath();

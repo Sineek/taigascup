@@ -38,6 +38,8 @@ export class PostPreviewComponent implements AfterViewInit, OnChanges {
   private wheelDragStartClientY = 0;
   private wheelDragStartX = 0;
   private wheelDragStartY = 0;
+  private wheelDragFrame: number | null = null;
+  private pendingWheelPosition: { x: number; y: number } | null = null;
 
   constructor(private readonly renderer: PostRendererService) {}
 
@@ -140,10 +142,19 @@ export class PostPreviewComponent implements AfterViewInit, OnChanges {
     const dy = y - 637;
     if (Math.hypot(dx, dy) > 336) return;
 
-    const sector = (Math.PI * 2) / this.state.wheelLeaders.length;
-    const firstStart = -Math.PI / 2 - sector / 2;
+    const total = this.state.wheelLeaders.reduce((sum, leader) => sum + leader.count, 0);
+    const firstSector = (Math.PI * 2 * this.state.wheelLeaders[0].count) / total;
+    const firstStart = -Math.PI / 2 - firstSector / 2;
     const normalized = ((Math.atan2(dy, dx) - firstStart) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
-    const index = Math.min(this.state.wheelLeaders.length - 1, Math.floor(normalized / sector));
+    let accumulated = 0;
+    let index = this.state.wheelLeaders.length - 1;
+    for (let current = 0; current < this.state.wheelLeaders.length; current += 1) {
+      accumulated += (Math.PI * 2 * this.state.wheelLeaders[current].count) / total;
+      if (normalized < accumulated) {
+        index = current;
+        break;
+      }
+    }
     const leader = this.state.wheelLeaders[index];
     if (!leader?.img) return;
 
@@ -165,17 +176,35 @@ export class PostPreviewComponent implements AfterViewInit, OnChanges {
     const scaleY = canvas.height / rect.height;
     const x = Math.max(-500, Math.min(500, this.wheelDragStartX + (event.clientX - this.wheelDragStartClientX) * scaleX));
     const y = Math.max(-500, Math.min(500, this.wheelDragStartY + (event.clientY - this.wheelDragStartClientY) * scaleY));
-    const wheelLeaders = this.state.wheelLeaders.map((leader, index) =>
-      index === this.draggingWheelLeaderIndex ? { ...leader, x, y } : leader,
-    );
-    this.stateChange.emit({ ...this.state, wheelLeaders });
+    this.pendingWheelPosition = { x, y };
+    if (this.wheelDragFrame === null) {
+      this.wheelDragFrame = requestAnimationFrame(() => {
+        this.applyPendingWheelPosition();
+        this.wheelDragFrame = null;
+      });
+    }
   }
 
   stopWheelLeaderDrag(event: PointerEvent): void {
     if (this.draggingWheelLeaderIndex === null) return;
+    if (this.wheelDragFrame !== null) {
+      cancelAnimationFrame(this.wheelDragFrame);
+      this.wheelDragFrame = null;
+    }
+    this.applyPendingWheelPosition();
     const canvas = event.currentTarget as HTMLCanvasElement;
     if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
     this.draggingWheelLeaderIndex = null;
+  }
+
+  private applyPendingWheelPosition(): void {
+    if (this.draggingWheelLeaderIndex === null || !this.pendingWheelPosition) return;
+    const position = this.pendingWheelPosition;
+    this.pendingWheelPosition = null;
+    const wheelLeaders = this.state.wheelLeaders.map((leader, index) =>
+      index === this.draggingWheelLeaderIndex ? { ...leader, ...position } : leader,
+    );
+    this.stateChange.emit({ ...this.state, wheelLeaders });
   }
 
   private render(): void {

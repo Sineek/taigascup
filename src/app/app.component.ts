@@ -48,6 +48,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   state: GeneratorState = createInitialState();
   fontDetected: boolean | null = null;
   private importedTournament = '';
+  private wheelAdjustmentsSaveTimer: ReturnType<typeof setTimeout> | null = null;
 
   constructor(
     private readonly leaderCatalog: LeaderCatalogService,
@@ -80,8 +81,14 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   updateState(state: GeneratorState): void {
     this.state = state;
-    const adjustments = state.wheelLeaders.map(({ id, zoom, x, y }) => ({ id, zoom, x, y }));
-    localStorage.setItem(WHEEL_ADJUSTMENTS_STORAGE_KEY, JSON.stringify(adjustments));
+    if (this.wheelAdjustmentsSaveTimer !== null) {
+      clearTimeout(this.wheelAdjustmentsSaveTimer);
+    }
+    this.wheelAdjustmentsSaveTimer = setTimeout(() => {
+      const adjustments = this.state.wheelLeaders.map(({ id, zoom, x, y }) => ({ id, zoom, x, y }));
+      localStorage.setItem(WHEEL_ADJUSTMENTS_STORAGE_KEY, JSON.stringify(adjustments));
+      this.wheelAdjustmentsSaveTimer = null;
+    }, 150);
   }
 
   downloadTop3(): void {
@@ -151,10 +158,19 @@ export class AppComponent implements AfterViewInit, OnInit {
       }));
 
       const savedAdjustments = this.loadWheelAdjustments();
-      const wheelLeaders: WheelLeaderState[] = await Promise.all(standings.map(async (participant) => {
+      const groups = standings.reduce<Array<{ code: string; count: number }>>((result, participant) => {
         const code = participant.deck.trim().toUpperCase();
+        const existing = result.find((group) => group.code === code);
+        if (existing) {
+          existing.count += 1;
+        } else {
+          result.push({ code, count: 1 });
+        }
+        return result;
+      }, []);
+      const wheelLeaders: WheelLeaderState[] = await Promise.all(groups.map(async ({ code, count }) => {
         const leader = leaderByCode.get(code);
-        const id = String(participant.id);
+        const id = code;
         const adjustment = savedAdjustments.get(id);
         let img: HTMLImageElement | null = null;
         if (leader) {
@@ -167,7 +183,8 @@ export class AppComponent implements AfterViewInit, OnInit {
         return {
           id,
           code,
-          name: leader?.name ?? participant.deck,
+          name: leader?.name ?? code,
+          count,
           img,
           zoom: adjustment?.zoom ?? 100,
           x: adjustment?.x ?? 0,

@@ -11,6 +11,7 @@ export interface WheelLeaderState {
   id: string;
   code: string;
   name: string;
+  count: number;
   img: HTMLImageElement | null;
   zoom: number;
   x: number;
