@@ -144,7 +144,7 @@ export class PostPreviewComponent implements AfterViewInit, OnChanges {
 
     const total = this.state.wheelLeaders.reduce((sum, leader) => sum + leader.count, 0);
     const firstSector = (Math.PI * 2 * this.state.wheelLeaders[0].count) / total;
-    const firstStart = -Math.PI / 2 - firstSector / 2;
+    const firstStart = -Math.PI / 3 - firstSector / 2;
     const normalized = ((Math.atan2(dy, dx) - firstStart) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
     let accumulated = 0;
     let index = this.state.wheelLeaders.length - 1;

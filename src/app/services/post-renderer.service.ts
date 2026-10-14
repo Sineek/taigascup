@@ -155,7 +155,7 @@ export class PostRendererService {
     const radius = 336;
     const total = leaders.reduce((sum, leader) => sum + leader.count, 0);
     const firstSector = (Math.PI * 2 * leaders[0].count) / total;
-    let currentStart = -Math.PI / 2 - firstSector / 2;
+    let currentStart = -Math.PI / 3 - firstSector / 2;
 
     leaders.forEach((leader, index) => {
       const sector = (Math.PI * 2 * leader.count) / total;
@@ -196,7 +196,7 @@ export class PostRendererService {
     ctx.beginPath();
     ctx.arc(cx, cy, radius, 0, Math.PI * 2);
     ctx.stroke();
-    currentStart = -Math.PI / 2 - firstSector / 2;
+    currentStart = -Math.PI / 3 - firstSector / 2;
     leaders.forEach((leader) => {
       const angle = currentStart;
       ctx.beginPath();
