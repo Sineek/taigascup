@@ -88,14 +88,6 @@
   </div>
 
   <div class="section">
-    <div class="status" *ngIf="fontDetected === null">Verificando a fonte do modelo…</div>
-    <div class="status" *ngIf="fontDetected === true">
-      <strong>Fonte do PSD detectada:</strong> VAG Rounded BT.
-    </div>
-    <div class="status" *ngIf="fontDetected === false">
-      <strong>Atenção:</strong> VAG Rounded BT não foi detectada. A aplicação usará uma fonte arredondada de fallback; para ficar idêntico ao PSD, instale a VAG Rounded BT no computador.
-    </div>
-
     <div class="hint" *ngIf="isValid; else invalidState">
       Tudo preenchido. Os posts estão prontos para exportação.
     </div>
@@ -117,8 +109,6 @@
         Baixar as 2 imagens
       </button>
     </div>
-
-    <div class="hint">Tudo é processado localmente no navegador. Nenhuma imagem é enviada para servidor.</div>
   </div>
 </aside>
 
