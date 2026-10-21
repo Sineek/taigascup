@@ -1,8 +1,13 @@
 @font-face {
   font-family: 'VAG Local';
-  src: local('VAG Rounded BT'), local('VAGRounded BT'), local('VAGRoundedBT-Regular');
+  src:
+    url('assets/fonts/vag-rounded-bt.ttf') format('truetype'),
+    local('VAG Rounded BT'),
+    local('VAGRounded BT'),
+    local('VAGRoundedBT-Regular');
   font-style: normal;
   font-weight: 400;
+  font-display: swap;
 }
 
 :root {
@@ -31,3 +36,4 @@ button,
 input {
   font: inherit;
 }
+
