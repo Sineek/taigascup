@@ -18,6 +18,7 @@
     <textarea id="proxy-list" [(ngModel)]="list" rows="15" placeholder="4xOP17-021&#10;2xOP16-098"></textarea>
     <button class="primary" type="button" (click)="addList()">Adicionar lista</button>
     <button class="pdf" type="button" [disabled]="!items.length || generating" (click)="generatePdf()">{{ generating ? 'Gerando PDF…' : 'Gerar PDF A4' }}</button>
+    <button class="clear" type="button" [disabled]="!items.length || generating" (click)="clearCards()">Limpar</button>
     @if (message) { <p class="message">{{ message }}</p> }
   </section>
 
@@ -34,5 +35,4 @@
       }
     </div>
   </section>
-  <div class="taiga-logo" style="background-image: url('assets/templates/template-top3.jpg')" role="img" aria-label="Taiga's Cup"></div>
 </main>

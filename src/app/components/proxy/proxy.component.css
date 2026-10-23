@@ -11,8 +11,8 @@ textarea { resize:vertical; min-height:260px; font-family:ui-monospace,monospace
 .suggestions button:hover { background:var(--cream); }
 .suggestions img { width:42px; height:59px; object-fit:cover; border-radius:4px; }
 .suggestions span { display:grid; }.suggestions small { color:var(--muted); }
-.primary,.pdf { width:100%; border:0; border-radius:10px; padding:12px; margin-top:12px; font-weight:800; cursor:pointer; }
-.primary { background:#ead09b; color:var(--brown); }.pdf { background:var(--brown); color:white; }.pdf:disabled { opacity:.45; cursor:not-allowed; }
+.primary,.pdf,.clear { width:100%; border:0; border-radius:10px; padding:12px; margin-top:12px; font-weight:800; cursor:pointer; }
+.primary { background:#ead09b; color:var(--brown); }.pdf { background:var(--brown); color:white; }.clear { border:1px solid #ccb59e; background:white; color:var(--brown); }.pdf:disabled,.clear:disabled { opacity:.45; cursor:not-allowed; }
 .message { color:var(--muted); font-size:14px; line-height:1.4; }
 .panel { min-height:650px; }
 .cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(175px,1fr)); gap:18px; }
@@ -23,5 +23,4 @@ textarea { resize:vertical; min-height:260px; font-family:ui-monospace,monospace
 .quantity button,.remove { border:1px solid #ccb59e; background:var(--cream); color:var(--brown); border-radius:8px; height:34px; cursor:pointer; font-weight:800; }
 .remove { margin-top:5px; width:100%; background:white; }
 .empty { color:var(--muted); text-align:center; margin:250px auto 0; }
-.taiga-logo { grid-column:1/-1; justify-self:end; width:180px; height:190px; background-repeat:no-repeat; background-size:1178px 1178px; background-position:-950px -900px; }
 @media (max-width:800px){.proxy-page{grid-template-columns:1fr;padding:16px}.panel{min-height:350px}.empty{margin:120px auto 0}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}

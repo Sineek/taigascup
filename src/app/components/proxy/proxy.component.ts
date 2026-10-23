@@ -56,6 +56,11 @@ export class ProxyComponent {
 
   change(item: ProxyItem, amount: number): void { item.quantity = Math.max(1, item.quantity + amount); }
   remove(item: ProxyItem): void { this.items = this.items.filter((entry) => entry !== item); }
+  clearCards(): void {
+    this.items = [];
+    this.list = '';
+    this.message = 'Todas as cartas foram removidas.';
+  }
   closeSearch(): void { window.setTimeout(() => this.searchOpen = false, 150); }
 
   async generatePdf(): Promise<void> {
