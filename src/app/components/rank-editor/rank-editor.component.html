@@ -32,40 +32,18 @@
     <strong>{{ rank.imageName }}</strong>
   </div>
 
-  <div class="range-row">
-    <label>
-      Zoom
-      <input
-        type="range"
-        min="100"
-        max="260"
-        [ngModel]="rank.zoom"
-        (ngModelChange)="patch({ zoom: +$event })"
-      />
-    </label>
-
-    <label>
-      Posição X
-      <input
-        type="range"
-        min="-100"
-        max="100"
-        [ngModel]="rank.x"
-        (ngModelChange)="patch({ x: +$event })"
-      />
-    </label>
-  </div>
-
   <label>
-    Posição Y
+    Zoom
     <input
       type="range"
-      min="-100"
-      max="100"
-      [ngModel]="rank.y"
-      (ngModelChange)="patch({ y: +$event })"
+      min="100"
+      max="260"
+      [ngModel]="rank.zoom"
+      (ngModelChange)="patch({ zoom: +$event, x: 0 })"
     />
   </label>
+
+  <div class="hint">Você também pode arrastar a imagem diretamente na prévia. A posição X permanece centralizada.</div>
 </div>
 
 <app-image-library

@@ -1,16 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LibraryImage } from '../../models/image-library.model';
 import { GeneratorState, RankState } from '../../models/post-generator.model';
 import { PostRendererService } from '../../services/post-renderer.service';
-import { ImageLibraryComponent } from '../image-library/image-library.component';
 import { RankEditorComponent } from '../rank-editor/rank-editor.component';
 
 @Component({
   selector: 'app-generator-controls',
   standalone: true,
-  imports: [CommonModule, FormsModule, RankEditorComponent, ImageLibraryComponent],
+  imports: [CommonModule, FormsModule, RankEditorComponent],
   templateUrl: './generator-controls.component.html',
   styleUrl: './generator-controls.component.css',
 })
@@ -23,8 +21,6 @@ export class GeneratorControlsComponent {
   @Output() downloadWheel = new EventEmitter<void>();
   @Output() downloadBoth = new EventEmitter<void>();
 
-  wheelLibraryOpen = false;
-
   constructor(private readonly renderer: PostRendererService) {}
 
   get missingFields(): string[] {
@@ -34,7 +30,7 @@ export class GeneratorControlsComponent {
       missing.push('roda');
     }
 
-    this.state.top3.forEach((rank, index) => {
+    this.state.top4.forEach((rank, index) => {
       if (!rank.nick.trim()) {
         missing.push(`nick do ${index + 1}º`);
       }
@@ -55,23 +51,23 @@ export class GeneratorControlsComponent {
   }
 
   updateRank(index: number, rank: RankState): void {
-    const top3 = this.state.top3.map((current, currentIndex) =>
+    const top4 = this.state.top4.map((current, currentIndex) =>
       currentIndex === index ? rank : current,
     );
-    this.patchState({ top3 });
+    this.patchState({ top4 });
   }
 
   async onWheelFile(event: Event): Promise<void> {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
     const wheel = await this.renderer.imageFromFile(file);
-    this.patchState({ wheel, wheelName: file?.name ?? null });
-  }
-
-  async onWheelLibrarySelected(item: LibraryImage): Promise<void> {
-    const wheel = await this.renderer.imageFromSrc(item.path);
-    this.patchState({ wheel, wheelName: item.name });
-    this.wheelLibraryOpen = false;
+    this.patchState({
+      wheel,
+      wheelName: file?.name ?? null,
+      wheelZoom: 100,
+      wheelX: 0,
+      wheelY: 0,
+    });
   }
 
   clearWheel(): void {
