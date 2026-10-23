@@ -22,7 +22,8 @@ export class ProxyComponent {
   generating = false;
 
   constructor() {
-    fetch('assets/library/cards.json').then((response) => response.json()).then((cards: CardCatalogEntry[]) => this.cards = cards)
+    const catalogUrl = `assets/library/cards.json?v=${Date.now()}`;
+    fetch(catalogUrl, { cache: 'no-store' }).then((response) => response.json()).then((cards: CardCatalogEntry[]) => this.cards = cards)
       .catch(() => this.message = 'Não foi possível carregar o catálogo de cartas.');
   }
 
