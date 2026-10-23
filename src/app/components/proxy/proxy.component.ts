@@ -30,7 +30,7 @@ export class ProxyComponent {
   get suggestions(): CardCatalogEntry[] {
     const query = this.normalize(this.search);
     if (!this.searchOpen || query.length < 2) return [];
-    return this.cards.filter((card) => this.normalize(`${card.code} ${card.name}`).includes(query)).slice(0, 12);
+    return this.cards.filter((card) => this.normalize(`${card.code} ${card.name}`).includes(query));
   }
 
   addCard(card: CardCatalogEntry, quantity = 1): void {
