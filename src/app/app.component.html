@@ -6,17 +6,9 @@
       <a href="#/calculadora" [attr.aria-current]="page === 'calculator' ? 'page' : null">Calculadora</a>
       <a href="#/torneio" [attr.aria-current]="page === 'tournament' ? 'page' : null">Torneio</a>
       <a href="#/administrativo" [attr.aria-current]="page === 'admin' ? 'page' : null">Administrativo</a>
+      <a href="#/proxy" [attr.aria-current]="page === 'proxy' ? 'page' : null">Proxy</a>
+      <a href="https://github.com/Sineek/taigascup" target="_blank" rel="noopener noreferrer">GitHub</a>
     </nav>
-    @if (page === 'generator') {
-      <h1>Taiga's Cup — Gerador de Posts</h1>
-      <p>Gera automaticamente os posts de colocação e roda em 1080 × 1080, mantendo o layout do PSD.</p>
-    } @else if (page === 'calculator') {
-      <h1>Taiga's Cup — Calculadora</h1>
-    } @else if (page === 'tournament') {
-      <h1>Taiga's Cup — Torneio</h1>
-    } @else {
-      <h1>Taiga's Cup — Administrativo</h1>
-    }
   </header>
 }
 
@@ -29,6 +21,8 @@
       <a class="action" href="#/calculadora">Calculadora</a>
       <a class="action" href="#/torneio">Torneio</a>
       <a class="action" href="#/administrativo">Administrativo</a>
+      <a class="action" href="#/proxy">Proxy</a>
+      <a class="action" href="https://github.com/Sineek/taigascup" target="_blank" rel="noopener noreferrer">GitHub</a>
     </nav>
   </main>
 } @else if (page === 'generator') {
@@ -48,6 +42,9 @@
   <app-deck-calculator />
 } @else if (page === 'tournament') {
   <app-tournament />
+} @else if (page === 'proxy') {
+  <app-proxy />
 } @else {
   <app-scoring-admin />
 }
+

@@ -51,8 +51,22 @@ canvas {
   cursor: grabbing;
 }
 
+.wheel-canvas {
+  touch-action: none;
+}
+
+.wheel-canvas:hover {
+  cursor: grab;
+}
+
+.wheel-canvas.dragging {
+  cursor: grabbing;
+}
+
 @media (max-width: 1050px) {
   .preview-grid {
     grid-template-columns: 1fr;
   }
 }
+
+

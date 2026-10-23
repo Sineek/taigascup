@@ -7,6 +7,17 @@ export interface RankState {
   y: number;
 }
 
+export interface WheelLeaderState {
+  id: string;
+  code: string;
+  name: string;
+  count: number;
+  img: HTMLImageElement | null;
+  zoom: number;
+  x: number;
+  y: number;
+}
+
 export interface GeneratorState {
   edition: number;
   wheelTitle: 'edition' | 'extra';
@@ -15,6 +26,7 @@ export interface GeneratorState {
   wheelZoom: number;
   wheelX: number;
   wheelY: number;
+  wheelLeaders: WheelLeaderState[];
   top4: RankState[];
 }
 
@@ -38,6 +50,7 @@ export function createInitialState(): GeneratorState {
     wheelZoom: 100,
     wheelX: 0,
     wheelY: 0,
+    wheelLeaders: [],
     top4: Array.from({ length: 4 }, () => ({
       nick: '',
       img: null,
@@ -48,3 +61,5 @@ export function createInitialState(): GeneratorState {
     })),
   };
 }
+
+

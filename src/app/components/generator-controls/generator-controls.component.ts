@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { GeneratorState, RankState } from '../../models/post-generator.model';
+import { GeneratorState, RankState, WheelLeaderState } from '../../models/post-generator.model';
 import { PostRendererService } from '../../services/post-renderer.service';
 import { RankEditorComponent } from '../rank-editor/rank-editor.component';
 
@@ -26,7 +26,7 @@ export class GeneratorControlsComponent {
   get missingFields(): string[] {
     const missing: string[] = [];
 
-    if (!this.state.wheel) {
+    if (!this.state.wheel && this.state.wheelLeaders.length === 0) {
       missing.push('roda');
     }
 
@@ -44,6 +44,10 @@ export class GeneratorControlsComponent {
 
   get isValid(): boolean {
     return this.missingFields.length === 0;
+  }
+
+  get wheelParticipantCount(): number {
+    return this.state.wheelLeaders.reduce((total, leader) => total + leader.count, 0);
   }
 
   patchState(changes: Partial<GeneratorState>): void {
@@ -67,7 +71,19 @@ export class GeneratorControlsComponent {
       wheelZoom: 100,
       wheelX: 0,
       wheelY: 0,
+      wheelLeaders: [],
     });
+  }
+
+  updateWheelLeader(index: number, changes: Partial<WheelLeaderState>): void {
+    const wheelLeaders = this.state.wheelLeaders.map((leader, currentIndex) =>
+      currentIndex === index ? { ...leader, ...changes } : leader,
+    );
+    this.patchState({ wheelLeaders });
+  }
+
+  resetWheelLeader(index: number): void {
+    this.updateWheelLeader(index, { zoom: 100, x: 0, y: 0 });
   }
 
   clearWheel(): void {
@@ -79,3 +95,5 @@ export class GeneratorControlsComponent {
   }
 
 }
+
+

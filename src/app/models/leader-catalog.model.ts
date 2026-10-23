@@ -9,3 +9,4 @@ export interface LeaderCatalog {
   source: string;
   leaders: LeaderCatalogEntry[];
 }
+

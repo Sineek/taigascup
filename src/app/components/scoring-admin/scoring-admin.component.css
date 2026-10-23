@@ -29,3 +29,4 @@ button:disabled { opacity: .6; cursor: wait; }
   .collection-menu button { width: auto; min-width: 72px; flex: none; }
   .collection-cards { max-height: 65vh; }
 }
+

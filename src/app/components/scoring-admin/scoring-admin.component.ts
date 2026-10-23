@@ -104,3 +104,4 @@ export class ScoringAdminComponent {
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 }
+

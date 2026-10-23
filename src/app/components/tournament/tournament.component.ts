@@ -240,7 +240,12 @@ export class TournamentComponent {
   }
 
   private buildMatches(participants: Participant[]): Match[] {
-    const pool = this.shuffle([...participants]).sort((a, b) => this.compareParticipants(a, b));
+    const firstRound = this.state.rounds.length === 0 ||
+      (this.state.rounds.length === 1 && this.currentRound?.number === 1);
+    const pool = this.shuffle([...participants]);
+    if (!firstRound) {
+      pool.sort((a, b) => this.compareParticipants(a, b));
+    }
     const matches: Match[] = [];
 
     if (pool.length % 2 === 1) {
@@ -436,4 +441,6 @@ export class TournamentComponent {
       .trim();
   }
 }
+
+
 

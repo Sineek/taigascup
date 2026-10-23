@@ -136,3 +136,4 @@ export class DeckCalculatorComponent {
     this.evaluated = true;
   }
 }
+

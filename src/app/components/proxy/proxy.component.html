@@ -1,0 +1,38 @@
+<main class="proxy-page">
+  <section class="controls">
+    <h1>Proxy</h1>
+    <label>Buscar carta</label>
+    <div class="search-wrap">
+      <input [(ngModel)]="search" (focus)="searchOpen = true" (input)="searchOpen = true" (blur)="closeSearch()" placeholder="Nome ou código da carta" autocomplete="off" />
+      @if (suggestions.length) {
+        <div class="suggestions">
+          @for (card of suggestions; track card.code) {
+            <button type="button" (mousedown)="$event.preventDefault()" (click)="addCard(card)">
+              <img [src]="card.thumbnail" [alt]="card.name" /><span><strong>{{ card.name }}</strong><small>{{ card.code }}</small></span>
+            </button>
+          }
+        </div>
+      }
+    </div>
+    <label for="proxy-list">Importar lista</label>
+    <textarea id="proxy-list" [(ngModel)]="list" rows="15" placeholder="4xOP17-021&#10;2xOP16-098"></textarea>
+    <button class="primary" type="button" (click)="addList()">Adicionar lista</button>
+    <button class="pdf" type="button" [disabled]="!items.length || generating" (click)="generatePdf()">{{ generating ? 'Gerando PDF…' : 'Gerar PDF A4' }}</button>
+    @if (message) { <p class="message">{{ message }}</p> }
+  </section>
+
+  <section class="panel" aria-label="Cartas selecionadas">
+    @if (!items.length) { <p class="empty">Pesquise uma carta ou importe uma lista para montar a folha de proxies.</p> }
+    <div class="cards">
+      @for (item of items; track item.code) {
+        <article class="card-item">
+          <img [src]="item.thumbnail" [alt]="item.name" />
+          <strong>{{ item.code }}</strong><span>{{ item.name }}</span>
+          <div class="quantity"><button type="button" (click)="change(item, -1)" aria-label="Remover uma cópia">−</button><b>{{ item.quantity }}</b><button type="button" (click)="change(item, 1)" aria-label="Adicionar uma cópia">+</button></div>
+          <button class="remove" type="button" (click)="remove(item)">Excluir</button>
+        </article>
+      }
+    </div>
+  </section>
+  <div class="taiga-logo" style="background-image: url('assets/templates/template-top3.jpg')" role="img" aria-label="Taiga's Cup"></div>
+</main>

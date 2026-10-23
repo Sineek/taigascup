@@ -23,6 +23,33 @@
 
   <div class="section">
     <h2>Roda dos líderes</h2>
+    <div class="tournament-wheel" *ngIf="state.wheelLeaders.length">
+      <strong>Gerada com {{ wheelParticipantCount }} participantes e {{ state.wheelLeaders.length }} líderes diferentes</strong>
+      <span>Arraste cada líder diretamente na roda para ajustar a posição.</span>
+    </div>
+
+    <div class="wheel-leader-list" *ngIf="state.wheelLeaders.length">
+      <div class="wheel-leader-control" *ngFor="let leader of state.wheelLeaders; let index = index">
+        <img *ngIf="leader.img" [src]="leader.img.src" [alt]="leader.name">
+        <div class="wheel-leader-info">
+          <strong>{{ leader.name }}</strong>
+          <span>{{ leader.code }} · {{ leader.count }}× no torneio</span>
+          <label [for]="'wheel-leader-zoom-' + index">Zoom: {{ leader.zoom }}%</label>
+          <input
+            [id]="'wheel-leader-zoom-' + index"
+            type="range"
+            min="80"
+            max="250"
+            step="1"
+            [ngModel]="leader.zoom"
+            (ngModelChange)="updateWheelLeader(index, { zoom: +$event })"
+          >
+        </div>
+        <button class="reset-leader" type="button" (click)="resetWheelLeader(index)">Redefinir</button>
+      </div>
+    </div>
+
+    <div class="manual-wheel" *ngIf="!state.wheelLeaders.length">
     <label for="wheel-file">Imagem da roda</label>
     <input
       id="wheel-file"
@@ -46,6 +73,7 @@
       <span>Selecionada</span>
       <strong>{{ state.wheelName }}</strong>
     </div>
+    </div>
 
   </div>
 
@@ -60,14 +88,6 @@
   </div>
 
   <div class="section">
-    <div class="status" *ngIf="fontDetected === null">Verificando a fonte do modelo…</div>
-    <div class="status" *ngIf="fontDetected === true">
-      <strong>Fonte do PSD detectada:</strong> VAG Rounded BT.
-    </div>
-    <div class="status" *ngIf="fontDetected === false">
-      <strong>Atenção:</strong> VAG Rounded BT não foi detectada. A aplicação usará uma fonte arredondada de fallback; para ficar idêntico ao PSD, instale a VAG Rounded BT no computador.
-    </div>
-
     <div class="hint" *ngIf="isValid; else invalidState">
       Tudo preenchido. Os posts estão prontos para exportação.
     </div>
@@ -89,7 +109,7 @@
         Baixar as 2 imagens
       </button>
     </div>
-
-    <div class="hint">Tudo é processado localmente no navegador. Nenhuma imagem é enviada para servidor.</div>
   </div>
 </aside>
+
+

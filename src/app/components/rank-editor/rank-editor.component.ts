@@ -43,3 +43,4 @@ export class RankEditorComponent {
     this.patch({ img: null, imageName: null, zoom: 100, x: 0, y: 0 });
   }
 }
+
