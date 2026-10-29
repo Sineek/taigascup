@@ -3,12 +3,12 @@
     <h1>Proxy</h1>
     <label>Buscar carta</label>
     <div class="search-wrap">
-      <input [(ngModel)]="search" (focus)="searchOpen = true" (input)="searchOpen = true" (blur)="closeSearch()" placeholder="Nome ou código da carta" autocomplete="off" />
+      <input [(ngModel)]="search" (focus)="searchOpen = true" (input)="searchOpen = true" (blur)="closeSearch()" placeholder="Nome, código ou cor da carta" autocomplete="off" />
       @if (suggestions.length) {
         <div class="suggestions">
           @for (card of suggestions; track card.code) {
             <button type="button" (mousedown)="$event.preventDefault()" (click)="addCard(card)">
-              <img [src]="card.thumbnail" [alt]="card.name" /><span><strong>{{ card.name }}</strong><small>{{ card.code }}</small></span>
+              <img [src]="card.thumbnail" [alt]="card.name" /><span><strong>{{ card.name }}</strong><small>{{ card.code }}{{ cardColorLabel(card) ? ' · ' + cardColorLabel(card) : '' }}</small></span>
             </button>
           }
         </div>

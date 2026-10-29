@@ -7,6 +7,14 @@ const projectRoot = path.resolve(__dirname, '..');
 const libraryRoot = path.join(projectRoot, 'src', 'assets', 'library');
 const categories = ['wheels', 'backgrounds'];
 const allowedExtensions = new Set(['.png', '.jpg', '.jpeg', '.webp']);
+const colorAliases = new Map([
+  ['red', 'red'], ['vermelho', 'red'], ['vermelha', 'red'],
+  ['green', 'green'], ['verde', 'green'],
+  ['blue', 'blue'], ['azul', 'blue'],
+  ['purple', 'purple'], ['roxo', 'purple'], ['roxa', 'purple'],
+  ['black', 'black'], ['preto', 'black'], ['preta', 'black'],
+  ['yellow', 'yellow'], ['amarelo', 'yellow'], ['amarela', 'yellow'],
+]);
 
 async function ensureDirectory(directory) { await fs.mkdir(directory, { recursive: true }); }
 async function walk(directory) {
@@ -27,6 +35,19 @@ function toDisplayName(fileName) {
 }
 function toAssetPath(category, relativeFile) {
   return `assets/library/${category}/${relativeFile.split(path.sep).map(encodeURIComponent).join('/')}`;
+}
+function normalizeCardColors(value, code) {
+  const values = Array.isArray(value) ? value : typeof value === 'string' ? [value] : [];
+  const colors = [];
+  for (const color of values) {
+    const normalized = colorAliases.get(String(color).trim().toLocaleLowerCase('pt-BR'));
+    if (!normalized) {
+      if (String(color).trim()) console.warn(`Cor inválida ignorada em ${code}: ${color}`);
+      continue;
+    }
+    if (!colors.includes(normalized)) colors.push(normalized);
+  }
+  return colors;
 }
 async function generateCategory(category) {
   const categoryRoot = path.join(libraryRoot, category);
@@ -57,10 +78,23 @@ async function generateCards() {
   }
   let names = {};
   try { names = JSON.parse(await fs.readFile(path.join(libraryRoot, 'card-names.json'), 'utf8')); } catch {}
+  let colors = {};
+  try { colors = JSON.parse(await fs.readFile(path.join(libraryRoot, 'card-colors.json'), 'utf8')); } catch {}
   if (!byCode.size) {
     try { return JSON.parse(await fs.readFile(path.join(libraryRoot, 'cards.json'), 'utf8')); } catch { return []; }
   }
-  return [...byCode.values()].map((card) => ({ ...card, name: names[card.code] ?? card.code, image: card.image || card.thumbnail, thumbnail: card.thumbnail || card.image }))
+  const missingColorCodes = [...byCode.keys()].filter((code) => !Object.hasOwn(colors, code));
+  if (missingColorCodes.length) {
+    const preview = missingColorCodes.slice(0, 20).join(', ');
+    console.warn(`Cores não cadastradas (${missingColorCodes.length}): ${preview}${missingColorCodes.length > 20 ? ', …' : ''}`);
+  }
+  return [...byCode.values()].map((card) => ({
+    ...card,
+    name: names[card.code] ?? card.code,
+    colors: normalizeCardColors(colors[card.code], card.code),
+    image: card.image || card.thumbnail,
+    thumbnail: card.thumbnail || card.image,
+  }))
     .sort((a, b) => a.code.localeCompare(b.code, 'pt-BR', { numeric: true }));
 }
 

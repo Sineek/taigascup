@@ -62,6 +62,15 @@ O script gera `src/assets/library/library.json` automaticamente. Você não prec
 
 `npm start` e `npm run build` já executam a atualização da biblioteca antes do Angular.
 
+### Cores das cartas
+
+As cores usadas na busca do módulo Proxy ficam em
+`src/assets/library/card-colors.json` e são incorporadas ao catálogo por
+`npm run library:generate`. Parte dos dados foi derivada do catálogo
+[Koala Kollect](https://github.com/hotavocado/koala-kollect-data), licenciado
+sob [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), e complementada
+localmente para as coleções mais recentes.
+
 ## Fonte
 
 O projeto tenta usar `VAG Rounded BT` instalada localmente. Se ela não existir no computador, utiliza uma fonte arredondada de fallback.

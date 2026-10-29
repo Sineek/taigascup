@@ -2,8 +2,18 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { jsPDF } from 'jspdf';
 
-interface CardCatalogEntry { code: string; name: string; image: string; thumbnail: string; }
+type CardColor = 'red' | 'green' | 'blue' | 'purple' | 'black' | 'yellow';
+interface CardCatalogEntry { code: string; name: string; colors: CardColor[]; image: string; thumbnail: string; }
 interface ProxyItem extends CardCatalogEntry { quantity: number; }
+
+const COLOR_SEARCH_ALIASES: Record<CardColor, string> = {
+  red: 'red vermelho vermelha',
+  green: 'green verde',
+  blue: 'blue azul',
+  purple: 'purple roxo roxa',
+  black: 'black preto preta',
+  yellow: 'yellow amarelo amarela',
+};
 
 @Component({
   selector: 'app-proxy',
@@ -30,7 +40,11 @@ export class ProxyComponent {
   get suggestions(): CardCatalogEntry[] {
     const query = this.normalize(this.search);
     if (!this.searchOpen || query.length < 2) return [];
-    return this.cards.filter((card) => this.normalize(`${card.code} ${card.name}`).includes(query));
+    const terms = query.split(/\s+/).filter(Boolean);
+    return this.cards.filter((card) => {
+      const searchable = this.searchableText(card);
+      return terms.every((term) => searchable.includes(term));
+    });
   }
 
   addCard(card: CardCatalogEntry, quantity = 1): void {
@@ -63,6 +77,13 @@ export class ProxyComponent {
     this.message = 'Todas as cartas foram removidas.';
   }
   closeSearch(): void { window.setTimeout(() => this.searchOpen = false, 150); }
+
+  cardColorLabel(card: CardCatalogEntry): string {
+    const labels: Record<CardColor, string> = {
+      red: 'Vermelho', green: 'Verde', blue: 'Azul', purple: 'Roxo', black: 'Preto', yellow: 'Amarelo',
+    };
+    return (card.colors ?? []).map((color) => labels[color] ?? color).join(' / ');
+  }
 
   async generatePdf(): Promise<void> {
     if (!this.items.length || this.generating) return;
@@ -107,6 +128,13 @@ export class ProxyComponent {
       };
       image.onerror = reject; image.src = src;
     });
+  }
+
+  private searchableText(card: CardCatalogEntry): string {
+    const colors = (card.colors ?? []).filter((color): color is CardColor => color in COLOR_SEARCH_ALIASES);
+    const aliases = colors.map((color) => COLOR_SEARCH_ALIASES[color]).join(' ');
+    const multi = colors.length > 1 ? 'multicolor multicor multicolored multicolorida multicolorido' : '';
+    return this.normalize(`${card.code} ${card.name} ${aliases} ${multi}`);
   }
 
   private normalize(value: string): string { return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); }
