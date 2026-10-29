@@ -81,7 +81,7 @@ export class ScoringAdminComponent {
   save(): void {
     if (!this.rules) return;
     const code = this.code.trim().toUpperCase();
-    if (!/^[A-Z]{1,5}\d{2,3}-\d{3}$/.test(code) ||
+    if (!/^[A-Z]{1,5}\d{0,3}-\d{3}$/.test(code) ||
         !Number.isInteger(this.points) || this.points < 0 || this.points > 100) {
       this.error = 'Informe um código válido e pontos inteiros entre 0 e 100.';
       return;

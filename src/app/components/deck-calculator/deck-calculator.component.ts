@@ -93,7 +93,7 @@ export class DeckCalculatorComponent {
 
     const parsed: { code: string; quantity: number }[] = [];
     for (const [index, line] of lines.entries()) {
-      const match = /^(\d+)\s*x\s*([A-Za-z]{1,5}\d{2,3}-\d{3})$/i.exec(line);
+      const match = /^(\d+)\s*x\s*([A-Za-z]{1,5}\d{0,3}-\d{3})$/i.exec(line);
       if (!match) {
         this.error = `Linha ${index + 1} inválida: ${line}`;
         return;

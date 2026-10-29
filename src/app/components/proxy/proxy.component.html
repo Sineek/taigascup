@@ -20,7 +20,7 @@
         <p class="catalog-count">{{ filteredCards.length }} carta{{ filteredCards.length === 1 ? '' : 's' }}</p>
         <div class="card-catalog" aria-label="Catálogo de cartas">
           @for (card of filteredCards; track card.code) {
-            <button type="button" class="catalog-card" (click)="addCard(card)" [attr.aria-label]="'Adicionar ' + card.name + ', ' + card.code">
+            <button type="button" class="catalog-card" (mouseenter)="startPreview(card)" (mouseleave)="stopPreview()" (focus)="startPreview(card)" (blur)="stopPreview()" (click)="addCard(card)" [attr.aria-label]="'Adicionar ' + card.name + ', ' + card.code">
               <img [src]="card.thumbnail" [alt]="card.name" loading="lazy" />
               <span><strong>{{ card.code }}</strong><small>{{ card.name }}</small></span>
             </button>
@@ -45,7 +45,7 @@
     @if (!items.length) { <p class="empty">Pesquise uma carta ou importe uma lista para montar a folha de proxies.</p> }
     <div class="cards">
       @for (item of items; track item.code) {
-        <article class="card-item">
+        <article class="card-item" (mouseenter)="startPreview(item)" (mouseleave)="stopPreview()">
           <img [src]="item.thumbnail" [alt]="item.name" />
           <strong>{{ item.code }}</strong><span>{{ item.name }}</span>
           <div class="quantity"><button type="button" (click)="change(item, -1)" aria-label="Remover uma cópia">−</button><b>{{ item.quantity }}</b><button type="button" (click)="change(item, 1)" aria-label="Adicionar uma cópia">+</button></div>
@@ -54,4 +54,10 @@
       }
     </div>
   </section>
+  @if (previewCard) {
+    <aside class="card-preview" aria-hidden="true">
+      <img [src]="previewCard.image" [alt]="previewCard.name" />
+      <strong>{{ previewCard.code }} — {{ previewCard.name }}</strong>
+    </aside>
+  }
 </main>

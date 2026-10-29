@@ -40,6 +40,8 @@ export class ProxyComponent {
   list = '';
   message = '';
   generating = false;
+  previewCard: CardCatalogEntry | null = null;
+  private previewTimer: ReturnType<typeof setTimeout> | null = null;
 
   constructor() {
     const catalogUrl = `assets/library/cards.json?v=${Date.now()}`;
@@ -74,6 +76,20 @@ export class ProxyComponent {
     if (existing) existing.quantity += quantity;
     else this.items.push({ ...card, quantity });
     this.message = '';
+  }
+
+  startPreview(card: CardCatalogEntry): void {
+    this.stopPreview();
+    this.previewTimer = setTimeout(() => {
+      this.previewCard = card;
+      this.previewTimer = null;
+    }, 3000);
+  }
+
+  stopPreview(): void {
+    if (this.previewTimer) clearTimeout(this.previewTimer);
+    this.previewTimer = null;
+    this.previewCard = null;
   }
 
   addList(): void {
