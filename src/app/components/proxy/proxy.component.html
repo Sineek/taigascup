@@ -36,6 +36,10 @@
         <button class="primary" type="button" (click)="addList()">Adicionar lista</button>
       </div>
     }
+    <label class="spacing-option">
+      <input type="checkbox" [(ngModel)]="pdfSpacing" />
+      <span>Adicionar 2 mm de espaço entre as cartas no PDF</span>
+    </label>
     <button class="pdf" type="button" [disabled]="!items.length || generating" (click)="generatePdf()">{{ generating ? 'Gerando PDF…' : 'Gerar PDF A4' }}</button>
     <button class="clear" type="button" [disabled]="!items.length || generating" (click)="clearCards()">Limpar</button>
     @if (message) { <p class="message">{{ message }}</p> }

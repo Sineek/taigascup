@@ -40,6 +40,7 @@ export class ProxyComponent {
   list = '';
   message = '';
   generating = false;
+  pdfSpacing = false;
   previewCard: CardCatalogEntry | null = null;
   private previewTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -121,8 +122,9 @@ export class ProxyComponent {
       const copies = this.items.flatMap((item) => Array.from({ length: item.quantity }, () => item));
       const width = 63;
       const height = 88;
-      const left = (210 - width * 3) / 2;
-      const top = (297 - height * 3) / 2;
+      const gap = this.pdfSpacing ? 2 : 0;
+      const left = (210 - (width * 3 + gap * 2)) / 2;
+      const top = (297 - (height * 3 + gap * 2)) / 2;
       const cache = new Map<string, string>();
       for (let index = 0; index < copies.length; index += 1) {
         if (index > 0 && index % 9 === 0) pdf.addPage('a4', 'portrait');
@@ -130,8 +132,8 @@ export class ProxyComponent {
         let data = cache.get(card.code);
         if (!data) { data = await this.imageData(card.image); cache.set(card.code, data); }
         const slot = index % 9;
-        const x = left + (slot % 3) * width;
-        const y = top + Math.floor(slot / 3) * height;
+        const x = left + (slot % 3) * (width + gap);
+        const y = top + Math.floor(slot / 3) * (height + gap);
         pdf.addImage(data, 'JPEG', x, y, width, height, undefined, 'FAST');
         pdf.setDrawColor(128, 128, 128);
         pdf.setLineWidth(0.265);

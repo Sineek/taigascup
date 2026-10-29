@@ -27,6 +27,8 @@ textarea { resize:vertical; min-height:260px; font-family:ui-monospace,monospace
 .catalog-empty { grid-column:1/-1; margin:70px 10px; color:var(--muted); text-align:center; }
 .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 .primary,.pdf,.clear { width:100%; border:0; border-radius:10px; padding:12px; margin-top:12px; font-weight:800; cursor:pointer; }
+.spacing-option { display:flex; align-items:center; gap:9px; margin:16px 0 2px; font-size:14px; cursor:pointer; }
+.spacing-option input { width:18px; height:18px; flex:0 0 18px; margin:0; accent-color:var(--brown); }
 .primary { background:#ead09b; color:var(--brown); }.pdf { background:var(--brown); color:white; }.clear { border:1px solid #ccb59e; background:white; color:var(--brown); }.pdf:disabled,.clear:disabled { opacity:.45; cursor:not-allowed; }
 .message { color:var(--muted); font-size:14px; line-height:1.4; }
 .panel { min-height:0; }
