@@ -83,7 +83,7 @@ export class ProxyComponent {
     this.previewTimer = setTimeout(() => {
       this.previewCard = card;
       this.previewTimer = null;
-    }, 3000);
+    }, 2000);
   }
 
   stopPreview(): void {
