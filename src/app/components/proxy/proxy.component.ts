@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { jsPDF } from 'jspdf';
 
 type CardColor = 'red' | 'green' | 'blue' | 'purple' | 'black' | 'yellow';
+type ProxyInputMode = 'search' | 'list';
 interface CardCatalogEntry { code: string; name: string; colors: CardColor[]; image: string; thumbnail: string; }
 interface ProxyItem extends CardCatalogEntry { quantity: number; }
 
@@ -23,36 +24,55 @@ const COLOR_SEARCH_ALIASES: Record<CardColor, string> = {
   styleUrl: './proxy.component.css',
 })
 export class ProxyComponent {
+  readonly colorFilters: { color: CardColor; label: string }[] = [
+    { color: 'black', label: 'Preto' },
+    { color: 'purple', label: 'Roxo' },
+    { color: 'blue', label: 'Azul' },
+    { color: 'red', label: 'Vermelho' },
+    { color: 'yellow', label: 'Amarelo' },
+    { color: 'green', label: 'Verde' },
+  ];
   cards: CardCatalogEntry[] = [];
   items: ProxyItem[] = [];
+  inputMode: ProxyInputMode = 'search';
+  selectedColor: CardColor | null = null;
   search = '';
   list = '';
-  searchOpen = false;
   message = '';
   generating = false;
 
   constructor() {
     const catalogUrl = `assets/library/cards.json?v=${Date.now()}`;
-    fetch(catalogUrl, { cache: 'no-store' }).then((response) => response.json()).then((cards: CardCatalogEntry[]) => this.cards = cards)
+    fetch(catalogUrl, { cache: 'no-store' }).then((response) => response.json()).then((cards: CardCatalogEntry[]) => {
+      this.cards = [...cards].sort((left, right) => this.compareCardCodes(left.code, right.code));
+    })
       .catch(() => this.message = 'Não foi possível carregar o catálogo de cartas.');
   }
 
-  get suggestions(): CardCatalogEntry[] {
+  get filteredCards(): CardCatalogEntry[] {
     const query = this.normalize(this.search);
-    if (!this.searchOpen || query.length < 2) return [];
     const terms = query.split(/\s+/).filter(Boolean);
     return this.cards.filter((card) => {
+      if (this.selectedColor && !(card.colors ?? []).includes(this.selectedColor)) return false;
+      if (!terms.length) return true;
       const searchable = this.searchableText(card);
       return terms.every((term) => searchable.includes(term));
     });
+  }
+
+  setInputMode(mode: ProxyInputMode): void {
+    this.inputMode = mode;
+    this.message = '';
+  }
+
+  toggleColor(color: CardColor): void {
+    this.selectedColor = this.selectedColor === color ? null : color;
   }
 
   addCard(card: CardCatalogEntry, quantity = 1): void {
     const existing = this.items.find((item) => item.code === card.code);
     if (existing) existing.quantity += quantity;
     else this.items.push({ ...card, quantity });
-    this.search = '';
-    this.searchOpen = false;
     this.message = '';
   }
 
@@ -76,15 +96,6 @@ export class ProxyComponent {
     this.list = '';
     this.message = 'Todas as cartas foram removidas.';
   }
-  closeSearch(): void { window.setTimeout(() => this.searchOpen = false, 150); }
-
-  cardColorLabel(card: CardCatalogEntry): string {
-    const labels: Record<CardColor, string> = {
-      red: 'Vermelho', green: 'Verde', blue: 'Azul', purple: 'Roxo', black: 'Preto', yellow: 'Amarelo',
-    };
-    return (card.colors ?? []).map((color) => labels[color] ?? color).join(' / ');
-  }
-
   async generatePdf(): Promise<void> {
     if (!this.items.length || this.generating) return;
     this.generating = true;
@@ -135,6 +146,27 @@ export class ProxyComponent {
     const aliases = colors.map((color) => COLOR_SEARCH_ALIASES[color]).join(' ');
     const multi = colors.length > 1 ? 'multicolor multicor multicolored multicolorida multicolorido' : '';
     return this.normalize(`${card.code} ${card.name} ${aliases} ${multi}`);
+  }
+
+  private compareCardCodes(left: string, right: string): number {
+    const leftParts = this.parseCardCode(left);
+    const rightParts = this.parseCardCode(right);
+    const familyPriority: Record<string, number> = { OP: 0, EB: 1, ST: 2, P: 3 };
+    const leftPriority = familyPriority[leftParts.family] ?? 10;
+    const rightPriority = familyPriority[rightParts.family] ?? 10;
+    return leftPriority - rightPriority
+      || rightParts.collection - leftParts.collection
+      || rightParts.number - leftParts.number
+      || right.localeCompare(left, undefined, { numeric: true });
+  }
+
+  private parseCardCode(code: string): { family: string; collection: number; number: number } {
+    const match = code.toUpperCase().match(/^([A-Z]+)(\d*)-(\d+)$/);
+    return {
+      family: match?.[1] ?? code.toUpperCase(),
+      collection: Number(match?.[2] ?? -1),
+      number: Number(match?.[3] ?? -1),
+    };
   }
 
   private normalize(value: string): string { return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); }

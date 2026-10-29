@@ -1,22 +1,41 @@
 <main class="proxy-page">
   <section class="controls">
     <h1>Proxy</h1>
-    <label>Buscar carta</label>
-    <div class="search-wrap">
-      <input [(ngModel)]="search" (focus)="searchOpen = true" (input)="searchOpen = true" (blur)="closeSearch()" placeholder="Nome, código ou cor da carta" autocomplete="off" />
-      @if (suggestions.length) {
-        <div class="suggestions">
-          @for (card of suggestions; track card.code) {
-            <button type="button" (mousedown)="$event.preventDefault()" (click)="addCard(card)">
-              <img [src]="card.thumbnail" [alt]="card.name" /><span><strong>{{ card.name }}</strong><small>{{ card.code }}{{ cardColorLabel(card) ? ' · ' + cardColorLabel(card) : '' }}</small></span>
+    <div class="mode-tabs" role="tablist" aria-label="Forma de adicionar cartas">
+      <button type="button" role="tab" [attr.aria-selected]="inputMode === 'search'" [class.active]="inputMode === 'search'" (click)="setInputMode('search')">Buscar carta</button>
+      <button type="button" role="tab" [attr.aria-selected]="inputMode === 'list'" [class.active]="inputMode === 'list'" (click)="setInputMode('list')">Importar lista</button>
+    </div>
+
+    @if (inputMode === 'search') {
+      <div class="search-mode" role="tabpanel">
+        <label for="proxy-search">Nome ou código</label>
+        <input id="proxy-search" [(ngModel)]="search" placeholder="Ex.: Nami ou OP18-030" autocomplete="off" />
+        <div class="color-filters" aria-label="Filtrar por cor">
+          @for (filter of colorFilters; track filter.color) {
+            <button type="button" class="color-filter" [class]="'color-filter ' + filter.color" [class.active]="selectedColor === filter.color" [attr.aria-pressed]="selectedColor === filter.color" [attr.aria-label]="'Filtrar cartas da cor ' + filter.label" [title]="filter.label" (click)="toggleColor(filter.color)">
+              <span class="sr-only">{{ filter.label }}</span>
             </button>
           }
         </div>
-      }
-    </div>
-    <label for="proxy-list">Importar lista</label>
-    <textarea id="proxy-list" [(ngModel)]="list" rows="15" placeholder="4xOP17-021&#10;2xOP16-098"></textarea>
-    <button class="primary" type="button" (click)="addList()">Adicionar lista</button>
+        <p class="catalog-count">{{ filteredCards.length }} carta{{ filteredCards.length === 1 ? '' : 's' }}</p>
+        <div class="card-catalog" aria-label="Catálogo de cartas">
+          @for (card of filteredCards; track card.code) {
+            <button type="button" class="catalog-card" (click)="addCard(card)" [attr.aria-label]="'Adicionar ' + card.name + ', ' + card.code">
+              <img [src]="card.thumbnail" [alt]="card.name" loading="lazy" />
+              <span><strong>{{ card.code }}</strong><small>{{ card.name }}</small></span>
+            </button>
+          } @empty {
+            <p class="catalog-empty">Nenhuma carta encontrada com esses filtros.</p>
+          }
+        </div>
+      </div>
+    } @else {
+      <div class="list-mode" role="tabpanel">
+        <label for="proxy-list">Lista de cartas</label>
+        <textarea id="proxy-list" [(ngModel)]="list" rows="15" placeholder="4xOP17-021&#10;2xOP16-098"></textarea>
+        <button class="primary" type="button" (click)="addList()">Adicionar lista</button>
+      </div>
+    }
     <button class="pdf" type="button" [disabled]="!items.length || generating" (click)="generatePdf()">{{ generating ? 'Gerando PDF…' : 'Gerar PDF A4' }}</button>
     <button class="clear" type="button" [disabled]="!items.length || generating" (click)="clearCards()">Limpar</button>
     @if (message) { <p class="message">{{ message }}</p> }
