@@ -46,10 +46,18 @@ export class StoreComponent {
     ...productsFromGrid('nami-jolly-roger.png', 40, 'contain', [['Nami (Jolly Roger)', 'center']]),
     ...productsFromGrid('brook-jolly-roger.png', 40, 'contain', [['Brook (Jolly Roger)', 'center']]),
     ...productsFromGrid('tony-tony-chopper.png', 35, 'contain', [['Tony Tony Chopper', 'center']]),
+    ...productsFromGrid('gecko-moria.png', 35, 'contain', [['Gecko Moria', 'center']]),
+    ...productsFromGrid('sogeking.png', 35, 'contain', [['Sogeking', 'center']]),
+    ...productsFromGrid('law-bepo.png', 35, 'contain', [['Law & Bepo', 'center']]),
+    ...productsFromGrid('yamato.png', 35, 'contain', [['Yamato', 'center']]),
+    ...productsFromGrid('dracule-mihawk.png', 35, 'contain', [['Dracule Mihawk', 'center']]),
+    ...productsFromGrid('nami-vivi.png', 35, 'contain', [['Nami and Vivi', 'center']]),
+    ...productsFromGrid('big-mom.png', 35, 'contain', [['Big Mom', 'center']]),
+    ...productsFromGrid('enel.png', 35, 'contain', [['Enel', 'center']]),
+    ...productsFromGrid('buggy.png', 35, 'contain', [['Buggy', 'center']]),
     ...productsFromGrid('sleeves-35-a.png', 35, '440%', [
       ['One Piece Stickers', '95% 22%'],
-      ['Big Mom', '37% 56%'], ['Luffy Holográfico', '66% 56%'], ['Law e Bepo', '95% 56%'],
-      ['Yamato', '66% 90%'], ['Ace', '95% 90%'],
+      ['Ace', '95% 90%'],
     ]),
     ...productsFromGrid('sleeves-35-b.png', 35, '330%', [
       ['Chopper Pattern', '4% 19%'], ['Logo Verde', '20% 77%'], ['Logo Azul', '80% 77%'],
@@ -63,11 +71,8 @@ export class StoreComponent {
       ['Uta Floral', '7% 82%'],
     ]),
     ...productsFromGrid('sleeves-35-d.png', 35, '430%', [
-      ['Batalha Monocromática', '5% 49%'], ['Piratas da Big Mom', '36% 49%'], ['Uta e Shanks', '67% 49%'], ['Boa Hancock Rosa', '96% 49%'],
-      ['Buggy', '36% 83%'], ['Mihawk', '67% 83%'], ['Boa Hancock Roxa', '96% 83%'],
-    ]),
-    ...productsFromGrid('sleeves-35-e.png', 35, '215%', [
-      ['Enel', '4% 8%'], ['Impel Down', '96% 8%'], ['Vivi e Nami', '4% 92%'], ['Família Charlotte', '96% 92%'],
+      ['Batalha Monocromática', '5% 49%'], ['Piratas da Big Mom', '36% 49%'], ['Boa Hancock Rosa', '96% 49%'],
+      ['Mihawk', '67% 83%'], ['Boa Hancock Roxa', '96% 83%'],
     ]),
     ...productsFromGrid('sleeves-35-f.png', 35, '330%', [
       ['Uta Coelhinha', '5% 10%'], ['Gear 5 Épico', '96% 10%'], ['Boa Hancock', '5% 52%'],
