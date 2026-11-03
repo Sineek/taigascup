@@ -57,16 +57,19 @@ export class StoreComponent {
     ...productsFromGrid('buggy.png', 35, 'contain', [['Buggy', 'center']]),
     ...productsFromGrid('sleeves-35-a.png', 35, '440%', [
       ['One Piece Stickers', '95% 22%'],
-      ['Ace', '95% 90%'],
     ]),
-    ...productsFromGrid('sleeves-35-b.png', 35, '330%', [
-      ['Chopper Pattern', '4% 19%'], ['Logo Verde', '20% 77%'], ['Logo Azul', '80% 77%'],
-    ]),
-    ...productsFromGrid('sleeves-35-c.png', 35, '430%', [
-      ['Luffy em Chamas', '67% 14%'], ['Tripulação em Chamas', '96% 14%'],
-      ['Luffy Branco', '5% 48%'], ['Luffy Vermelho', '67% 48%'], ['Sabo', '96% 48%'],
-      ['Nami Retrato', '36% 83%'], ['Nami Aventureira', '67% 83%'], ['Gear 5', '96% 83%'],
-    ]),
+    ...productsFromGrid('gol-d-roger.png', 35, 'contain', [['Gol.D.Roger', 'center']]),
+    ...productsFromGrid('kung-fu-jugon-karoo.png', 35, 'contain', [['Kung Fu Jugon & Karoo', 'center']]),
+    ...productsFromGrid('log-pose-green.png', 35, 'contain', [['Log Pose(Green)', 'center']]),
+    ...productsFromGrid('log-pose-blue.png', 35, 'contain', [['Log Pose (Blue)', 'center']]),
+    ...productsFromGrid('sabo.png', 35, 'contain', [['Sabo', 'center']]),
+    ...productsFromGrid('ace-sabo-luffy.png', 35, 'contain', [['Ace, Sabo & Luffy', 'center']]),
+    ...productsFromGrid('monkey-d-luffy-white.png', 35, 'contain', [['Monkey D. Luffy', 'center']]),
+    ...productsFromGrid('monkey-d-luffy.png', 35, 'contain', [['Monkey D. Luffy', 'center']]),
+    ...productsFromGrid('sabo-store-edition-vol-2.png', 35, 'contain', [['Sabo (Store Edition Vol.2)', 'center']]),
+    ...productsFromGrid('nami-limited-edition-vol-6.png', 35, 'contain', [['Nami (Limited Edition Vol.6)', 'center']]),
+    ...productsFromGrid('sailor-nami.png', 35, 'contain', [['Sailor Nami', 'center']]),
+    ...productsFromGrid('monkey-d-luffy-gear-5.png', 35, 'contain', [['Monkey D. Luffy (Gear 5)', 'center']]),
     ...productsFromGrid('sleeves-premium-a.png', 45, '310%', [
       ['Uta Floral', '7% 82%'],
     ]),
@@ -74,16 +77,17 @@ export class StoreComponent {
       ['Batalha Monocromática', '5% 49%'], ['Piratas da Big Mom', '36% 49%'], ['Boa Hancock Rosa', '96% 49%'],
       ['Mihawk', '67% 83%'], ['Boa Hancock Roxa', '96% 83%'],
     ]),
-    ...productsFromGrid('sleeves-35-f.png', 35, '330%', [
-      ['Uta Coelhinha', '5% 10%'], ['Gear 5 Épico', '96% 10%'], ['Boa Hancock', '5% 52%'],
-      ['Uta Aventura', '50% 52%'], ['Logo Azul Escuro', '50% 93%'],
-    ]),
-    ...productsFromGrid('sleeves-40.png', 40, '420%', [
-      ['Tripulação no Mar', '35% 8%'], ['Uta no Mar', '65% 8%'], ['Law', '95% 8%'],
-      ['Ace 2º Aniversário', '4% 48%'],
-    ]),
-    ...productsFromGrid('sleeves-special.png', 45, '205%', [['Logo Laranja', '3% 50%']]),
-    ...productsFromGrid('sleeves-special.png', 50, '205%', [['Tripulação — Formato Horizontal', '97% 50%']]),
+    ...productsFromGrid('uta-sleeve-vol-3.png', 35, 'contain', [['Uta (Sleeve Vol. 3)', 'center']]),
+    ...productsFromGrid('monkey-d-luffy-limited-edition-vol-6.png', 35, 'contain', [['Monkey D. Luffy (Limited Edition Vol. 6)', 'center']]),
+    ...productsFromGrid('sleeves-35-f.png', 35, '330%', [['Boa Hancock', '5% 52%']]),
+    ...productsFromGrid('monkey-d-luffy-elbaph.png', 35, 'contain', [['Monkey D. Luffy (Elbaph)', 'center']]),
+    ...productsFromGrid('log-pose-xebec.png', 35, 'contain', [['Log Pose(Xebec)', 'center']]),
+    ...productsFromGrid('strawhat-crew-championship-25-26kv.png', 40, 'contain', [['Strawhat Crew (Championship 25-26KV)', 'center']]),
+    ...productsFromGrid('shiraoshi.png', 40, 'contain', [['Shiraoshi', 'center']]),
+    ...productsFromGrid('trafalgar-law.png', 40, 'contain', [['Trafalgar Law', 'center']]),
+    ...productsFromGrid('monkey-d-luffy-2nd-anniversary-japan.png', 40, 'contain', [['Monkey D. Luffy (2nd Anniversary set Japan)', 'center']]),
+    ...productsFromGrid('log-pose-orange.png', 45, 'contain', [['Log Pose (Orange)', 'center']]),
+    ...productsFromGrid('battle-mera-mera-fruit-edition.png', 50, 'contain', [['The Battle for the Mera Mera Fruit Edition', 'center']]),
   ];
 
   formatPrice(price: number): string {
