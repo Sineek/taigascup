@@ -5,12 +5,13 @@ import { DeckCalculatorComponent } from './components/deck-calculator/deck-calcu
 import { ScoringAdminComponent } from './components/scoring-admin/scoring-admin.component';
 import { TournamentComponent } from './components/tournament/tournament.component';
 import { ProxyComponent } from './components/proxy/proxy.component';
+import { StoreComponent } from './components/store/store.component';
 import { PostPreviewComponent } from './components/post-preview/post-preview.component';
 import { createInitialState, GeneratorState, WheelLeaderState } from './models/post-generator.model';
 import { LeaderCatalogService } from './services/leader-catalog.service';
 import { PostRendererService } from './services/post-renderer.service';
 
-type Page = 'home' | 'generator' | 'calculator' | 'tournament' | 'admin' | 'proxy';
+type Page = 'home' | 'generator' | 'calculator' | 'tournament' | 'admin' | 'proxy' | 'store';
 
 interface StoredTournamentParticipant {
   id: number;
@@ -38,7 +39,7 @@ const WHEEL_ADJUSTMENTS_STORAGE_KEY = 'taigas-cup-wheel-adjustments-v1';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [GeneratorControlsComponent, DeckCalculatorComponent, ScoringAdminComponent, TournamentComponent, ProxyComponent, PostPreviewComponent],
+  imports: [GeneratorControlsComponent, DeckCalculatorComponent, ScoringAdminComponent, TournamentComponent, ProxyComponent, StoreComponent, PostPreviewComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -222,6 +223,8 @@ export class AppComponent implements AfterViewInit, OnInit {
         return 'tournament';
       case '#/proxy':
         return 'proxy';
+      case '#/loja':
+        return 'store';
       default:
         return 'home';
     }
