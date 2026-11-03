@@ -1,21 +1,9 @@
 <main class="admin">
-  <h2>Tabela de pontuação</h2>
-  <p>Edite os valores abaixo, baixe o arquivo e publique-o no repositório como <code>src/assets/scoring/rules.json</code>. Só uma alteração publicada no GitHub valerá para todos.</p>
+  <h2>Tabela de Pontuação</h2>
+  <p>Consulte abaixo os líderes e as cartas que possuem pontuação.</p>
   @if (error) { <p class="error" role="alert">{{ error }}</p> }
   @if (rules) {
-    <div class="fields">
-      <label>Versão <input [(ngModel)]="rules.version"></label>
-      <label>Teto de pontos <input type="number" min="0" [(ngModel)]="rules.pointCap"></label>
-    </div>
-    <h3>Definir pontuação</h3>
-    <div class="fields">
-      <label>Tipo
-        <select [(ngModel)]="kind"><option value="leaders">Líder</option><option value="cards">Carta</option></select>
-      </label>
-      <label>Código <input [(ngModel)]="code" placeholder="OP17-020"></label>
-      <label>Pontos <input type="number" min="0" max="100" [(ngModel)]="points"></label>
-      <button type="button" (click)="save()">Adicionar ou alterar</button>
-    </div>
+    <p class="rules-summary">Versão {{ rules.version }} · Teto de {{ rules.pointCap }} pontos</p>
     <h3>Líderes</h3>
     @if (!leaderEntries.length) { <p>Nenhum líder pontuado.</p> }
     @for (entry of paginatedLeaderEntries; track entry[0]) {
@@ -69,8 +57,6 @@
         </div>
       </div>
     }
-    <button class="download" type="button" (click)="download()">Baixar tabela para publicação</button>
-    <p><a href="https://github.com/Sineek/taigascup/edit/main/src/assets/scoring/rules.json" target="_blank" rel="noopener noreferrer">Publicar no GitHub</a></p>
   }
 </main>
 

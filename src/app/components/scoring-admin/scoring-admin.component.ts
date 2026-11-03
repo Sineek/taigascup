@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 interface Rules {
@@ -12,19 +11,15 @@ interface Rules {
 @Component({
   selector: 'app-scoring-admin',
   standalone: true,
-  imports: [FormsModule],
   templateUrl: './scoring-admin.component.html',
   styleUrl: './scoring-admin.component.css',
 })
 export class ScoringAdminComponent {
   rules: Rules | null = null;
   missingImages = new Set<string>();
-  code = '';
-  points = 0;
-  kind: 'leaders' | 'cards' = 'cards';
   error = '';
   loading = true;
-  readonly leadersPerPage = 5;
+  readonly leadersPerPage = 10;
   leaderPage = 1;
   selectedCardCollection = '';
 
@@ -78,30 +73,5 @@ export class ScoringAdminComponent {
     this.missingImages.add(code);
   }
 
-  save(): void {
-    if (!this.rules) return;
-    const code = this.code.trim().toUpperCase();
-    if (!/^[A-Z]{1,5}\d{0,3}-\d{3}$/.test(code) ||
-        !Number.isInteger(this.points) || this.points < 0 || this.points > 100) {
-      this.error = 'Informe um código válido e pontos inteiros entre 0 e 100.';
-      return;
-    }
-    this.rules[this.kind][code] = this.points;
-    if (this.kind === 'cards') this.selectedCardCollection = code.split('-')[0];
-    this.code = '';
-    this.points = 0;
-    this.error = '';
-  }
-
-  download(): void {
-    if (!this.rules) return;
-    const data = JSON.stringify(this.rules, null, 2) + '\n';
-    const url = URL.createObjectURL(new Blob([data], { type: 'application/json' }));
-    const anchor = document.createElement('a');
-    anchor.href = url;
-    anchor.download = 'rules.json';
-    anchor.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  }
 }
 
