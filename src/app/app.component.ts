@@ -170,7 +170,10 @@ export class AppComponent implements AfterViewInit, OnInit {
         }
         return result;
       }, []);
-      const wheelLeaders: WheelLeaderState[] = await Promise.all(groups.map(async ({ code, count }) => {
+      const groupsByParticipation = groups
+        .map((group, originalIndex) => ({ ...group, originalIndex }))
+        .sort((a, b) => b.count - a.count || a.originalIndex - b.originalIndex);
+      const wheelLeaders: WheelLeaderState[] = await Promise.all(groupsByParticipation.map(async ({ code, count }) => {
         const leader = leaderByCode.get(code);
         const id = code;
         const adjustment = savedAdjustments.get(id);
