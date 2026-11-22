@@ -56,6 +56,13 @@ export class ThreeDStoreComponent {
       description: 'Deckbox temática de Barba Negra produzida em impressão 3D.',
       badge: '3D',
     },
+    {
+      name: 'Deckbox Nico Robin',
+      price: 100,
+      image: asset('deckbox-nico-robin.png'),
+      description: 'Deckbox temática de Nico Robin produzida em impressão 3D.',
+      badge: '3D',
+    },
   ];
 
   formatPrice(price: number): string {
