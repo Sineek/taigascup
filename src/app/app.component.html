@@ -8,6 +8,7 @@
       <a href="#/proxy" [attr.aria-current]="page === 'proxy' ? 'page' : null">Proxy</a>
       <a href="#/gerador" [attr.aria-current]="page === 'generator' ? 'page' : null">Gerador de Post</a>
       <a href="#/loja" [attr.aria-current]="page === 'store' ? 'page' : null">Loja</a>
+      <a href="#/3d" [attr.aria-current]="page === 'three-d' ? 'page' : null">3D</a>
       <a href="https://github.com/Sineek/taigascup" target="_blank" rel="noopener noreferrer">GitHub</a>
     </nav>
   </header>
@@ -24,6 +25,7 @@
       <a class="action" href="#/proxy">Proxy</a>
       <a class="action" href="#/gerador">Gerador de Post</a>
       <a class="action" href="#/loja">Loja</a>
+      <a class="action" href="#/3d">3D</a>
       <a class="action" href="https://github.com/Sineek/taigascup" target="_blank" rel="noopener noreferrer">GitHub</a>
     </nav>
   </main>
@@ -48,6 +50,8 @@
   <app-proxy />
 } @else if (page === 'store') {
   <app-store />
+} @else if (page === 'three-d') {
+  <app-three-d-store />
 } @else {
   <app-scoring-admin />
 }
