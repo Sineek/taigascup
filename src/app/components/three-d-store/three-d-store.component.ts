@@ -35,6 +35,13 @@ export class ThreeDStoreComponent {
       description: 'Deckbox temática de Shanks produzida em impressão 3D.',
       badge: '3D',
     },
+    {
+      name: 'Insert NOVA LATA',
+      price: 79.99,
+      image: asset('insert-nova-lata.png'),
+      description: 'Insert para organizar cartas, marcadores e acessórios do One Piece Card Game.',
+      badge: '3D',
+    },
   ];
 
   formatPrice(price: number): string {
