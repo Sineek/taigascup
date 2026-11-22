@@ -17,17 +17,17 @@ const asset = (file: string): string => `assets/3d/${file}`;
   styleUrl: './three-d-store.component.css',
 })
 export class ThreeDStoreComponent {
-  readonly whatsappNumber = '553598114920';
+  readonly whatsappNumber = '5535997420366';
 
   // Adicione as fotos em src/assets/3d e cadastre os produtos neste array.
   readonly products: ThreeDProduct[] = [
-    // {
-    //   name: 'Nome do produto',
-    //   price: 0,
-    //   image: asset('produto.png'),
-    //   description: 'Descrição curta do item.',
-    //   badge: 'Feito sob encomenda',
-    // },
+    {
+      name: 'Deckbox Law',
+      price: 100,
+      image: asset('deckbox-law.png'),
+      description: 'Deckbox temática de Trafalgar Law produzida em impressão 3D.',
+      badge: '3D',
+    },
   ];
 
   formatPrice(price: number): string {
