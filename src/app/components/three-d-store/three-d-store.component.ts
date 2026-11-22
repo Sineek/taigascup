@@ -42,6 +42,13 @@ export class ThreeDStoreComponent {
       description: 'Insert para organizar cartas, marcadores e acessórios do One Piece Card Game.',
       badge: '3D',
     },
+    {
+      name: 'Deckbox Gunko',
+      price: 100,
+      image: asset('deckbox-gunko.png'),
+      description: 'Deckbox temática de Gunko produzida em impressão 3D.',
+      badge: '3D',
+    },
   ];
 
   formatPrice(price: number): string {
