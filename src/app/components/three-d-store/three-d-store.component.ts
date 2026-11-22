@@ -28,6 +28,13 @@ export class ThreeDStoreComponent {
       description: 'Deckbox temática de Trafalgar Law produzida em impressão 3D.',
       badge: '3D',
     },
+    {
+      name: 'Deckbox Shanks',
+      price: 100,
+      image: asset('deckbox-shanks.png'),
+      description: 'Deckbox temática de Shanks produzida em impressão 3D.',
+      badge: '3D',
+    },
   ];
 
   formatPrice(price: number): string {
