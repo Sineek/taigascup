@@ -65,7 +65,7 @@ async function generateCards() {
   const byCode = new Map();
   for (const absoluteFile of files) {
     const fileName = path.basename(absoluteFile);
-    const match = fileName.match(/^([A-Z]{1,5}\d{0,2}-\d{3})(?!_)/i);
+    const match = fileName.match(/^([A-Z]{1,5}\d{0,2}-\d{3})(?:_small)?\./i);
     if (!match) continue;
     const code = match[1].toUpperCase();
     const relative = path.relative(root, absoluteFile);
