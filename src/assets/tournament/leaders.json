@@ -583,9 +583,19 @@
       "image": "assets/library/Cards/OP17/OP17-099.jpg"
     },
     {
+      "code": "OP18-001",
+      "name": "Karoo",
+      "image": "assets/library/Cards/OP18/OP18-001.jpg"
+    },
+    {
       "code": "OP18-021",
       "name": "Franky",
       "image": "assets/library/Cards/OP18/OP18-021.jpg"
+    },
+    {
+      "code": "OP18-041",
+      "name": "Ms. All Sunday",
+      "image": "assets/library/Cards/OP18/OP18-041.jpg"
     },
     {
       "code": "OP18-060",
