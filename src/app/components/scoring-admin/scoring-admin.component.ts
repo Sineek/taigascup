@@ -17,6 +17,7 @@ interface Rules {
 export class ScoringAdminComponent {
   rules: Rules | null = null;
   missingImages = new Set<string>();
+  fullSizeImages = new Set<string>();
   error = '';
   loading = true;
   readonly leadersPerPage = 10;
@@ -66,10 +67,16 @@ export class ScoringAdminComponent {
 
   cardImagePath(code: string): string {
     const collection = code.split('-')[0];
-    return `assets/library/Cards/${collection}/${code}_small.jpg`;
+    const fileName = this.fullSizeImages.has(code) ? `${code}.jpg` : `${code}_small.jpg`;
+    return `assets/library/Cards/${collection}/${fileName}`;
   }
 
   imageLoadError(code: string): void {
+    if (!this.fullSizeImages.has(code)) {
+      this.fullSizeImages.add(code);
+      return;
+    }
+
     this.missingImages.add(code);
   }
 
